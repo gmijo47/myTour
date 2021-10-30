@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/btn_login.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/gradient_splashscreen.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/login_container.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/text_field.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/text_field_error.xml" value="0.21203703703703702" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_login.xml" value="0.1859375" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_splashscreen.xml" value="0.1859375" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/registertips_fragment.xml" value="0.25" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19722222222222222" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

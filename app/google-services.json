@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "787058489748",
+    "project_id": "mytour-df457",
+    "storage_bucket": "mytour-df457.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787058489748:android:d9a321967ddd3fc35cb781",
+        "android_client_info": {
+          "package_name": "com.gmijo.mytour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787058489748-2vm90c5kd8ljelpr0tg1hf9vejuv2jed.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArl1qLMuuqpl8x5K9YFxZHOzgl9I0Upkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787058489748-2vm90c5kd8ljelpr0tg1hf9vejuv2jed.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

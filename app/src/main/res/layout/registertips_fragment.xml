@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+    <TextView
+        android:id="@+id/rTipsUsernameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/rDataTipsUsernameTitle"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/rTipsUsernameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:text="@string/rDataTipsUsernameText"
+        android:textStyle="italic"/>
+
+    <TextView
+        android:id="@+id/rTipsEmailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/rDataTipsEmailTitle"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/rTipsEmailText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:text="@string/rTipsEmailText"
+        android:textStyle="italic"/>
+
+    <TextView
+        android:id="@+id/rTipsPasswordTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/rDataTipsPasswordTitle"
+        android:textStyle="bold" />
+
+    <TextView
+    android:id="@+id/rTipsPasswordText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="25dp"
+    android:text="@string/rTipsPasswordText"
+    android:textStyle="italic"/>
+
+
+</LinearLayout>

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">myTour</string>
+    <string name="desc">Default deskripcija, cisto onako da ne izbacuje missing arg</string>
+    <string name="errUsername">Unesite validno korisničko ime ne kraće od 5 karaktera!</string>
+    <string name="errEmail">Unesite validnu e-mail adresu!</string>
+    <string name="errPass">Unesite validnu lozinku!</string>
+    <string name="alright">Razumijem!</string>
+    <string name="rDataTipsTitle">Opss.. molimo ispoštujte slijedeće korake prilikom kreiranja naloga!</string>
+    <string name="rDataTipsUsernameTitle">1. Korisničko ime</string>
+    <string name="rDataTipsUsernameText">Vaše korisničko ime mora biti duže od 4 i kraće od 16 karaktera</string>
+    <string name="rDataTipsEmailTitle">2. Email</string>
+    <string name="rTipsEmailText">Vaš email smije sadržavati velika, mala slova, brojeve, i specijalne karaktere (. - _ +).</string>
+    <string name="rDataTipsPasswordTitle">3. Lozinka</string>
+    <string name="rTipsPasswordText">Vaša lozina treba biti duža od 8 karaktera, preporučujemo da koristite kombinaciju malih/velikih slova, brojeva i specijalnih karaktera.</string>
+
+</resources>

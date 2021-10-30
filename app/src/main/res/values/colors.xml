@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="dark_blue">#0E60AC</color>
+    <color name="black_grad">#073056</color>
+    <color name="blue_grad1">#3e42aa</color>
+    <color name="blue_grad2">#3759c4</color>
+    <color name="blue_grad3">#0a83f2</color>
+    <color name="light_white">#F3F2F2</color>
+    <color name="stroke_gray">#8F8E8E</color>
+    <color name="blue_light">#87ABF7</color>
+    <color name="dark_orange">#F37B3B</color>
+    <color name="dark_red">#FF0000</color>
+</resources>
