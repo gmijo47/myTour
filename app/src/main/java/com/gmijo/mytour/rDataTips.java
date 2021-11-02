@@ -21,14 +21,14 @@ public class rDataTips extends DialogFragment {
         builder.setMessage(R.string.rDataTipsTitle);
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View newFileView = inflater.inflate(R.layout.registertips_fragment, null);
+        View newFileView = inflater.inflate(R.layout.registertips_dialog, null);
 
         builder.setView(newFileView);
 
         builder.setPositiveButton(R.string.alright,  new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // on success
+
             }
         });
 
@@ -38,6 +38,7 @@ public class rDataTips extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedIstanceState){
         super.onViewCreated(view, savedIstanceState);
+
     }
 
     @Override
