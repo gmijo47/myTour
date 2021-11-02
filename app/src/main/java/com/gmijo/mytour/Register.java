@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
+import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
@@ -131,8 +132,13 @@ public class Register extends AppCompatActivity{
 
                                             setError("errConnection");
 
+                                            //Previše requesova sa jednog IP
+                                        }else if(task.getException() instanceof FirebaseTooManyRequestsException){
+
+                                            setError("errTooManyReq");
+
                                             //Svi ostali exceptioni
-                                        }else {
+                                        } else{
 
                                             errUnknownCode = ((FirebaseAuthException) task.getException()).getErrorCode();
                                             setError("errUnknownCode");
@@ -208,6 +214,11 @@ public class Register extends AppCompatActivity{
             //Svi ostali errori odnosno exceptioni
             case "errUnknownCode":{
                 rErrorMsg.setText(errUnknownCode);
+                rErrorMsg.setVisibility(View.VISIBLE);
+                break;
+            }
+            case "errTooManyReq": {
+                rErrorMsg.setText(R.string.errTooManyReq);
                 rErrorMsg.setVisibility(View.VISIBLE);
                 break;
             }
