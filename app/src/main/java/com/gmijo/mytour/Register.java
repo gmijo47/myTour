@@ -102,7 +102,6 @@ public class Register extends AppCompatActivity{
                                     if (task.isSuccessful()) {
                                         //Nakon uspješnog kreiranja, getuje korisnika i šalje mu verifikacioni email
                                             firebaseUser = firebaseAuth.getCurrentUser();
-                                            if (firebaseUser != null){
                                                     firebaseUser.sendEmailVerification().addOnCompleteListener(Register.this, new OnCompleteListener<Void>() {
 
                                                         @Override
@@ -118,7 +117,7 @@ public class Register extends AppCompatActivity{
                                                             }, 3000);
                                                             }
                                                     });
-                                            }
+
                                     //Hendolovanje exceptiona
                                     } else {
                                         //Exception za multinalog (nalog je već registrovan)
@@ -162,13 +161,6 @@ public class Register extends AppCompatActivity{
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         rDataTips.show(fragmentTransaction, "");
         errCounter = 0;
-    }
-    // Provjera da li je na startu (početku) trenutni korisnik prijavljen(logovan) ili nije odnosno korisnik je null.
-    public void onStart() {
-        super.onStart();
-        firebaseUser = firebaseAuth.getCurrentUser();
-        if(firebaseUser != null){
-        }
     }
     //Postavljanje errora, odnoso njihov UI prikaz
     public void setError(String errCode, int timeOut){
