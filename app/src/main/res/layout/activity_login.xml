@@ -111,7 +111,7 @@
                 android:id="@+id/LoginErrorMessage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="3dp"
                 android:fontFamily="sans-serif-black"
                 android:paddingLeft="20dp"
                 android:text="."
@@ -121,7 +121,7 @@
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/LoginRememberPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/LoginForgotPassword" />
 
 
             <Button
@@ -136,7 +136,7 @@
                 android:text="@string/lMyTour"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/LoginRememberPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/LoginForgotPassword" />
 
             <TextView
                 android:id="@+id/ortxt"
@@ -167,17 +167,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/LoginPassword" />
 
-            <CheckBox
-                android:id="@+id/LoginRememberPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/lRemember"
-                android:textColor="@color/stroke_gray"
-                android:textSize="12dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/LoginForgotPassword" />
 
             <Button
                 android:id="@+id/LoginGoogleBtn"
