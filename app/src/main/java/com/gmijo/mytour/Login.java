@@ -266,6 +266,7 @@ public class Login extends AppCompatActivity  {
                 lErrorMsg.setVisibility(View.INVISIBLE);
                 lProgressBar.setVisibility(View.INVISIBLE);
                 canSendVerifyEmail = false;
+                antiBruteForece = 0;
             }
         }, timeOut);
         }
