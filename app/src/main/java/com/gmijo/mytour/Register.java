@@ -107,7 +107,7 @@ public class Register extends AppCompatActivity{
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             //Nakon USPJEŠNO poslatog emaila delaya 3000ms i prebacuje na Login actitvity, te šalje poruku da je nalog uspješno kreiran
-                                                            Toast.makeText(getApplicationContext(), R.string.rVerificationSucces, Toast.LENGTH_LONG).show();
+                                                            Toast.makeText(getApplicationContext(), R.string.rAccCreated, Toast.LENGTH_LONG).show();
                                                             new Handler().postDelayed(new Runnable() {
                                                                 @Override
                                                                 public void run() {
@@ -122,15 +122,21 @@ public class Register extends AppCompatActivity{
                                     } else {
                                         //Exception za multinalog (nalog je već registrovan)
                                         if (task.getException() instanceof FirebaseAuthUserCollisionException){
+
                                             setError("errUserAlreadyExist");
                                             rProgressBar.setVisibility(View.INVISIBLE);
+
                                             //Exception za internet (nema internetske veze)
                                         } else if(task.getException() instanceof FirebaseNetworkException){
+
                                             setError("errConnection");
+
                                             //Svi ostali exceptioni
                                         }else {
+
                                             errUnknownCode = ((FirebaseAuthException) task.getException()).getErrorCode();
                                             setError("errUnknownCode");
+
                                         }
 
                                     }
