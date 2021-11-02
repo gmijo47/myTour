@@ -33,7 +33,6 @@ public class Login extends AppCompatActivity  {
     EditText lEmail, lPassword, lSenderEmail;
     Button lBtn, lBtnGoogle;
     TextView lForgotPassword, lRegisterRedirect, lErrorMsg;
-    CheckBox lRemember;
     String lEmailData, lPasswordData, errUnknownCode;
     ProgressBar lProgressBar;
     Boolean canSendVerifyEmail = false;
@@ -57,8 +56,6 @@ public class Login extends AppCompatActivity  {
         lEmail = (EditText) findViewById(R.id.LoginEmail);
 
         lPassword=  (EditText) findViewById(R.id.LoginPassword);
-
-        lRemember = (CheckBox) findViewById(R.id.LoginRememberPassword);
 
         lForgotPassword = (TextView) findViewById(R.id.LoginForgotPassword);
 
@@ -143,12 +140,12 @@ public class Login extends AppCompatActivity  {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         firebaseUser = firebaseAuth.getCurrentUser();
-                            if (firebaseUser != null && !firebaseUser.isEmailVerified()){
+                            if (!firebaseUser.isEmailVerified()){
 
                                 //Email nije verifikovan
                                 setError("errEmailNoVerify", 20000);
 
-                            }else if(firebaseUser != null && firebaseUser.isEmailVerified()){
+                            }else {
 
                                 //Email je verifikovan, startuje LandingActivity
                                 startActivity(new Intent(Login.this, LandingActivity.class));
@@ -182,7 +179,6 @@ public class Login extends AppCompatActivity  {
 
                             //Svi ostali exceptioni
                             errUnknownCode = ((FirebaseAuthException) task.getException()).getErrorCode();
-                            //TODO cooldown na btn click toomanyrequests
                             setError("errUnknownCode");
 
                         }
@@ -286,6 +282,14 @@ public class Login extends AppCompatActivity  {
     public void setError(String errCode){
         setError(errCode, 3200);
     }
-
+    // Provjera da li je na startu (početku) trenutni korisnik prijavljen(logovan) ili nije odnosno korisnik je null.
+    public void onStart() {
+        super.onStart();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        if(firebaseUser != null){
+            startActivity(new Intent(Login.this, LandingActivity.class));
+            finish();
+        }
+    }
 
     }
