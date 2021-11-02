@@ -1,16 +1,53 @@
 <resources>
     <string name="app_name">myTour</string>
-    <string name="desc">Default deskripcija, cisto onako da ne izbacuje missing arg</string>
-    <string name="errUsername">Unesite validno korisničko ime ne kraće od 5 karaktera!</string>
+    <string name="desc">Default deskripcija</string>
+
+    <string name="errUsername">Unesite validno korisničko ime!</string>
     <string name="errEmail">Unesite validnu e-mail adresu!</string>
     <string name="errPass">Unesite validnu lozinku!</string>
-    <string name="alright">Razumijem!</string>
-    <string name="rDataTipsTitle">Opss.. molimo ispoštujte slijedeće korake prilikom kreiranja naloga!</string>
+    <string name="errUserAlreadyExist">Već ste registrovani!</string>
+    <string name="errConn">Nema internetske veze!</string>
+    <string name="errEmailNoVerify">Vaš email nije verifikovan. Za ponovo slanje verifikacije kliknite ovjde!</string>
+    <string name="errInvalidPass">Unesena lozika nije tačna!</string>
+    <string name="errInvalidUser">Korisnički nalog ne postoji!</string>
+    <string name="errBruteForce">Upss... iskoristili ste sve pokušaje, pokušajte ponovo nakon 5 minuta!</string>
+
+    <string name="alright">Razumijem</string>
+    <string name="rDataTipsTitle">Opss.. izgleda da vam ne ide od ruke, evo pomoći!</string>
     <string name="rDataTipsUsernameTitle">1. Korisničko ime</string>
     <string name="rDataTipsUsernameText">Vaše korisničko ime mora biti duže od 4 i kraće od 16 karaktera</string>
     <string name="rDataTipsEmailTitle">2. Email</string>
     <string name="rTipsEmailText">Vaš email smije sadržavati velika, mala slova, brojeve, i specijalne karaktere (. - _ +).</string>
     <string name="rDataTipsPasswordTitle">3. Lozinka</string>
     <string name="rTipsPasswordText">Vaša lozina treba biti duža od 8 karaktera, preporučujemo da koristite kombinaciju malih/velikih slova, brojeva i specijalnih karaktera.</string>
+    <string name="rAccCreated">Korisnički nalog uspješno kreiran</string>
+
+    <string name="title_activity_landing">LandingActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="rTitle">myTour Registracija</string>
+    <string name="rSubTitle">MOLIMO IZVRŠITE REGISTRACIJU!</string>
+    <string name="rlEmail">E-MAIL ADRESA</string>
+    <string name="rlUsername">KORISNIČKO IME</string>
+    <string name="rlPass">LOZINKA</string>
+    <string name="rPassAgain">PONOVO LOZINKA</string>
+    <string name="rTerms">Registracijom prihvatate sve uslove korištenja</string>
+    <string name="rBtn">MYTOUR REGISTRACIJA</string>
+
+    <string name="lWellcome">Dobrodošli!</string>
+    <string name="lSubTitle">MOLIMO PRIJAVITE SE!</string>
+    <string name="lMyTour">MYTOUR PRIJAVA</string>
+    <string name="lOR">ili</string>
+    <string name="lForgotPass">Zaboravljena lozinka?</string>
+    <string name="lRemember">ZAPAMTI MOJU PRIJAVU</string>
+    <string name="lGoogle">Google prijava</string>
+    <string name="lRedirectCreateAcc">Nemate MyTour nalog? Kliknite ovdje!</string>
+
+
+    <string name="lResendedMail">Verifikaciski email poslat, provjerite sanduče!</string>
+    <string name="lNotResendedMail">Verifikaciski email poslat, provjerite sanduče!</string>
+
 
 </resources>
