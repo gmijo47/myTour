@@ -3,6 +3,7 @@ package com.gmijo.mytour;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,38 +11,48 @@ import android.os.Handler;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.FirebaseTooManyRequestsException;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class Login extends AppCompatActivity  {
 
     //Inicijaliziranje i definisanje elemenata
-    EditText lEmail, lPassword, lSenderEmail;
+    EditText lEmail, lPassword;
     Button lBtn, lBtnGoogle;
     TextView lForgotPassword, lRegisterRedirect, lErrorMsg;
     String lEmailData, lPasswordData, errUnknownCode;
     ProgressBar lProgressBar;
-    Boolean canSendVerifyEmail = false;
+    Boolean canSendVerifyEmail = false, firstTimeLog = true;
     int antiBruteForece = 0;
 
 
     //FireBaseAuth i FirebaseUser inicijaliziranje
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
+
+    //Google OAUTH inicijaliziranje
+    GoogleSignInClient googleSignInClient;
+    private static final int RC_SIGN_IN = 123;
 
 
     @Override
@@ -72,6 +83,16 @@ public class Login extends AppCompatActivity  {
         //Dobavljanje firebaseAuth-a
         firebaseAuth = FirebaseAuth.getInstance();
 
+        //Konfiguracija prijave putem Googla
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.webcl_id))
+                .requestEmail()
+                .build();
+
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+
+
+
         //Lisener za startanje ForgotPassworda
         lForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +105,7 @@ public class Login extends AppCompatActivity  {
         @Override
         public void onClick(View v) {
             startActivity(new Intent(Login.this, Register.class));
+            finish();
         }
     });
 
@@ -189,7 +211,16 @@ public class Login extends AppCompatActivity  {
 
         }
     });
+
+    //Lisener na google login button, pozivanje metode googleSignIn
+        lBtnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                googleSignIn();
+            }
+        });
     }
+
     //Postavljanje errora, odnoso njihov UI prikaz
     public void setError(String errCode, int timeOut){
         switch (errCode) {
@@ -258,8 +289,21 @@ public class Login extends AppCompatActivity  {
                 lErrorMsg.setVisibility(View.VISIBLE);
                 break;
             }
+            //Previše zahtjeva (requestova) ka firebase serveru (Limit 200 po IP za 24h)
             case "errTooManyReq": {
                 lErrorMsg.setText(R.string.errTooManyReq);
+                lErrorMsg.setVisibility(View.VISIBLE);
+                break;
+            }
+            //Pogreška prilikom google prijave
+            case "errGoogleSignIn": {
+                lErrorMsg.setText(R.string.errGoogleSignIn);
+                lErrorMsg.setVisibility(View.VISIBLE);
+                break;
+            }
+            //Pogreška prilikom google prijave
+            case "signInFailed": {
+                lErrorMsg.setText(R.string.signInFailed);
                 lErrorMsg.setVisibility(View.VISIBLE);
                 break;
             }
@@ -277,19 +321,81 @@ public class Login extends AppCompatActivity  {
                 antiBruteForece = 0;
             }
         }, timeOut);
-        }
+    }
+
     //Metod overloading
     public void setError(String errCode){
         setError(errCode, 3200);
     }
+
     // Provjera da li je na startu (početku) trenutni korisnik prijavljen(logovan) ili nije odnosno korisnik je null.
     public void onStart() {
         super.onStart();
         firebaseUser = firebaseAuth.getCurrentUser();
         if(firebaseUser != null){
-            startActivity(new Intent(Login.this, LandingActivity.class));
-            finish();
+            if(firebaseUser.isEmailVerified()){
+
+                //Email je verifikovan, startuje LandingActivity
+                startActivity(new Intent(Login.this, LandingActivity.class));
+                finish();
+
+            }
         }
     }
 
+    //Google prijava, pokretanje Google intenta za odabir mejla
+    private void googleSignIn() {
+
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
+    //Hendlovanje odabira iz metode iznad
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //Rezultat vracen iz pokretanja intenta za odabir mejla
+        if (requestCode == RC_SIGN_IN) {
+
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+
+            try {
+
+                //Google prijava uspješna, poziva metodu ispod odnosno firebaseAuthGoogle
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthGoogle(account);
+
+            } catch (ApiException e) {
+
+                //Google prijava neuspješna, izbacuje error
+                setError("errGoogleSignIn");
+            }
+        }
+    }
+
+    //Ukoliko "prođe" odnosno uspije metodu iznad prelazi na samu autentifikaciju sa firebaseom
+    private void firebaseAuthGoogle(GoogleSignInAccount acccount) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(acccount.getIdToken(), null);
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            //Prijava uspješna, startuje LandingActivity
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            startActivity(new Intent(Login.this, LandingActivity.class));
+                            finish();
+
+                        } else {
+
+                            //Prijava neuspješna, izbacuje error
+                            setError("signInFailed");
+
+                        }
+                    }
+                });
+    }
+}
+
