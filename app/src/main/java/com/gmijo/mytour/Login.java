@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -328,18 +329,30 @@ public class Login extends AppCompatActivity  {
         setError(errCode, 3200);
     }
 
-    // Provjera da li je na startu (početku) trenutni korisnik prijavljen(logovan) ili nije odnosno korisnik je null.
+    /* Provjera da li je na startu (početku) trenutni korisnik prijavljen(logovan) ili nije odnosno korisnik je null,
+     kao i to da li korisnik uopšte postoji u bazi*/
     public void onStart() {
         super.onStart();
         firebaseUser = firebaseAuth.getCurrentUser();
-        if(firebaseUser != null){
-            if(firebaseUser.isEmailVerified()){
+        if (firebaseUser != null) {
+            firebaseUser.reload().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        //Korisnik postoji u bazi, provjera za email
+                        if (firebaseUser.isEmailVerified()) {
 
-                //Email je verifikovan, startuje LandingActivity
-                startActivity(new Intent(Login.this, LandingActivity.class));
-                finish();
+                            //Email je verifikovan, startuje LandingActivity
+                            startActivity(new Intent(Login.this, LandingActivity.class));
+                            finish();
 
-            }
+                        }
+                    } else {
+                        //Korisnik ne postoji u bazi, odjavi ga
+                        FirebaseAuth.getInstance().signOut();
+                    }
+                }
+            });
         }
     }
 
