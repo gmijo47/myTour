@@ -11,7 +11,9 @@
     <string name="errInvalidPass">Unesena lozika nije tačna!</string>
     <string name="errInvalidUser">Korisnički nalog ne postoji!</string>
     <string name="errBruteForce">Upss... iskoristili ste sve pokušaje, pokušajte ponovo nakon 5 minuta!</string>
-    <string name="errTooManyReq">Došlo je do pogreške, pokušajte ponovo kasnije!</string>
+    <string name="errTooManyReq">Zahtjev ocijenjen kao spam, pokušajte ponovo kasnije!</string>
+    <string name="errGoogleSignIn">Došlo je do pogreške, pokušajte ponovo kasnije!</string>
+    <string name="signInFailed">Prijava neuspješna, pokušajte ponovo kasnije!</string>
 
     <string name="alright">Razumijem</string>
     <string name="rDataTipsTitle">Opss.. izgleda da vam ne ide od ruke, evo pomoći!</string>
