@@ -304,7 +304,7 @@ public class Login extends AppCompatActivity  {
             }
             //Pogreška prilikom google prijave
             case "signInFailed": {
-                lErrorMsg.setText(R.string.signInFailed);
+                lErrorMsg.setText(R.string.errSignInFailed);
                 lErrorMsg.setVisibility(View.VISIBLE);
                 break;
             }
@@ -329,17 +329,12 @@ public class Login extends AppCompatActivity  {
         setError(errCode, 3200);
     }
 
-    /* Provjera da li je na startu (početku) trenutni korisnik prijavljen(logovan) ili nije odnosno korisnik je null,
-     kao i to da li korisnik uopšte postoji u bazi*/
-    public void onStart() {
+    // Provjera da li je na startu (početku) trenutni korisnik prijavljen(logovan) ili nije odnosno korisnik je null
+
+   public void onStart() {
         super.onStart();
         firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser != null) {
-            firebaseUser.reload().addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        //Korisnik postoji u bazi, provjera za email
                         if (firebaseUser.isEmailVerified()) {
 
                             //Email je verifikovan, startuje LandingActivity
@@ -347,12 +342,8 @@ public class Login extends AppCompatActivity  {
                             finish();
 
                         }
-                    } else {
-                        //Korisnik ne postoji u bazi, odjavi ga
-                        FirebaseAuth.getInstance().signOut();
-                    }
-                }
-            });
+
+
         }
     }
 
