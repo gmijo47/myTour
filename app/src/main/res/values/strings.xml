@@ -15,6 +15,7 @@
     <string name="errGoogleSignIn">Došlo je do pogreške, pokušajte ponovo kasnije!</string>
     <string name="errSignInFailed">Prijava neuspješna, pokušajte ponovo kasnije!</string>
     <string name="errSessionExipired">Sesija istekla, molimo prijavite se!</string>
+    <string name="errNoUserExist">Korisnički nalog ne postoji, email nije poslat!</string>
 
     <string name="alright">Razumijem</string>
     <string name="rDataTipsTitle">Opss.. izgleda da vam ne ide od ruke, evo pomoći!</string>
@@ -52,6 +53,10 @@
 
     <string name="lResendedMail">Verifikaciski email poslat, provjerite sanduče!</string>
     <string name="lNotResendedMail">Verifikaciski email poslat, provjerite sanduče!</string>
+
+    <string name="rsPasswordEmail">Email za reset lozinke poslat, provjerite sanduče!</string>
+    <string name="rsUnknownErr">Došlo je do pogreške, pokušajte ponovo kasnije!</string>
+
 
     <string name="webcl_id">787058489748-2vm90c5kd8ljelpr0tg1hf9vejuv2jed.apps.googleusercontent.com</string>
 
