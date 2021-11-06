@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -122,9 +121,13 @@ public class Login extends AppCompatActivity  {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
+
                             setError("succVerifySent", 10000);
+
                         }else {
+
                             setError("errVerifyNotSent", 10000);
+
                         }
                     }
                 });
