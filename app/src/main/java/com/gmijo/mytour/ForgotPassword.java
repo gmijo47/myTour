@@ -70,38 +70,39 @@ public class ForgotPassword extends AppCompatActivity {
                                     da korisnik postoji
                                  */
                                 if (task.getResult().getSignInMethods().size() >= 1) {
-
-                                    //Slanje password reset emaila
-                                    firebaseAuth.sendPasswordResetEmail(rsEmailData).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
+                                    if (sent < 3) {
+                                        //Slanje password reset emaila
+                                        firebaseAuth.sendPasswordResetEmail(rsEmailData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
 
                                             /*Ukoliko je uspješno poslat i ovo je prvi put u ovoj sesiji da ga šalje
                                                 izbacuje poruku da je uspješno poslat*/
-                                            if (task.isSuccessful() && sent == 0) {
+                                                if (task.isSuccessful()) {
 
-                                                setError("rsPasswordEmail");
-                                                sent++;
-                                            //Hendlovanje exceptiona konkretno problem sa konekcijom
-                                            } else if (task.getException() instanceof FirebaseNetworkException) {
+                                                    setError("rsPasswordEmail");
+                                                    sent++;
+                                                    //Hendlovanje exceptiona konkretno problem sa konekcijom
+                                                } else if (task.getException() instanceof FirebaseNetworkException) {
 
-                                                setError("errConn");
+                                                    setError("errConn");
 
-                                            //Email je već poslat
-                                            } else if (sent > 3) {
+                                                    //Svi ostali exeptioni
+                                                } else {
 
-                                                setError("rsAlreadySent");
+                                                    setError("rsUnknownErr");
 
-                                            //Svi ostali exceptioni
-                                            } else {
-
-                                                setError("rsUnknownErr");
-
+                                                 }
                                             }
-                                        }
-                                    });
-                                //Fetch vratio vrijednost manju od 1 odnosno 0, što znači da korisnik ne postoji
-                                } else {
+                                        });
+                                        //Poslato više od 3 emaila
+                                    } else {
+
+                                        setError("rsAlreadySent");
+
+                                    }
+                                    //Fetch vratio vrijednost manju od 1 odnosno 0, što znači da korisnik ne postoji
+                                }else {
 
                                     setError("errNoUserExist");
 
@@ -114,6 +115,11 @@ public class ForgotPassword extends AppCompatActivity {
                             }
                         }
                     });
+                    //Uneseni email nije ispravan
+                }else {
+
+                    setError("errEmail");
+
                 }
             }
         });
@@ -138,7 +144,7 @@ public class ForgotPassword extends AppCompatActivity {
             }
             //Korisnik ne postoji
             case "errNoUserExist":{
-                rsErrorMsg.setText(R.string.rsPasswordEmail);
+                rsErrorMsg.setText(R.string.errNoUserExist);
                 rsErrorMsg.setVisibility(View.VISIBLE);
                 break;
             }
@@ -158,6 +164,13 @@ public class ForgotPassword extends AppCompatActivity {
             case "rsAlreadySent": {
                 rsErrorMsg.setText(R.string.rsAlreadySent);
                 rsErrorMsg.setVisibility(View.VISIBLE);
+                break;
+            }
+            //Uneseni email nije validan (regex)
+            case "errEmail": {
+                rsErrorMsg.setText(R.string.errEmail);
+                rsErrorMsg.setVisibility(View.VISIBLE);
+                break;
             }
         }
         //Čišćenje, odnoso rollbackovanje UI na default nakon određeno timeouta
