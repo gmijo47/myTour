@@ -19,16 +19,18 @@ import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.SignInMethodQueryResult;
 
-import java.util.regex.Pattern;
 
 public class ForgotPassword extends AppCompatActivity {
 
+    //Inicijaliziranje i definisanje elemenata
     EditText rsEmail;
     TextView rsErrorMsg;
     Button rsBtn;
     String rsEmailData;
     ProgressBar rsProgressBar;
+    int sent = 0;
 
+    //FireBaseAuth inicijaliziranje
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -36,6 +38,7 @@ public class ForgotPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
+        //Dodjelivanje elemenata "varijablama"
         rsEmail = (EditText) findViewById(R.id.ResetPasswordEmail);
 
         rsBtn = (Button) findViewById(R.id.ResetPasswordBtn);
@@ -44,45 +47,69 @@ public class ForgotPassword extends AppCompatActivity {
 
         rsProgressBar = (ProgressBar) findViewById(R.id.ResetPasswordProgressBar);
 
+        //Dobavljanje firebaseAuth-a
         firebaseAuth = FirebaseAuth.getInstance();
 
+        //Lisener na ResetPassword button
         rsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 rsEmailData = rsEmail.getText().toString().trim();
                 rsProgressBar.setVisibility(View.VISIBLE);
+
+                //Provjera da li email podliježe regexu odnosno patternu za email
                 if (Patterns.EMAIL_ADDRESS.matcher(rsEmailData).matches()){
 
+                    //Fetchuje metode prijave za unijeti email, te stavlja lisener na to
                     firebaseAuth.fetchSignInMethodsForEmail(rsEmailData).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                         @Override
                         public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                            if (task.isSuccessful()) {
+                                /*Ukoliko je broj metoda jednak 1 ili veći od 1 šalje email, odnosno to potvrđuje
+                                    da korisnik postoji
+                                 */
+                                if (task.getResult().getSignInMethods().size() >= 1) {
 
-                            if(task.getResult().getSignInMethods().size() == 1){
+                                    //Slanje password reset emaila
+                                    firebaseAuth.sendPasswordResetEmail(rsEmailData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
 
-                                firebaseAuth.sendPasswordResetEmail(rsEmailData).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
+                                            /*Ukoliko je uspješno poslat i ovo je prvi put u ovoj sesiji da ga šalje
+                                                izbacuje poruku da je uspješno poslat*/
+                                            if (task.isSuccessful() && sent == 0) {
 
-                                        if (task.isSuccessful()){
+                                                setError("rsPasswordEmail");
+                                                sent++;
+                                            //Hendlovanje exceptiona konkretno problem sa konekcijom
+                                            } else if (task.getException() instanceof FirebaseNetworkException) {
 
-                                            setError("rsPasswordEmail");
+                                                setError("errConn");
 
-                                        }else if(task.getException() instanceof FirebaseNetworkException) {
+                                            //Email je već poslat
+                                            } else if (sent > 3) {
 
-                                            setError("errConn");
+                                                setError("rsAlreadySent");
 
-                                        } else {
+                                            //Svi ostali exceptioni
+                                            } else {
 
-                                            setError("rsUnknownErr");
+                                                setError("rsUnknownErr");
 
+                                            }
                                         }
+                                    });
+                                //Fetch vratio vrijednost manju od 1 odnosno 0, što znači da korisnik ne postoji
+                                } else {
 
-                                    }
-                                });
+                                    setError("errNoUserExist");
 
-                            } else{
+                                }
+                            //Fetch metoda nije uspio
+                            }else {
 
-                                setError("errNoUserExist");
+                                setError("rsUnknownErr");
 
                             }
                         }
@@ -102,26 +129,36 @@ public class ForgotPassword extends AppCompatActivity {
     }
     public void setError(String errCode, int timeOut){
         switch (errCode) {
+            //Email je poslat
             case "rsPasswordEmail":{
                 rsErrorMsg.setTextColor(Color.GREEN);
                 rsErrorMsg.setText(R.string.rsPasswordEmail);
                 rsErrorMsg.setVisibility(View.VISIBLE);
                 break;
             }
+            //Korisnik ne postoji
             case "errNoUserExist":{
                 rsErrorMsg.setText(R.string.rsPasswordEmail);
                 rsErrorMsg.setVisibility(View.VISIBLE);
                 break;
             }
+            //Problem sa konekcijom
             case "errConn":{
                 rsErrorMsg.setText(R.string.errConn);
                 rsErrorMsg.setVisibility(View.VISIBLE);
                 break;
             }
-            case "rsUnknownErr":
+            //Ostali problemi (exceptioni)
+            case "rsUnknownErr": {
                 rsErrorMsg.setText(R.string.rsUnknownErr);
                 rsErrorMsg.setVisibility(View.VISIBLE);
                 break;
+            }
+            //Email je već poslat odnosno došlo je do prekoračenja broja slanja iz jedne sesije (5)
+            case "rsAlreadySent": {
+                rsErrorMsg.setText(R.string.rsAlreadySent);
+                rsErrorMsg.setVisibility(View.VISIBLE);
+            }
         }
         //Čišćenje, odnoso rollbackovanje UI na default nakon određeno timeouta
         new Handler().postDelayed(new Runnable() {
