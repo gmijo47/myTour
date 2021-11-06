@@ -28,9 +28,11 @@
     <string name="rAccCreated">Korisnički nalog uspješno kreiran</string>
 
     <string name="title_activity_landing">LandingActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="fHome">Pocetna</string>
+    <string name="fLeaderboard">Ljestvica</string>
+    <string name="fExplore">Istraži</string>
+    <string name="fMap">Mapa</string>
+    <string name="fProfile">Profil</string>
 
     <string name="rTitle">myTour Registracija</string>
     <string name="rSubTitle">MOLIMO IZVRŠITE REGISTRACIJU!</string>
@@ -56,6 +58,7 @@
 
     <string name="rsPasswordEmail">Email za reset lozinke poslat, provjerite sanduče!</string>
     <string name="rsUnknownErr">Došlo je do pogreške, pokušajte ponovo kasnije!</string>
+    <string name="rsAlreadySent">Email je već poslat!</string>
 
 
     <string name="webcl_id">787058489748-2vm90c5kd8ljelpr0tg1hf9vejuv2jed.apps.googleusercontent.com</string>
