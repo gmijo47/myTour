@@ -6,19 +6,32 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/btn_login.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/gradient_splashscreen.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.30462962962962964" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.32037037037037036" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ljestvica.xml" value="0.30462962962962964" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/login_container.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/pocetna.xml" value="0.22" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/profil.xml" value="0.30462962962962964" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/text_field.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/text_field_error.xml" value="0.21203703703703702" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
-        <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_landing.xml" value="0.32864583333333336" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_landing.xml" value="0.25" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_splashscreen.xml" value="0.1859375" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_dashboard.xml" value="0.34270833333333334" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_explore.xml" value="0.34270833333333334" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_home.xml" value="0.34270833333333334" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_leaderborad.xml" value="0.34270833333333334" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_mapa.xml" value="0.34270833333333334" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_pocetna.xml" value="0.3380208333333333" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_profil.xml" value="0.34270833333333334" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/registertips_dialog.xml" value="0.2682291666666667" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/registertips_fragment.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/resendverifyemail_dialog.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/resendverifyemail_fragment.xml" value="0.19010416666666666" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20677083333333332" />
         <entry key="..\:/Projects/myTour/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19722222222222222" />
       </map>
     </option>
