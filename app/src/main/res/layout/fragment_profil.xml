@@ -5,24 +5,697 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profil.ProfilFragment">
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="280dp"
         android:background="@drawable/pfad_42"
-        tools:ignore="MissingConstraints"/>
+        tools:ignore="MissingConstraints"
+        android:orientation="vertical">
+
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:text="Profil"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Moj profil"
+        android:textColor="@color/white"
+        android:textSize="22dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:src="@drawable/edit_white_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="250dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="80dp"
+        tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/default_profile_avatar" />
+    </androidx.cardview.widget.CardView>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="240dp"
+            android:background="@drawable/profile_container">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="148dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/profile_menu_container"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/profileVerifyBadge"
+                android:layout_width="30dp"
+                android:layout_height="60dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/verify_icon"
+                app:layout_constraintBottom_toTopOf="@+id/profileSettings"
+                app:layout_constraintEnd_toEndOf="parent">
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/profileAdminBadge"
+                android:layout_width="30dp"
+                android:layout_height="60dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/admin_icon"
+                app:layout_constraintBottom_toTopOf="@+id/profileSettings"
+                app:layout_constraintEnd_toStartOf="@+id/profileVerifyBadge">
+
+            </ImageButton>
+            <ImageButton
+                android:id="@+id/profileDeveloperBadge"
+                android:layout_width="30dp"
+                android:layout_height="60dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/dev_icon"
+                app:layout_constraintBottom_toTopOf="@+id/profileSettings"
+                app:layout_constraintEnd_toStartOf="@+id/profileAdminBadge">
+
+            </ImageButton>
+        <TextView
+            android:id="@+id/profileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:fontFamily="sans-serif-black"
+            android:text=""
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="22dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/profileUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:text=""
+            android:textColor="@color/stroke_gray"
+            android:textAlignment="center"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileName" />
+
+            <ImageButton
+                android:id="@+id/profileInfo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="24dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:src="@drawable/personalinfo_selected_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="40dp"
+                app:layout_constraintTop_toBottomOf="@+id/profileName"
+                tools:ignore="MissingConstraints" />
+
+            <ImageButton
+                android:id="@+id/profileStats"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="24dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:src="@drawable/stats_def_icon"
+                app:layout_constraintEnd_toStartOf="@+id/profileSettings"
+                app:layout_constraintStart_toEndOf="@+id/profileInfo"
+                app:layout_constraintTop_toBottomOf="@+id/profileName"
+                tools:ignore="MissingConstraints" />
+
+            <ImageButton
+                android:id="@+id/profileSettings"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="24dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:src="@drawable/settings_icon"
+                app:layout_constraintEnd_toStartOf="@+id/profileLogOut"
+                app:layout_constraintStart_toEndOf="@+id/profileStats"
+                app:layout_constraintTop_toBottomOf="@+id/profileName"
+                tools:ignore="MissingConstraints" />
+            <ImageButton
+                android:id="@+id/profileLogOut"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="40dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:src="@drawable/logout_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileName"
+                tools:ignore="MissingConstraints" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+    <ScrollView
+        android:id="@+id/viewPersonalInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="350dp"
+        android:visibility="visible">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="60dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/pUser"
+                    android:textColor="@color/gray"
+                    android:fontFamily="sans-serif-black"
+                    android:textSize="20dp"
+                    android:layout_marginBottom="25dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/field_element">
+
+                    <ImageView
+                        android:id="@+id/profileNameIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:src="@drawable/name_icon"
+                        tools:ignore="MissingConstraints"
+                        tools:layout_editor_absoluteY="2dp" />
+
+                    <TextView
+                        android:id="@+id/profileInfoNameTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@color/stroke_gray"
+                        android:textSize="14dp"
+                        android:text="@string/pInfoNameAndSurname"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintStart_toEndOf="@+id/profileNameIcon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/profileInfoUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="sans-serif-black"
+                        android:textColor="@color/gray"
+                        android:padding="8dp"
+                        android:text=""
+                        android:textSize="17dp"
+                        android:layout_marginLeft="75dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/field_element"
+                android:layout_marginTop="15dp">
+
+                <ImageView
+                    android:id="@+id/profileUsernameIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/username_icon"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <TextView
+                    android:id="@+id/profileInfoUsernameTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/stroke_gray"
+                    android:textSize="14dp"
+                    android:text="@string/pInfoUsername"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toEndOf="@+id/profileUsernameIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/profileInfoName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="sans-serif-black"
+                    android:textColor="@color/gray"
+                    android:padding="8dp"
+                    android:text=""
+                    android:textSize="17dp"
+                    android:layout_marginLeft="75dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/field_element"
+                android:layout_marginTop="15dp">
+
+                <ImageView
+                    android:id="@+id/profileEmailIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/email_icon"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <TextView
+                    android:id="@+id/profileInfoEmailTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/stroke_gray"
+                    android:textSize="14dp"
+                    android:text="@string/pInfoEmail"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toEndOf="@+id/profileEmailIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/profileInfoEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="sans-serif-black"
+                    android:textColor="@color/gray"
+                    android:padding="8dp"
+                    android:text=""
+                    android:textSize="17dp"
+                    android:layout_marginLeft="75dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/field_element"
+                android:layout_marginTop="15dp">
+
+                <ImageView
+                    android:id="@+id/profilePhoneIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/phone_icon"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <TextView
+                    android:id="@+id/profileInfoPhoneTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/stroke_gray"
+                    android:textSize="14dp"
+                    android:text="@string/pInfoPhone"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toEndOf="@+id/profilePhoneIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/profileInfoPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="sans-serif-black"
+                    android:textColor="@color/gray"
+                    android:padding="8dp"
+                    android:text=""
+                    android:textSize="17dp"
+                    android:layout_marginLeft="75dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/field_element"
+                android:layout_marginTop="15dp">
+
+                <ImageView
+                    android:id="@+id/profileGroupIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/group_icon"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <TextView
+                    android:id="@+id/profileInfoGroupTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/stroke_gray"
+                    android:textSize="14dp"
+                    android:text="@string/pInfoGroup"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toEndOf="@+id/profileGroupIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/profileInfoGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="sans-serif-black"
+                    android:textColor="@color/gray"
+                    android:padding="8dp"
+                    android:text=""
+                    android:textSize="17dp"
+                    android:layout_marginLeft="75dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="50dp"
+                android:contentDescription="Ovaj textbox omogućava da nav meni ne zaklanja polja">
+
+            </TextView>
+
+        </LinearLayout>
+    </ScrollView>
+    <ScrollView
+        android:id="@+id/viewPersonalStats"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="350dp"
+        android:visibility="gone">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginBottom="60dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/pStats"
+            android:textColor="@color/gray"
+            android:fontFamily="sans-serif-black"
+            android:textSize="20dp"
+            android:layout_marginBottom="25dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/field_element"
+            android:layout_marginTop="15dp">
+            <ImageView
+                android:id="@+id/statsPoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/token_icon"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="2dp" />
+
+            <TextView
+                android:id="@+id/statPointsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/stroke_gray"
+                android:textSize="14dp"
+                android:text="@string/stPointsTitle"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toEndOf="@+id/statsPoints"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statsPointsCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-black"
+                android:padding="8dp"
+                android:text="0"
+                android:textColor="@color/gray"
+                android:textSize="16dp"
+                app:layout_constraintStart_toEndOf="@+id/statPointsTitle"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/field_element"
+            android:layout_marginTop="15dp">
+            <ImageView
+                android:id="@+id/statsCityExplored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/city_icon"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="2dp" />
+
+            <TextView
+                android:id="@+id/statsCityExploredTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/stroke_gray"
+                android:textSize="14dp"
+                android:text="@string/stCityExplored"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toEndOf="@+id/statsCityExplored"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statsCityExploredCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-black"
+                android:padding="8dp"
+                android:text="0"
+                android:textColor="@color/gray"
+                android:textSize="16dp"
+                app:layout_constraintStart_toEndOf="@+id/statsCityExploredTitle"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/field_element"
+            android:layout_marginTop="15dp">
+            <ImageView
+                android:id="@+id/statsVillage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/village_icon"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="2dp" />
+
+            <TextView
+                android:id="@+id/statsVillageExploredTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/stroke_gray"
+                android:textSize="14dp"
+                android:text="@string/statsVillageExplored"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toEndOf="@+id/statsVillage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statsVillageExploredCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-black"
+                android:padding="8dp"
+                android:text="0"
+                android:textColor="@color/gray"
+                android:textSize="16dp"
+                app:layout_constraintStart_toEndOf="@+id/statsVillageExploredTitle"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/field_element"
+            android:layout_marginTop="15dp">
+            <ImageView
+                android:id="@+id/statsNaturePoint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/naturepoint_icon"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="2dp" />
+
+            <TextView
+                android:id="@+id/statsNaturePointExploredTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/stroke_gray"
+                android:textSize="14dp"
+                android:text="@string/statsNaturePointExplored"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toEndOf="@+id/statsNaturePoint"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statsNaturePointExploredCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-black"
+                android:padding="8dp"
+                android:text="0"
+                android:textColor="@color/gray"
+                android:textSize="16dp"
+                app:layout_constraintStart_toEndOf="@+id/statsNaturePointExploredTitle"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/field_element"
+            android:layout_marginTop="15dp">
+            <ImageView
+                android:id="@+id/statsNacionalPark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/nacionalpark_icon"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="2dp" />
+
+            <TextView
+                android:id="@+id/statsNacionalParkExploredTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/stroke_gray"
+                android:textSize="14dp"
+                android:text="@string/statsNacionalParkExplored"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toEndOf="@+id/statsNacionalPark"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statsNacionalParkExploredCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-black"
+                android:padding="8dp"
+                android:text="0"
+                android:textColor="@color/gray"
+                android:textSize="16dp"
+                app:layout_constraintStart_toEndOf="@+id/statsNacionalParkExploredTitle"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:contentDescription="Ovaj textbox omogućava da nav meni ne zaklanja polja">
+
+        </TextView>
+    </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
