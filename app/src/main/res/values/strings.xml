@@ -64,5 +64,23 @@
 
     <string name="webcl_id">787058489748-2vm90c5kd8ljelpr0tg1hf9vejuv2jed.apps.googleusercontent.com</string>
 
+    <string name="pUser">Informacije o korisniku:</string>
+    <string name="pStats">Statistika o korisniku:</string>
+    <string name="pInfoUsername">KORISNIČKO IME</string>
+    <string name="pInfoNameAndSurname">IME I PREZIME</string>
+    <string name="pInfoEmail">E-MAIL ADRESA</string>
+    <string name="pInfoPhone">BROJ TELEFONA</string>
+    <string name="pInfoGroup">KORISNIČKA GRUPA</string>
+    <string name="pGroupUser">Korisnik</string>
+    <string name="pGroupAdmin">Administrator</string>
+
+
+    <string name="stPointsTitle">myTour TOKENI</string>
+    <string name="stCityExplored">OTKRIVENO GRADOVA</string>
+    <string name="statsNaturePointExplored">OTKRIVENO PRIODNIH ATRAKCIJA</string>
+    <string name="statsVillageExplored">OTKRIVENO SELA</string>
+    <string name="statsNacionalParkExplored">OTKRIVENO NACIONALNIH PARKOVA</string>
+
+
 
 </resources>
