@@ -4,17 +4,28 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/back.xml" value="0.25833333333333336" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/btn_login.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/default_profile_avatar.xml" value="0.2526041666666667" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/edit_white.xml" value="0.25833333333333336" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/field_element.xml" value="0.2526041666666667" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/gradient_splashscreen.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.30462962962962964" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.32037037037037036" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ljestvica.xml" value="0.30462962962962964" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/login_container.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/name.xml" value="0.2526041666666667" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/personalinfo.xml" value="0.28888888888888886" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/personalinfo_btn.xml" value="0.2324074074074074" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/pocetna.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/profil.xml" value="0.30462962962962964" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/profile_container.xml" value="0.25833333333333336" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/profile_menu_container.xml" value="0.25833333333333336" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/settings.xml" value="0.2526041666666667" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/text_field.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/text_field_error.xml" value="0.21203703703703702" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/verify_icon.xml" value="0.30277777777777776" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_landing.xml" value="0.25" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_login.xml" value="0.22" />
