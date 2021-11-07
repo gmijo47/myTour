@@ -24,6 +24,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Register extends AppCompatActivity{
@@ -32,11 +37,12 @@ public class Register extends AppCompatActivity{
     Button rBtn;
     ProgressBar rProgressBar;
     TextView rErrorMsg, rTerms;
-    String rEmailData, rUsernameData, rPasswordData, rPasswordRepeatData, errUnknownCode;
+    String rEmailData, rUsernameData, rPasswordData, rPasswordRepeatData, errUnknownCode, userUUID;
 
-    //FireBaseAuth i FirebaseUser inicijaliziranje
+    //FireBaseAuth i FirebaseUser, FirebaseFireStore inicijaliziranje
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
+    FirebaseFirestore firebaseFirestore;
 
     //Broji errore
     int errCounter = 0;
@@ -64,8 +70,9 @@ public class Register extends AppCompatActivity{
         rErrorMsg = (TextView) findViewById(R.id.RegisterErrorMessage);
         rTerms = (TextView) findViewById(R.id.RegisterTermsOfUse);
 
-        //Dobavljanje firebaseAuth-a
+        //Dobavljanje firebaseAuth-a i firebasefirestore-a
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
 
         //Lisener na register button
@@ -106,16 +113,57 @@ public class Register extends AppCompatActivity{
 
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
-                                                            //Nakon USPJEŠNO poslatog emaila delaya 3000ms i prebacuje na Login actitvity, te šalje poruku da je nalog uspješno kreiran
-                                                            Toast.makeText(getApplicationContext(), R.string.rAccCreated, Toast.LENGTH_LONG).show();
-                                                            new Handler().postDelayed(new Runnable() {
-                                                                @Override
-                                                                public void run() {
-                                                                    startActivity(new Intent(Register.this, Login.class));
-                                                                    finish();
-                                                                }
-                                                            }, 3000);
+                                                            if (task.isSuccessful()) {
+                                                                userUUID = firebaseAuth.getCurrentUser().getUid();
+                                                                DocumentReference documentReference = firebaseFirestore.collection("korisnici").document(userUUID);
+                                                                Map<String, Object> user = new HashMap<>();
+                                                                user.put("username", rUsernameData);
+                                                                user.put("e-mail", rEmailData);
+                                                                user.put("telefon", "");
+                                                                user.put("verifikovan", false);
+                                                                user.put("tip", "korisnik");
+                                                                documentReference.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                        if (task.isSuccessful()){
+
+                                                                            //Nakon USPJEŠNO poslatog emaila delaya 3000ms i prebacuje na Login actitvity, te šalje poruku da je nalog uspješno kreiran
+                                                                            Toast.makeText(getApplicationContext(), R.string.rAccCreated, Toast.LENGTH_LONG).show();
+                                                                            new Handler().postDelayed(new Runnable() {
+                                                                                @Override
+                                                                                public void run() {
+
+                                                                                    startActivity(new Intent(Register.this, Login.class));
+                                                                                    finish();
+                                                                                }
+                                                                            }, 3000);
+
+                                                                            //Problem sa konekcijom
+                                                                        }else if(task.getException() instanceof  FirebaseNetworkException){
+
+                                                                            setError("errConnection");
+
+                                                                            //Otali exceptioni
+                                                                        }else{
+
+                                                                            setError("errUnknown");
+
+                                                                        }
+                                                                    }
+                                                                });
+
+                                                               //Problem sa konekcijom
+                                                            }else if(task.getException() instanceof FirebaseNetworkException) {
+
+                                                                setError("errConnection");
+
+                                                                //Ostali exceptioni
+                                                            } else {
+
+                                                                setError("errUnknown");
+
                                                             }
+                                                        }
                                                     });
 
                                     //Hendolovanje exceptiona
@@ -213,6 +261,10 @@ public class Register extends AppCompatActivity{
                 rErrorMsg.setText(R.string.errTooManyReq);
                 rErrorMsg.setVisibility(View.VISIBLE);
                 break;
+            }
+            case "errUnknown":{
+                rErrorMsg.setText(R.string.errUnknown);
+                rErrorMsg.setVisibility(View.VISIBLE);
             }
         }
         //Čišćenje, odnoso rollbackovanje UI na default nakon određeno timeouta

@@ -33,6 +33,11 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Login extends AppCompatActivity  {
 
@@ -40,15 +45,17 @@ public class Login extends AppCompatActivity  {
     EditText lEmail, lPassword;
     Button lBtn, lBtnGoogle;
     TextView lForgotPassword, lRegisterRedirect, lErrorMsg;
-    String lEmailData, lPasswordData, errUnknownCode;
+    String lEmailData, lPasswordData, errUnknownCode, userUUID;
     ProgressBar lProgressBar;
     Boolean canSendVerifyEmail = false, firstTimeLog = true;
     int antiBruteForece = 0;
 
 
-    //FireBaseAuth i FirebaseUser inicijaliziranje
+    //FireBaseAuth i FirebaseUser, Firestore inicijaliziranje
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
+    FirebaseFirestore firebaseFirestore;
+
 
     //Google OAUTH inicijaliziranje
     GoogleSignInClient googleSignInClient;
@@ -80,8 +87,9 @@ public class Login extends AppCompatActivity  {
 
         lProgressBar = (ProgressBar) findViewById(R.id.LoginProgressBar);
 
-        //Dobavljanje firebaseAuth-a
+        //Dobavljanje firebaseAuth-a i Firestore-a
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         //Konfiguracija prijave putem Googla
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -172,11 +180,25 @@ public class Login extends AppCompatActivity  {
                                 setError("errEmailNoVerify", 20000);
 
                             }else {
+                                userUUID = firebaseUser.getUid();
+                                DocumentReference documentReference = firebaseFirestore.collection("korisnici").document(userUUID);
 
-                                //Email je verifikovan, startuje LandingActivity
-                                startActivity(new Intent(Login.this, LandingActivity.class));
-                                finish();
+                                documentReference.update("verifikovan", true).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
 
+                                            //Email je verifikovan, startuje LandingActivity
+                                            startActivity(new Intent(Login.this, LandingActivity.class));
+                                            finish();
+
+                                        }else {
+
+                                            setError("errUnknown");
+
+                                        }
+                                    }
+                                });
                             }
                     }else {
                         //Hendolovanje exceptiona
@@ -238,6 +260,7 @@ public class Login extends AppCompatActivity  {
             case "errPassword":{
                 lErrorMsg.setText(R.string.errPass);
                 lErrorMsg.setVisibility(View.VISIBLE);
+                lPassword.setBackgroundResource(R.drawable.text_field_error);
                 break;
             }
             //Nalog nije verifikovan
@@ -310,6 +333,10 @@ public class Login extends AppCompatActivity  {
                 lErrorMsg.setText(R.string.errSignInFailed);
                 lErrorMsg.setVisibility(View.VISIBLE);
                 break;
+            }
+            case "errUnknown":{
+                lErrorMsg.setText(R.string.errUnknown);
+                lErrorMsg.setVisibility(View.VISIBLE);
             }
         }
         //Čišćenje, odnoso rollbackovanje UI na default nakon određeno timeouta
