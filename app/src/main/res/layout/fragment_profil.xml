@@ -5,6 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profil.ProfilFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:background="@drawable/pfad_42"
+        tools:ignore="MissingConstraints"/>
 
     <TextView
         android:id="@+id/text_home"

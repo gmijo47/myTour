@@ -16,6 +16,7 @@
     <string name="errSignInFailed">Prijava neuspješna, pokušajte ponovo kasnije!</string>
     <string name="errSessionExipired">Sesija istekla, molimo prijavite se!</string>
     <string name="errNoUserExist">Korisnički nalog ne postoji, email nije poslat!</string>
+    <string name="errUnknown">Došlo je do pogreške, pokušajte ponovo kasnije!</string>
 
     <string name="alright">Razumijem</string>
     <string name="rDataTipsTitle">Opss.. izgleda da vam ne ide od ruke, evo pomoći!</string>
@@ -32,7 +33,7 @@
     <string name="fLeaderboard">Ljestvica</string>
     <string name="fExplore">Istraži</string>
     <string name="fMap">Mapa</string>
-    <string name="fProfile">Profil</string>
+    <string name="fProfile">Moj Profil</string>
 
     <string name="rTitle">myTour Registracija</string>
     <string name="rSubTitle">MOLIMO IZVRŠITE REGISTRACIJU!</string>
