@@ -115,13 +115,23 @@ public class Register extends AppCompatActivity{
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             if (task.isSuccessful()) {
                                                                 userUUID = firebaseAuth.getCurrentUser().getUid();
-                                                                DocumentReference documentReference = firebaseFirestore.collection("korisnici").document(userUUID);
+                                                                DocumentReference documentReference = firebaseFirestore.collection("users").document(userUUID);
                                                                 Map<String, Object> user = new HashMap<>();
-                                                                user.put("username", rUsernameData);
-                                                                user.put("e-mail", rEmailData);
-                                                                user.put("telefon", "");
-                                                                user.put("verifikovan", false);
-                                                                user.put("tip", "korisnik");
+                                                                Map<String, Object> data = new HashMap<>();
+                                                                    data.put("Username", rUsernameData);
+                                                                    data.put("fullName", "");
+                                                                    data.put("Email", rEmailData);
+                                                                    data.put("Phone", "");
+                                                                    data.put("Verified", false);
+                                                                    data.put("userType", "User");
+                                                                    user.put("personalData", data);
+                                                                    Map<String, Object> achievementData = new HashMap<>();
+                                                                        achievementData.put("myTourTokens", 5);
+                                                                        achievementData.put("cityExplored", 0);
+                                                                        achievementData.put("villageExplored", 0);
+                                                                        achievementData.put("neturepointExplored", 0);
+                                                                        achievementData.put("nationalParkExplored", 0);
+                                                                user.put("achievementData", achievementData);
                                                                 documentReference.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                     @Override
                                                                     public void onComplete(@NonNull Task<Void> task) {
