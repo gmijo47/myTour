@@ -180,25 +180,10 @@ public class Login extends AppCompatActivity  {
                                 setError("errEmailNoVerify", 20000);
 
                             }else {
-                                userUUID = firebaseUser.getUid();
-                                DocumentReference documentReference = firebaseFirestore.collection("korisnici").document(userUUID);
 
-                                documentReference.update("verifikovan", true).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-
-                                            //Email je verifikovan, startuje LandingActivity
-                                            startActivity(new Intent(Login.this, LandingActivity.class));
-                                            finish();
-
-                                        }else {
-
-                                            setError("errUnknown");
-
-                                        }
-                                    }
-                                });
+                                //Email je verifikovan, startuje LandingActivity
+                                startActivity(new Intent(Login.this, LandingActivity.class));
+                                finish();
                             }
                     }else {
                         //Hendolovanje exceptiona
