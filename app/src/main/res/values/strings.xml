@@ -64,8 +64,8 @@
 
     <string name="webcl_id">787058489748-2vm90c5kd8ljelpr0tg1hf9vejuv2jed.apps.googleusercontent.com</string>
 
-    <string name="pUser">Informacije o korisniku:</string>
-    <string name="pStats">Statistika o korisniku:</string>
+    <string name="pUser">Korisnički podatci:</string>
+    <string name="pStats">Statistika:</string>
     <string name="pInfoUsername">KORISNIČKO IME</string>
     <string name="pInfoNameAndSurname">IME I PREZIME</string>
     <string name="pInfoEmail">E-MAIL ADRESA</string>
@@ -80,7 +80,28 @@
     <string name="statsNaturePointExplored">OTKRIVENO PRIODNIH ATRAKCIJA</string>
     <string name="statsVillageExplored">OTKRIVENO SELA</string>
     <string name="statsNacionalParkExplored">OTKRIVENO NACIONALNIH PARKOVA</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 
+    <!-- Preference Titles -->
+    <string name="settingsTitle">Postavke</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="editProfileTitle">Uređivanje profila</string>
+    <string name="editProfileSubTitle">Uređivanje korisničkih podataka:</string>
+    <string name="editPasswordNew">NOVA LOZINKA</string>
+    <string name="editPasswordNewRepeat">PONOVO NOVA LOZINKA</string>
+    <string name="phoneVerify">VERIFIKUJ</string>
+    <string name="phoneNVerify">NEVERIFIKOVAN</string>
 
 
 </resources>

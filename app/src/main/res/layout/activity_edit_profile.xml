@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfile">
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:background="@drawable/pfad_41"
+        tools:ignore="MissingConstraints"
+        android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/dark_blue"
+            tools:ignore="MissingConstraints">
+            <ImageButton
+                android:id="@+id/editProfileBack"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/back_icon"
+                android:background="@android:color/transparent"
+                tools:ignore="MissingConstraints" />
+
+            <ImageButton
+                android:id="@+id/editProfileSave"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/save_icon"
+                app:layout_constraintEnd_toEndOf="@+id/textView2"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif"
+                android:padding="15dp"
+                android:text="@string/editProfileTitle"
+                android:textColor="@color/white"
+                android:textFontWeight="500"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/editProfileBack" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="90dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/editAvatar"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_profile_avatar" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="240dp"
+        android:background="@drawable/edit_profile_container">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/viewPersonalInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="240dp"
+        android:visibility="visible">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="60dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/editProfileSubTitle"
+                android:textColor="@color/gray"
+                android:fontFamily="sans-serif-black"
+                android:textSize="20dp"
+                android:layout_marginBottom="25dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/field_element"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/profileNameIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/name_icon"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <EditText
+                    android:id="@+id/editFullName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/text_field_edit_profile"
+                    android:ems="10"
+                    android:fontFamily="sans-serif"
+                    android:hint="@string/pInfoNameAndSurname"
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:textColor="@color/stroke_gray"
+                    android:textSize="14dp"
+                    android:maxLength="24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/profileNameIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/field_element"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/profileUsernameIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/username_icon"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <EditText
+                    android:id="@+id/editUsername"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/text_field_edit_profile"
+                    android:ems="10"
+                    android:fontFamily="sans-serif"
+                    android:hint="@string/pInfoUsername"
+                    android:inputType="text"
+                    android:enabled="false"
+                    android:padding="8dp"
+                    android:textColor="@color/stroke_gray"
+                    android:textSize="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/profileUsernameIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/field_element"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/profileEmailIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/email_icon"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <TextView
+                    android:id="@+id/editEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="5dp"
+                    android:enabled="false"
+                    android:fontFamily="sans-serif"
+                    android:padding="8dp"
+                    android:text="@string/pInfoEmail"
+                    android:textColor="@color/stroke_gray"
+                    android:textSize="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/profileEmailIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/field_element"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/passwordIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/password_icon"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <TextView
+                    android:id="@+id/editPass"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif"
+                    android:padding="8dp"
+                    android:text="@string/editPasswordNew"
+                    android:textColor="@color/stroke_gray"
+                    android:textSize="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/passwordIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/field_element"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/passwordIcon2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/password_icon"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <TextView
+                    android:id="@+id/editPassRepeat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif"
+                    android:padding="8dp"
+                    android:text="@string/editPasswordNewRepeat"
+                    android:textColor="@color/stroke_gray"
+                    android:textSize="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/passwordIcon2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/field_element"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/profilePhoneIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/phone_icon"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <TextView
+                    android:id="@+id/displayPhone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif"
+                    android:padding="8dp"
+                    android:text="@string/phoneNVerify"
+                    android:textColor="@color/stroke_gray"
+                    android:enabled="false"
+                    android:textSize="14dp"
+                    app:layout_constraintEnd_toStartOf="@+id/verifyPhone"
+                    app:layout_constraintStart_toEndOf="@+id/profilePhoneIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/verifyPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif"
+                    android:padding="8dp"
+                    android:text="@string/phoneVerify"
+                    android:textColor="@color/blue_grad3"
+                    android:textSize="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="50dp"
+                android:contentDescription="Ovaj textbox omogućava da nav meni ne zaklanja polja">
+
+            </TextView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
