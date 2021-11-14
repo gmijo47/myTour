@@ -12,16 +12,16 @@ import androidx.annotation.Nullable;
 
 public class SQLiteController extends SQLiteOpenHelper{
     //Verzija baze
-    private static int DB_VER = 1;
+    private static final int DB_VER = 1;
 
     //Podatci o bazi, kolonama, tabeli
-    private static String DB_NAME = "users.db";
-    private static String TAB_NAME = "userData";
+    private static final String DB_NAME = "users.db";
+    private static final String TAB_NAME = "userData";
 
-    private static String COL_NO = "_no";
-    private static String COL_GPUUID = "googleUUID";
-    private static String COL_FNAME = "fullName";
-    private static String COL_USERNAME = "username";
+    private static final String COL_NO = "_no";
+    private static final String COL_GPUUID = "googleUUID";
+    private static final String COL_FNAME = "fullName";
+    private static final String COL_USERNAME = "username";
 
     //Query komande
     String create_query;
@@ -70,5 +70,4 @@ public class SQLiteController extends SQLiteOpenHelper{
     public long getResult(){
         return result;
     }
-
 }
