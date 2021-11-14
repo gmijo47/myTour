@@ -3,6 +3,7 @@
     <string name="desc">Default deskripcija</string>
 
     <string name="errUsername">Unesite validno korisničko ime!</string>
+    <string name="errUsernameExists">Korisničko ime već postoji</string>
     <string name="errEmail">Unesite validnu e-mail adresu!</string>
     <string name="errPass">Unesite validnu lozinku!</string>
     <string name="errUserAlreadyExist">Već ste registrovani!</string>
@@ -17,6 +18,7 @@
     <string name="errSessionExipired">Sesija istekla, molimo prijavite se!</string>
     <string name="errNoUserExist">Korisnički nalog ne postoji, email nije poslat!</string>
     <string name="errUnknown">Došlo je do pogreške, pokušajte ponovo kasnije!</string>
+    <string name="errAlreadySignedInPass">Već ste registrovani koristeći email, ukoliko niste vi, zatražite reset lozinke!</string>
 
     <string name="alright">Razumijem</string>
     <string name="rDataTipsTitle">Opss.. izgleda da vam ne ide od ruke, evo pomoći!</string>
@@ -52,6 +54,8 @@
     <string name="lRemember">ZAPAMTI MOJU PRIJAVU</string>
     <string name="lGoogle">Google prijava</string>
     <string name="lRedirectCreateAcc">Nemate MyTour nalog? Kliknite ovdje!</string>
+    <string name="lSuccess">Prijava uspješna!</string>
+
 
 
     <string name="lResendedMail">Verifikaciski email poslat, provjerite sanduče!</string>
