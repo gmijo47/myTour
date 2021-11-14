@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -33,11 +35,15 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Login extends AppCompatActivity  {
 
@@ -45,9 +51,9 @@ public class Login extends AppCompatActivity  {
     EditText lEmail, lPassword;
     Button lBtn, lBtnGoogle;
     TextView lForgotPassword, lRegisterRedirect, lErrorMsg;
-    String lEmailData, lPasswordData, errUnknownCode, userUUID;
+    String lEmailData, lPasswordData, errUnknownCode, userUUID, gName, gSurname, gUsername;
     ProgressBar lProgressBar;
-    Boolean canSendVerifyEmail = false, firstTimeLog = true;
+    Boolean canSendVerifyEmail = false;
     int antiBruteForece = 0;
 
 
@@ -55,7 +61,6 @@ public class Login extends AppCompatActivity  {
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     FirebaseFirestore firebaseFirestore;
-
 
     //Google OAUTH inicijaliziranje
     GoogleSignInClient googleSignInClient;
@@ -364,7 +369,7 @@ public class Login extends AppCompatActivity  {
 
     //Google prijava, pokretanje Google intenta za odabir mejla
     private void googleSignIn() {
-
+    firebaseUser = firebaseAuth.getCurrentUser();
         Intent signInIntent = googleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -402,10 +407,8 @@ public class Login extends AppCompatActivity  {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            //Prijava uspješna, startuje LandingActivity
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-                            startActivity(new Intent(Login.this, LandingActivity.class));
-                            finish();
+                            //Dobavljanje podataka od GoogleNaloga
+                            getGData();
 
                         } else {
 
@@ -416,5 +419,101 @@ public class Login extends AppCompatActivity  {
                     }
                 });
     }
+    //Metoda za dobavljanje podataka od Google Naloga,
+    private void getGData(){
+        GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if (googleSignInAccount != null) {
+            lEmailData = googleSignInAccount.getEmail();
+            String[] rawData = lEmailData.split("@");
+            gUsername = rawData[0];
+            gName = googleSignInAccount.getGivenName();
+            gSurname = googleSignInAccount.getFamilyName();
+            userUUID = googleSignInAccount.getId();
+           gName = googleSignInAccount.getGivenName();
+            checkUsernameCloud();
+        }
+    }
+    //Provjera da li postoji username zapisan negdje na cloudu, da ne budu 2 korisnika sa istim username-om
+    private void checkUsernameCloud(){
+        //Odabir kolekcije na cloudfilestore-u
+        CollectionReference usersRef = firebaseFirestore.collection("users");
+
+        //Query komanda za provjeru da li username postoj
+        Query query = usersRef.whereEqualTo("personalData.Username", gUsername);
+
+        //Pozivanje/slanje querija
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+
+                    //Na cloudu ne postoje podatci o tom username-u, upisuje ih  tamo
+                    if (task.getResult().size() <= 0 ){
+                        DocumentReference documentReference = firebaseFirestore.collection("users").document(userUUID);
+                        Map<String, Object> user1 = new HashMap<>();
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("Username", gUsername);
+                        data.put("Email", lEmailData);
+                        data.put("userType", "Korisnik");
+                        user1.put("personalData", data);
+                        Map<String, Object> achievementData = new HashMap<>();
+                        achievementData.put("myTourTokens", 5);
+                        achievementData.put("cityExplored", 0);
+                        achievementData.put("villageExplored", 0);
+                        achievementData.put("neturepointExplored", 0);
+                        achievementData.put("nationalParkExplored", 0);
+                        user1.put("achievementData", achievementData);
+                        documentReference.set(user1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+
+                                    //Nakon uspješnog upisa, prebacuje ga na LandingActivity
+                                    Toast.makeText(getApplicationContext(), R.string.lSuccess, Toast.LENGTH_LONG).show();
+                                    lProgressBar.setVisibility(View.GONE);
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                                startActivity(new Intent(Login.this, LandingActivity.class));
+                                                finish();
+
+
+                                        }
+                                    }, 3000);
+
+                                    //Problem sa konekcijom i odjava jer je korisnik prijavljen
+                                } else if (task.getException() instanceof FirebaseNetworkException) {
+
+                                    FirebaseAuth.getInstance().signOut();
+                                    setError("errConnection");
+
+                                    //Ostali exceptioni i odjava, jer je korisnik je prijavljen
+                                } else {
+
+                                    FirebaseAuth.getInstance().signOut();
+                                    setError("errUnknown");
+
+                                }
+                            }
+                        });
+                        //Na cloudu postoji userame, genenerisanje novog
+                    }else if (task.getResult().size() > 0){
+                        Random random = new Random();
+                        gUsername = gUsername + random.nextInt(100);
+                        checkUsernameCloud();
+
+                    }
+
+                }else {
+
+                    //Ostali exceptioni
+                    setError("errUnknown");
+
+                }
+            }
+        });
+    }
+
 }
 
