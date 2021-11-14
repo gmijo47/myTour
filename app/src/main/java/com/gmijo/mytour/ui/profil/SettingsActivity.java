@@ -1,4 +1,4 @@
-package com.gmijo.mytour;
+package com.gmijo.mytour.ui.profil;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.gmijo.mytour.R;
 import com.gmijo.mytour.ui.profil.ProfilFragment;
 
 public class SettingsActivity extends AppCompatActivity {
