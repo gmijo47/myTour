@@ -24,17 +24,20 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,6 +45,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -324,8 +328,13 @@ public class Login extends AppCompatActivity  {
                 lErrorMsg.setVisibility(View.VISIBLE);
                 break;
             }
+            //Svi ostali exceptioni
             case "errUnknown":{
                 lErrorMsg.setText(R.string.errUnknown);
+                lErrorMsg.setVisibility(View.VISIBLE);
+            }//Već je prijavljen jednom od metoda
+            case "errAlreadySignedInPass":{
+                lErrorMsg.setText(R.string.errAlreadySignedInPass);
                 lErrorMsg.setVisibility(View.VISIBLE);
             }
         }
@@ -372,30 +381,46 @@ public class Login extends AppCompatActivity  {
     firebaseUser = firebaseAuth.getCurrentUser();
         Intent signInIntent = googleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+        GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if (googleSignInAccount != null){
+            lEmailData = googleSignInAccount.getEmail();
+        }
     }
 
     //Hendlovanje odabira iz metode iznad
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    firebaseAuth.fetchSignInMethodsForEmail(lEmailData).addOnSuccessListener(new OnSuccessListener<SignInMethodQueryResult>() {
+        @Override
+        public void onSuccess(SignInMethodQueryResult signInMethodQueryResult) {
+            List<String> signInMethods = signInMethodQueryResult.getSignInMethods();
+            if (signInMethods.contains(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD)){
 
-        //Rezultat vracen iz pokretanja intenta za odabir mejla
-        if (requestCode == RC_SIGN_IN) {
+                setError("errAlreadySignedInPass", 6000);
 
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            }else{
 
-            try {
+                //Rezultat vracen iz pokretanja intenta za odabir mejla
+                if (requestCode == RC_SIGN_IN) {
 
-                //Google prijava uspješna, poziva metodu ispod odnosno firebaseAuthGoogle
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthGoogle(account);
+                    Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
-            } catch (ApiException e) {
+                    try {
 
-                //Google prijava neuspješna, izbacuje error
-                setError("errGoogleSignIn");
+                        //Google prijava uspješna, poziva metodu ispod odnosno firebaseAuthGoogle
+                        GoogleSignInAccount account = task.getResult(ApiException.class);
+                        firebaseAuthGoogle(account);
+
+                    } catch (ApiException e) {
+
+                        //Google prijava neuspješna, izbacuje error
+                        setError("errGoogleSignIn");
+                    }
+                }
             }
         }
+    });
     }
 
     //Ukoliko "prođe" odnosno uspije metodu iznad prelazi na samu autentifikaciju sa firebaseom
