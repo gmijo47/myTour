@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTour">
         <activity
-            android:name=".EditProfile"
+            android:name=".ui.profil.EditProfile"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".ui.profil.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings" />
         <activity
