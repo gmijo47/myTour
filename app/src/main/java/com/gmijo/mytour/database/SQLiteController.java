@@ -1,4 +1,4 @@
-package com.gmijo.mytour.ui.database;
+package com.gmijo.mytour.database;
 
 
 
