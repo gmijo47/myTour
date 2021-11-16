@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gmijo.mytour.ui.database.SQLiteController;
+import com.gmijo.mytour.database.SQLiteController;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
@@ -175,7 +175,7 @@ public class Register extends AppCompatActivity{
 
 
                                                                                     }
-                                                                                }, 3000);
+                                                                                }, 800);
 
                                                                                 //Problem sa konekcijom
                                                                             } else if (task.getException() instanceof FirebaseNetworkException) {
