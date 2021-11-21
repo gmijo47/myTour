@@ -51,7 +51,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class Login extends AppCompatActivity  {
-
+    //TODO disable sve buttone, kada klikne na neki
     //Inicijaliziranje i definisanje elemenata
     EditText lEmail, lPassword;
     Button lBtn, lBtnGoogle;
@@ -416,8 +416,6 @@ public class Login extends AppCompatActivity  {
             gUsername = rawData[0];
             gName = googleSignInAccount.getGivenName();
             gSurname = googleSignInAccount.getFamilyName();
-            userUUID = googleSignInAccount.getId();
-            gName = googleSignInAccount.getGivenName();
 
             //Projvera da li je email trenutnog korisnika registrovan passwordom
             firebaseAuth.fetchSignInMethodsForEmail(lEmailData).addOnSuccessListener(new OnSuccessListener<SignInMethodQueryResult>() {
@@ -471,13 +469,14 @@ public class Login extends AppCompatActivity  {
                                         Map<String, Object> data = new HashMap<>();
                                         data.put("Username", gUsername);
                                         data.put("Email", lEmailData);
+                                        data.put("FullName", gName + " " + gSurname);
                                         data.put("userType", "Korisnik");
                                         user1.put("personalData", data);
                                         Map<String, Object> achievementData = new HashMap<>();
                                         achievementData.put("myTourTokens", 5);
                                         achievementData.put("cityExplored", 0);
                                         achievementData.put("villageExplored", 0);
-                                        achievementData.put("neturepointExplored", 0);
+                                        achievementData.put("naturepointExplored", 0);
                                         achievementData.put("nationalParkExplored", 0);
                                         user1.put("achievementData", achievementData);
                                         documentReference.set(user1).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -572,6 +571,9 @@ public class Login extends AppCompatActivity  {
                                 startActivity(new Intent(Login.this, LandingActivity.class));
                                 finish();
                             } else if (code == "reg") {
+                                firebaseAuth = FirebaseAuth.getInstance();
+                                firebaseUser = firebaseAuth.getCurrentUser();
+                                userUUID = firebaseUser.getUid();
                                 //Register mod prijave, nemamo sve podatke o korisniku, pozivamo metodu za dobavljanje podataka
                                 getUserData();
                             }
