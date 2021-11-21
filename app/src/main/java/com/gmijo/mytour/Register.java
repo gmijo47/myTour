@@ -37,6 +37,7 @@ import java.util.Map;
 
 public class Register extends AppCompatActivity{
     //Inicijaliziranje i definisanje elemenata
+    //TODO disable sve buttone, kada klikne na neki
     EditText rUsername, rEmail, rPassword, rPasswordRepeat;
     Button rBtn;
     ProgressBar rProgressBar;
@@ -144,7 +145,7 @@ public class Register extends AppCompatActivity{
                                                                     achievementData.put("myTourTokens", 5);
                                                                     achievementData.put("cityExplored", 0);
                                                                     achievementData.put("villageExplored", 0);
-                                                                    achievementData.put("neturepointExplored", 0);
+                                                                    achievementData.put("naturepointExplored", 0);
                                                                     achievementData.put("nationalParkExplored", 0);
                                                                     user.put("achievementData", achievementData);
                                                                     documentReference.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -163,7 +164,7 @@ public class Register extends AppCompatActivity{
                                                                                         SQLiteController DBcontroller = new SQLiteController(Register.this);
 
                                                                                         //Pozivanje metode za ubacivanje usera u bazu
-                                                                                        DBcontroller.registerUser(userUUID, null, rUsernameData);
+                                                                                        DBcontroller.registerUser(userUUID, null, rUsernameData, 0, 0, 0, 0, 5);
                                                                                         if (DBcontroller.getResult() != -1) {
                                                                                             startActivity(new Intent(Register.this, Login.class));
                                                                                             finish();
