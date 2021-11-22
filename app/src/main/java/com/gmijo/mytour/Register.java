@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gmijo.mytour.database.SQLiteController;
+import com.gmijo.mytour.database.SQLiteDataHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
@@ -139,6 +140,7 @@ public class Register extends AppCompatActivity{
                                                                     Map<String, Object> data = new HashMap<>();
                                                                     data.put("Username", rUsernameData);
                                                                     data.put("Email", rEmailData);
+                                                                    data.put("FullName", null);
                                                                     data.put("userType", "Korisnik");
                                                                     user.put("personalData", data);
                                                                     Map<String, Object> achievementData = new HashMap<>();
@@ -161,11 +163,11 @@ public class Register extends AppCompatActivity{
                                                                                     public void run() {
 
                                                                                         //SQlite kontroler iz SQLiteControler.class
-                                                                                        SQLiteController DBcontroller = new SQLiteController(Register.this);
 
+                                                                                        SQLiteDataHelper liteDataHelper = new SQLiteDataHelper(Register.this);
                                                                                         //Pozivanje metode za ubacivanje usera u bazu
-                                                                                        DBcontroller.registerUser(userUUID, null, rUsernameData, 0, 0, 0, 0, 5);
-                                                                                        if (DBcontroller.getResult() != -1) {
+                                                                                        liteDataHelper.registerUser(userUUID, null, rUsernameData, 0, 0, 0, 0, 5, "Korisnik");
+                                                                                        if (liteDataHelper.getResult() != -1) {
                                                                                             startActivity(new Intent(Register.this, Login.class));
                                                                                             finish();
                                                                                         } else {
