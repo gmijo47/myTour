@@ -1,4 +1,4 @@
-package com.gmijo.mytour;
+package com.gmijo.mytour.ui.profil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import com.gmijo.mytour.R;
 
 public class EditProfile extends AppCompatActivity {
 
@@ -39,6 +41,6 @@ public class EditProfile extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //Dialog bez save
+        finish();
     }
 }
