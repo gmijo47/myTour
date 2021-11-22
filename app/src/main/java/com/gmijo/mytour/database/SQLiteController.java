@@ -2,11 +2,12 @@ package com.gmijo.mytour.database;
 
 
 
-import android.content.ContentValues;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
 
 import androidx.annotation.Nullable;
 
@@ -15,31 +16,33 @@ public class SQLiteController extends SQLiteOpenHelper{
     private static final int DB_VER = 1;
 
     //Podatci o bazi, kolonama, tabeli
-    private static final String DB_NAME = "users.db";
-    private static final String TAB_NAME = "userData";
-
-    private static final String COL_NO = "_no";
-    private static final String COL_GPUUID = "googleUUID";
-    private static final String COL_FNAME = "fullName";
-    private static final String COL_USERNAME = "username";
+    public static final String DB_NAME = "users.db";
+    public static final String TAB_NAME = "userData";
+    public static final String COL_NO = "_no";
+    public static final String COL_GPUUID = "googleUUID";
+    public static final String COL_FNAME = "fullName";
+    public static final String COL_USERNAME = "username";
+    public static final String COL_CITYEXP = "cities_explored";
+    public static final String COL_NAPEXP = "nacionalpark_explored";
+    public static final String COL_NATEXP = "naturepoint_explored";
+    public static final String COL_VILEXP = "villages_explored";
+    public static final String COL_MYTT = "mytour_tokens";
+    public static final String COL_GROUP = "userGroup";
 
     //Query komande
-    String create_query;
-
-    //Varijabla za indikaciju izvršenosti querija, uspješan/neuspješan
-    long result;
-
+    String create_query, check_query;
 
     //Kreiranje baze
     public SQLiteController(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VER);
     }
 
-    //onCreate meteoda vrši kreiranje table i odgovarajučih kolona, odnosno googlePlayId-a, punog imena, te korisničkog imena
+    //onCreate meteoda vrši kreiranje table i odgovarajučih kolona
     @Override
     public void onCreate(SQLiteDatabase liteDatabase) {
         create_query = "CREATE TABLE " + TAB_NAME +
-                " (" + COL_NO + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_GPUUID + " TEXT, " + COL_FNAME + " TEXT, " + COL_USERNAME + " TEXT); ";
+                " (" + COL_NO + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_GPUUID + " TEXT, " + COL_FNAME + " TEXT, " + COL_USERNAME + " TEXT, " +
+                COL_CITYEXP + " INTEGER, " + COL_NAPEXP + " INTEGER, " + COL_NATEXP + " INTEGER, " + COL_VILEXP + " INTEGER, " + COL_MYTT + " INTEGER, " + COL_GROUP + " TEXT); ";
         liteDatabase.execSQL(create_query);
 
     }
@@ -50,24 +53,5 @@ public class SQLiteController extends SQLiteOpenHelper{
             onCreate(liteDatabase);
     }
 
-    //Metoda za insetrovanje podataka u bazu (lokalnu) na registeru
-    public void registerUser(String gUUID, String fName, String username){
-        SQLiteDatabase liteDatabase = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
 
-        values.put(COL_GPUUID, gUUID);
-        values.put(COL_FNAME, fName);
-        values.put(COL_USERNAME, username);
-
-       result  = liteDatabase.insert(TAB_NAME, null, values);
-        if (result == -1){
-            Log.d("SQLlite", "Podatci NISU insertovani");
-        }else {
-            Log.d("SQLlite", "Podatci SU insertovani");
-        }
-    }
-    //Metoda koja vrača rezultat querija uspješan/neuspješan
-    public long getResult(){
-        return result;
-    }
 }
