@@ -59,6 +59,10 @@ public class LandingActivity extends AppCompatActivity {
                 }
             });
 
+        }else {
+                Toast.makeText(getApplicationContext(), R.string.errSessionExipired, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(LandingActivity.this, Login.class));
+                finish();
         }
     }
 }
