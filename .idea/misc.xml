@@ -8,10 +8,12 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/back_icon.xml" value="0.29907407407407405" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/btn_login.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/default_profile_avatar.xml" value="0.2526041666666667" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/desert_background.xml" value="0.20364583333333333" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/edit_profile_container.xml" value="0.2972222222222222" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/edit_white.xml" value="0.25833333333333336" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/field_element.xml" value="0.2526041666666667" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/gradient_splashscreen.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_error_svg.xml" value="0.21296296296296297" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.30462962962962964" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.32037037037037036" />
@@ -31,13 +33,14 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/save_icon.xml" value="0.2972222222222222" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/settings.xml" value="0.2526041666666667" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/settings_icon.xml" value="0.2898148148148148" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/stats_selected_icon.xml" value="0.21296296296296297" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/text_field.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/text_field_edit_profile.xml" value="0.22149837133550487" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/text_field_error.xml" value="0.21203703703703702" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/verify_icon.xml" value="0.30277777777777776" />
-        <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_edit_profile.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
-        <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_landing.xml" value="0.25" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_landing.xml" value="0.2" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_splashscreen.xml" value="0.1859375" />
