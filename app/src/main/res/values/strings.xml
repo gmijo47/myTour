@@ -19,6 +19,9 @@
     <string name="errNoUserExist">Korisnički nalog ne postoji, email nije poslat!</string>
     <string name="errUnknown">Došlo je do pogreške, pokušajte ponovo kasnije!</string>
     <string name="errAlreadySignedInPass">Već ste registrovani koristeći email, ukoliko niste vi, zatražite reset lozinke!</string>
+    <string name="errLoader">Upss... došlo je do pogreške!</string>
+    <string name="errDataLoading">Neuspješno dohvaćanje podataka!</string>
+    <string name="errActionUnfinished">Molimo pričekajte</string>
 
     <string name="alright">Razumijem</string>
     <string name="rDataTipsTitle">Opss.. izgleda da vam ne ide od ruke, evo pomoći!</string>
@@ -77,13 +80,17 @@
     <string name="pInfoGroup">KORISNIČKA GRUPA</string>
     <string name="pGroupUser">Korisnik</string>
     <string name="pGroupAdmin">Administrator</string>
+    <string name="pSignedOut">Odjavljeni ste!</string>
+    <string name="pAdmin">Administrator platforme</string>
+    <string name="pDev">Developer platforme</string>
+    <string name="pRef">Osvježi</string>
 
 
     <string name="stPointsTitle">myTour TOKENI</string>
     <string name="stCityExplored">OTKRIVENO GRADOVA</string>
-    <string name="statsNaturePointExplored">OTKRIVENO PRIODNIH ATRAKCIJA</string>
-    <string name="statsVillageExplored">OTKRIVENO SELA</string>
-    <string name="statsNacionalParkExplored">OTKRIVENO NACIONALNIH PARKOVA</string>
+    <string name="stNaturePointExplored">OTKRIVENO PRIODNIH ATRAKCIJA</string>
+    <string name="stVillageExplored">OTKRIVENO SELA</string>
+    <string name="stNacionalParkExplored">OTKRIVENO NACIONALNIH PARKOVA</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- Preference Titles -->
