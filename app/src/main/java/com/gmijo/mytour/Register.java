@@ -37,8 +37,7 @@ import java.util.Map;
 
 
 public class Register extends AppCompatActivity{
-    //Inicijaliziranje i definisanje elemenata
-    //TODO disable sve buttone, kada klikne na neki
+    //Inicijaliziranje i definisanje elemenataneki
     EditText rUsername, rEmail, rPassword, rPasswordRepeat;
     Button rBtn;
     ProgressBar rProgressBar;
@@ -49,6 +48,8 @@ public class Register extends AppCompatActivity{
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     FirebaseFirestore firebaseFirestore;
+
+    boolean disabled_back = false;
 
     //Broji errore
     int errCounter = 0;
@@ -88,6 +89,7 @@ public class Register extends AppCompatActivity{
         rBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                disabled_back = true;
                 rUsernameData = rUsername.getText().toString().trim();
                 rEmailData = rEmail.getText().toString().trim();
                 rPasswordData = rPassword.getText().toString().trim();
@@ -162,11 +164,11 @@ public class Register extends AppCompatActivity{
                                                                                     @Override
                                                                                     public void run() {
 
-                                                                                        //SQlite kontroler iz SQLiteControler.class
+                                                                                        //SQlite helper
 
                                                                                         SQLiteDataHelper liteDataHelper = new SQLiteDataHelper(Register.this);
                                                                                         //Pozivanje metode za ubacivanje usera u bazu
-                                                                                        liteDataHelper.registerUser(userUUID, null, rUsernameData, 0, 0, 0, 0, 5, "Korisnik");
+                                                                                        liteDataHelper.registerUser(userUUID, null, rUsernameData, 0, 0, 0, 0, 5, "Korisnik", false);
                                                                                         if (liteDataHelper.getResult() != -1) {
                                                                                             startActivity(new Intent(Register.this, Login.class));
                                                                                             finish();
@@ -266,6 +268,7 @@ public class Register extends AppCompatActivity{
     }
     //Prikaz fragmenta za tips
     public void showRegTipFragment() {
+        disabled_back = false;
         rDataTips rDataTips = new rDataTips();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         rDataTips.show(fragmentTransaction, "");
@@ -273,6 +276,7 @@ public class Register extends AppCompatActivity{
     }
     //Postavljanje errora, odnoso njihov UI prikaz
     public void setError(String errCode, int timeOut){
+        disabled_back = false;
         switch (errCode){
             //Problem sa username
             case "errUsername": {
@@ -350,6 +354,16 @@ public class Register extends AppCompatActivity{
             }
         }, timeOut);
     }
+
+    @Override
+    public void onBackPressed() {
+        if (disabled_back){
+            Toast.makeText(getApplicationContext(), R.string.errActionUnfinished, Toast.LENGTH_LONG).show();
+        }else {
+            super.onBackPressed();
+        }
+    }
+
     //Metod overloading
     public void setError(String errCode){
         setError(errCode, 3200);
