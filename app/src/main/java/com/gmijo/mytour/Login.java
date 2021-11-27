@@ -469,6 +469,14 @@ public class Login extends AppCompatActivity  {
                                         Map<String, Object> data = new HashMap<>();
                                         data.put("Username", gUsername);
                                         data.put("Email", lEmailData);
+                                        if (gName == null){
+                                            gName = "";
+                                            if (gSurname == null){
+                                                gSurname = "";
+                                            }
+                                        }else if (gSurname == null){
+                                            gSurname = "";
+                                        }
                                         data.put("FullName", gName + " " + gSurname);
                                         data.put("userType", "Korisnik");
                                         user1.put("personalData", data);
