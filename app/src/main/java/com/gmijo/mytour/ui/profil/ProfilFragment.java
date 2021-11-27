@@ -1,8 +1,8 @@
 package com.gmijo.mytour.ui.profil;
 
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +15,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.gmijo.mytour.Login;
 import com.gmijo.mytour.R;
 import com.gmijo.mytour.database.SQLiteDataHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,14 +38,16 @@ public class ProfilFragment extends Fragment {
             userVerifyBadgeBtn, userAdminBadgeBtn, userDeveloperBadgeBtn, userEditProfileBtn;
     TextView userFullName, userUsername, profileFullName, profileUsername, userEmail, userPhone, userGroup, statsTokenCount,
             statsCityExploredCount, statsVillageExploredCount, statsNaturePointExplored, statsNationalParkExplored;
-
     //Kada je 1 selektovan userinfo, kada je 2 stats
     int selected = 1;
 
-    View view;
+    View view = null;
+    //Thread (runovanje kreiranja view-a)
+    Thread t;
 
-
+    //Stringovi za polja
     String userUUID, userEmailData = null, usernameData, fullNameData, groupData, tokenCount, cityExplored, villageExplored, naturePointExplored, nationalParkExplored;
+    //Helper SQLite
     SQLiteDataHelper liteDataHelper;
 
     //FireBaseAuth i FirebaseUser, FirebaseFireStore inicijaliziranje
@@ -55,46 +57,50 @@ public class ProfilFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_profil, container, false);
-        getElements();
-        //FirebaseAuth, FirebaseFirestore
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-
-        //Dobijanje korisničkog emaila
-        userEmailData = firebaseUser.getEmail();
-        userUUID = firebaseUser.getUid();
-
-        //Prosljeđivanje konteksta u SQLiteController
-        liteDataHelper = new SQLiteDataHelper(getActivity());
-
-
+        //Otvaranje threada
+       t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //Kreiranje fragmenta
+                view = inflater.inflate(R.layout.fragment_profil, container, false);
+            }
+        });
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException e) {
+            ErrDialog("setErr");
+        }
+        try {
+            //Dobavljanje elemenata (u novom threadu)
+            getElements();
+        } catch (InterruptedException e) {
+            ErrDialog("setErr");
+        }
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         //Pozivanje metode za provjeru da li postoje podatci o korisniku u lokalnoj bazi
         boolean locUserExists = liteDataHelper.checkLocalData(userUUID);
-
         if (locUserExists) {
             ArrayList<String> data = liteDataHelper.getData(userUUID);
                 if (data != null){
 
-                        displayData(data);
+                    //Podatci postoje, prikaz istih
+                    displayData(data);
 
                 }
-
-
         } else {
+
             //Podatci ne postoje
             syncCloudLocal(userUUID);
 
         }
 
+        //Lisener na button za informacije o korisniku
         userProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +113,8 @@ public class ProfilFragment extends Fragment {
                 }
             }
         });
+
+        //Lisener na button za statistiku korisnika
         userStatsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,34 +127,39 @@ public class ProfilFragment extends Fragment {
                 }
             }
         });
+
+        //Lisener za postavke (otvaranje)
         userSettingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                disableButtons();
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
             }
         });
-
+        //Lisener za odjavu (logout)
         userLogOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                disableButtons();
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getActivity(), Login.class));
                 getActivity().finish();
                 Toast.makeText(getActivity().getApplicationContext(), "Odjavljeni ste", Toast.LENGTH_LONG).show();
             }
         });
+
+        //Lisener za uređivanje korisničkog profila
         userEditProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                disableButtons();
                 startActivity(new Intent(getActivity(), EditProfile.class));
             }
         });
     }
+
+    //Metoda za prikaz podataka
     public void displayData(ArrayList<String> data){
-       Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Log.d("Mijo", "etoda je pozvan");
                 if (data.size() != 0) {
                     profileUsername.setText(data.get(0));
                     userUsername.setText(data.get(0));
@@ -158,7 +171,7 @@ public class ProfilFragment extends Fragment {
                     //Email
                     userEmail.setText(firebaseUser.getEmail());
 //
-                    //Phone
+                    //Phone (Ukoliko korisnik ima verifikovan telefon, prikazuje mu badge)
                     if (firebaseUser.getPhoneNumber() != null) {
                         userPhone.setText(firebaseUser.getPhoneNumber());
                         userVerifyBadgeBtn.setVisibility(View.VISIBLE);
@@ -166,8 +179,21 @@ public class ProfilFragment extends Fragment {
                         userPhone.setText(R.string.phoneNVerify);
                     }
 //
-                    //Group
-                    userGroup.setText(data.get(2));
+                    //Group (Ukoliko korisnik ima grupu administrator_2 ili 1 shodno tome prikazuje mu badge)
+                    String str = data.get(2);
+                    if (str.matches("Administrator_2")) {
+                        userAdminBadgeBtn.setVisibility(View.VISIBLE);
+                        userDeveloperBadgeBtn.setVisibility(View.VISIBLE);
+                        String[] ugr = str.split("_");
+                        userGroup.setText(ugr[0]);
+                    } else if (str.matches("Adminstrator_1")) {
+                        userAdminBadgeBtn.setVisibility(View.VISIBLE);
+                        String[] ugr = str.split("_");
+                        userGroup.setText(ugr[0]);
+                    } else {
+                        userGroup.setText(data.get(2));
+                    }
+
 //
                     //Stats
                     statsCityExploredCount.setText(data.get(3));
@@ -176,11 +202,10 @@ public class ProfilFragment extends Fragment {
                     statsNaturePointExplored.setText(data.get(6));
                     statsTokenCount.setText(data.get(7));
 
-                }
-            }
-        });
+                    //Nakon setovanja sklanja loader
+                    ErrDialog("rsState");
 
-        thread.start();
+                }
     }
 
     @Override
@@ -188,12 +213,30 @@ public class ProfilFragment extends Fragment {
         super.onDestroyView();
     }
 
-        public void setError(String errCode){
-        switch (errCode){
-            case "errFailedToGetData":{
-                //Snackbar
-                break;
-            }
+    //Metoda za setovanje errora
+    public void setError(String errCode){ switch (errCode){
+        case "errFailedToGetData":{
+            Snackbar snackbar = (Snackbar) Snackbar.make(getView(), R.string.errDataLoading, 6000).setAction(R.string.pRef, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    syncCloudLocal(userUUID);
+                }
+            });
+            snackbar.setAnchorView(R.id.nav_view);
+            snackbar.show();
+            break;
+        }
+        case "errConnection":{
+            Snackbar snackbar = (Snackbar) Snackbar.make(getView(), R.string.errConn, 6000).setAction(R.string.pRef, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    syncCloudLocal(userUUID);
+                }
+            });
+            snackbar.setAnchorView(R.id.nav_view);
+            snackbar.show();
+            break;
+        }
         }
     }
 
@@ -207,11 +250,10 @@ public class ProfilFragment extends Fragment {
                     if (documentSnapshot.exists()) {
 
                         usernameData = documentSnapshot.get("personalData.Username").toString();
-                        Object objFullName = documentSnapshot.get("personalData.FullName");
+                         fullNameData = documentSnapshot.get("personalData.FullName").toString();
+                        Log.d("Mijo", fullNameData);
                         if (fullNameData == null) {
                             fullNameData = "";
-                        }else {
-                            fullNameData = objFullName.toString();
                         }
                         cityExplored = documentSnapshot.get("achievementData.cityExplored").toString();
                         nationalParkExplored = documentSnapshot.get("achievementData.nationalParkExplored").toString();
@@ -222,7 +264,7 @@ public class ProfilFragment extends Fragment {
 
                         liteDataHelper.registerUser(userUUID, fullNameData, usernameData, Integer.parseInt(cityExplored),
                                 Integer.parseInt(nationalParkExplored), Integer.parseInt(naturePointExplored),
-                                Integer.parseInt(villageExplored), Integer.parseInt(tokenCount), groupData);
+                                Integer.parseInt(villageExplored), Integer.parseInt(tokenCount), groupData, true);
 
 
 
@@ -239,18 +281,21 @@ public class ProfilFragment extends Fragment {
             }
         });
     }
-    public void getElements(){
+
+    //Metoda za dobavljanje elemenata
+    public void getElements() throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                userProfile = (ScrollView) view.findViewById(R.id.viewPersonalInfo);
-                userStats = (ScrollView) view.findViewById(R.id.viewPersonalStats);
 
                 //Dugmći
+                userProfile = (ScrollView) view.findViewById(R.id.viewPersonalInfo);
+                userStats = (ScrollView) view.findViewById(R.id.viewPersonalStats);
                 userProfileBtn = (ImageButton) view.findViewById(R.id.profileInfo);
                 userStatsBtn = (ImageButton) view.findViewById(R.id.profileStats);
                 userSettingsBtn = (ImageButton) view.findViewById(R.id.profileSettings);
                 userLogOutBtn = (ImageButton) view.findViewById(R.id.profileLogOut);
+                userEditProfileBtn = (ImageButton) view.findViewById(R.id.profileEdit);
 
                 //Polja
                 profileFullName = (TextView) view.findViewById(R.id.pName);
@@ -268,14 +313,71 @@ public class ProfilFragment extends Fragment {
                 statsNaturePointExplored = (TextView) view.findViewById(R.id.statsNaturePointExploredCount);
                 statsNationalParkExplored = (TextView) view.findViewById(R.id.statsNacionalParkExploredCount);
 
+                //Beđevi
                 userVerifyBadgeBtn = (ImageButton)  view.findViewById(R.id.profileVerifyBadge);
                 userAdminBadgeBtn = (ImageButton) view.findViewById(R.id.profileAdminBadge);
                 userDeveloperBadgeBtn = (ImageButton) view.findViewById(R.id.profileDeveloperBadge);
 
-                userEditProfileBtn = (ImageButton) view.findViewById(R.id.profileEdit);
+                //FirebaseAuth, FirebaseFirestore
+                firebaseAuth = FirebaseAuth.getInstance();
+                firebaseFirestore = FirebaseFirestore.getInstance();
+                firebaseUser = firebaseAuth.getCurrentUser();
+
+                //Dobijanje korisničkog emaila
+                userEmailData = firebaseUser.getEmail();
+                userUUID = firebaseUser.getUid();
+
+                //Prosljeđivanje konteksta u SQLiteController
+                liteDataHelper = new SQLiteDataHelper(getActivity());
+
+
             }
         });
         thread.start();
+        thread.join();
     }
 
+    //Metoda za prikaz/sklanjanje error/loading dialoga
+    public void ErrDialog(String state){
+        switch (state){
+            case ("setErr"):{
+
+                getActivity().findViewById(R.id.fragmentProgBar).setVisibility(View.GONE);
+                getActivity().findViewById(R.id.errImg).setVisibility(View.VISIBLE);
+                getActivity().findViewById(R.id.loaderError).setVisibility(View.VISIBLE);
+                getActivity().findViewById(R.id.loaderBox).setVisibility(View.VISIBLE);
+                break;
+            }
+            case ("rsState"):{
+
+                getActivity().findViewById(R.id.loaderBox).setVisibility(View.GONE);
+                getActivity().findViewById(R.id.fragmentProgBar).setVisibility(View.VISIBLE);
+                getActivity().findViewById(R.id.errImg).setVisibility(View.GONE);
+                getActivity().findViewById(R.id.loaderError).setVisibility(View.GONE);
+
+            }
+        }
+    }
+    //Gasi buttone, radi prevencije bagovanja
+    public void disableButtons(){
+        userProfile.setEnabled(false);
+        userStats.setEnabled(false);
+        userProfileBtn.setEnabled(false);
+        userStatsBtn.setEnabled(false);
+        userSettingsBtn.setEnabled(false);
+        userLogOutBtn.setEnabled(false);
+        userEditProfileBtn.setEnabled(false);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                userProfile.setEnabled(true);
+                userStats.setEnabled(true);
+                userProfileBtn.setEnabled(true);
+                userStatsBtn.setEnabled(true);
+                userSettingsBtn.setEnabled(true);
+                userLogOutBtn.setEnabled(true);
+                userEditProfileBtn.setEnabled(true);
+            }
+        },2000);
+    }
 }
