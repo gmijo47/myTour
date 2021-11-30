@@ -17,25 +17,30 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.gmijo.mytour.ui.profil.ProfilFragment;
+
+import com.gmijo.mytour.interfaceProfilFragment;
 
 import java.util.ArrayList;
 
 public class SQLiteDataHelper {
     private Context context;
-    ProfilFragment profilFragment;
     SQLiteController sqLiteController;
     ArrayList<String> data = new ArrayList<String>();
     int result;
+    private interfaceProfilFragment interfaceProfilFragment = null;
 
     public SQLiteDataHelper(Context context){
         this.context = context;
         sqLiteController = new SQLiteController(context);
-        profilFragment = new ProfilFragment();
+
+    }
+    public void setDisplayer(interfaceProfilFragment d) {
+        interfaceProfilFragment = d;
     }
     //Metoda za insetrovanje podataka u bazu (lokalnu) na registeru
     public void registerUser(String gUUID, String fName, String username, int cityExplored, int nacionalParkExplored, int naturePointExplored, int villageExplored, int mytourTokens, String group, Boolean refresh){
         try {
+            boolean dataUpdate = checkLocalData(gUUID);
             SQLiteDatabase liteDatabase = sqLiteController.getWritableDatabase();
             ContentValues values = new ContentValues();
 
@@ -49,21 +54,39 @@ public class SQLiteDataHelper {
             values.put(COL_MYTT, mytourTokens);
             values.put(COL_GROUP, group);
 
-            result = (int) liteDatabase.insert(TAB_NAME, null, values);
-            if (result == 1) {
-                if (refresh){
-                    ArrayList<String> data = getData(gUUID);
-                    if (data != null){
-                    profilFragment.displayData(data);
+            if (dataUpdate){
+
+                int res = (int) liteDatabase.update(TAB_NAME, values, COL_GPUUID + " = " + "'" + gUUID + "'", null);
+                    if (res == 1){
+                        ArrayList<String> data = getData(gUUID);
+                        if (data != null) {
+                            if (interfaceProfilFragment != null) {
+                                interfaceProfilFragment.displayData(data);
+                            }
+                        }
                     }
-                }
-                Log.d("SQLlite", "Podatci NISU insertovani");
+
             } else {
-                Log.d("SQLlite", "Podatci SU insertovani");
+
+                result = (int) liteDatabase.insert(TAB_NAME, null, values);
+                if (result == 1) {
+                    if (refresh) {
+                        ArrayList<String> data = getData(gUUID);
+                        if (data != null) {
+                            if (interfaceProfilFragment != null) {
+                                interfaceProfilFragment.displayData(data);
+                            }
+                        }
+                    }
+                    Log.d("SQLlite", "Podatci NISU insertovani");
+                } else {
+                    Log.d("SQLlite", "Podatci SU insertovani");
+                }
             }
         }catch (Exception e){
-
-            profilFragment.setError("errFailedToGetData");
+            if (interfaceProfilFragment != null) {
+                interfaceProfilFragment.setError("errFailedToGetData");
+            }
 
         }
     }
@@ -89,7 +112,9 @@ public class SQLiteDataHelper {
         }
         }catch (Exception e){
 
-            profilFragment.setError("errFailedToGetData");
+            if (interfaceProfilFragment != null) {
+                interfaceProfilFragment.setError("errFailedToGetData");
+            }
 
         }
        return ret;
@@ -115,12 +140,15 @@ public class SQLiteDataHelper {
                         data.add(7, cursor.getString(cursor.getColumnIndex(COL_MYTT)));
                     }
                 } else {
-                    profilFragment.setError("errFailedToGetData");
+                    if (interfaceProfilFragment != null) {
+                        interfaceProfilFragment.setError("errFailedToGetData");
+                    }
                 }
             }
         } catch (Exception e){
-
-            profilFragment.setError("errFailedToGetData");
+            if (interfaceProfilFragment != null) {
+                interfaceProfilFragment.setError("errFailedToGetData");
+            }
 
         }
         return  data;
