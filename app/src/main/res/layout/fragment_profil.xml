@@ -12,7 +12,11 @@
         android:layout_height="280dp"
         android:background="@drawable/pfad_42"
         tools:ignore="MissingConstraints"
-        android:orientation="vertical"/>
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
