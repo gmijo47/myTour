@@ -19,7 +19,7 @@ public class SQLiteController extends SQLiteOpenHelper{
     public static final String DB_NAME = "users.db";
     public static final String TAB_NAME = "userData";
     public static final String COL_NO = "_no";
-    public static final String COL_GPUUID = "googleUUID";
+    public static String COL_GPUUID = "googleUUID";
     public static final String COL_FNAME = "fullName";
     public static final String COL_USERNAME = "username";
     public static final String COL_CITYEXP = "cities_explored";
