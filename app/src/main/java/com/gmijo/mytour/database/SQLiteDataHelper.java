@@ -18,7 +18,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 
-import com.gmijo.mytour.interfaceProfilFragment;
+import com.gmijo.mytour.ui.profil.interfaceProfilFragment;
 
 import java.util.ArrayList;
 
