@@ -2,6 +2,7 @@ package com.gmijo.mytour;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 
 import android.content.Intent;
@@ -26,6 +27,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthCredential;
@@ -58,6 +60,7 @@ public class Login extends AppCompatActivity  {
     TextView lForgotPassword, lRegisterRedirect, lErrorMsg;
     String lEmailData, lPasswordData, errUnknownCode, userUUID, gName, gSurname, gUsername;
     ProgressBar lProgressBar;
+    ConstraintLayout loginLayout;
     Boolean canSendVerifyEmail = false;
     int antiBruteForece = 0;
 
@@ -101,6 +104,9 @@ public class Login extends AppCompatActivity  {
         //Dobavljanje firebaseAuth-a i Firestore-a
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+        //View
+        loginLayout = (ConstraintLayout) findViewById(R.id.LoginLayout);
 
         //Konfiguracija prijave putem Googla
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -493,7 +499,7 @@ public class Login extends AppCompatActivity  {
                                                 if (task.isSuccessful()) {
 
                                                     //Nakon uspješnog upisa, odjavljuje korisnika, i ponovo ga prijavljuje
-                                                    Toast.makeText(getApplicationContext(), R.string.lSuccess, Toast.LENGTH_LONG).show();
+                                                    Snackbar.make(loginLayout, R.string.lSuccess, Snackbar.LENGTH_SHORT).show();
                                                     lProgressBar.setVisibility(View.GONE);
                                                     firebaseAuth.signOut();
                                                     new Handler().postDelayed(new Runnable() {
@@ -539,7 +545,7 @@ public class Login extends AppCompatActivity  {
                         });
                     } else{
                         //Korisnicki UUID postoji, što znači da se korisnik nije logovao prvi put, odjavljuje ga i ponovo prijavljuje
-                        Toast.makeText(getApplicationContext(), R.string.lSuccess, Toast.LENGTH_LONG).show();
+                        Snackbar.make(loginLayout, R.string.lSuccess, Snackbar.LENGTH_SHORT).show();
                         lProgressBar.setVisibility(View.GONE);
                         firebaseAuth.signOut();
                         new Handler().postDelayed(new Runnable() {
@@ -547,7 +553,7 @@ public class Login extends AppCompatActivity  {
                             public void run() {
                                 firebaseAuthGoogle(googleSignInAccount, LOGIN);
                             }
-                        }, 800);
+                        }, 300);
                     }
                     //Problem sa konekcijom i odjava jer je korisnik prijavljen
                 } else if (task.getException() instanceof FirebaseNetworkException){
