@@ -83,7 +83,18 @@
     <string name="pSignedOut">Odjavljeni ste!</string>
     <string name="pAdmin">Administrator platforme</string>
     <string name="pDev">Developer platforme</string>
+    <string name="pVerified">Verifikovani korisnik</string>
     <string name="pRef">Osvježi</string>
+    <string name="pUnsavedData">Imate nespremljenih promjena, želite ih spremiti?</string>
+    <string name="pApplyCancel">Odbaci</string>
+    <string name="pApplySave">Spremi</string>
+    <string name="pNoChangesMade">Niste napravili nikakve promjene!</string>
+    <string name="pErrPasswrd">Lozinke se ne podudaraju, ili nisu dovoljno duge!</string>
+    <string name="pPassChanged">Lozinka promjenjena!</string>
+    <string name="pNameChanged">Ime promjenjeno!</string>
+    <string name="pGoogleDeny">Akcija neuspjela, nalog kreiran pomoću Google-a!</string>
+    <string name="pLoggedOut">Odjavljeni ste!</string>
+
 
 
     <string name="stPointsTitle">myTour TOKENI</string>
@@ -110,9 +121,10 @@
     <string name="editProfileTitle">Uređivanje profila</string>
     <string name="editProfileSubTitle">Uređivanje korisničkih podataka:</string>
     <string name="editPasswordNew">NOVA LOZINKA</string>
-    <string name="editPasswordNewRepeat">PONOVO NOVA LOZINKA</string>
+    <string name="editPasswordNewRepeat">PONOVO LOZINKA</string>
     <string name="phoneVerify">VERIFIKUJ</string>
     <string name="phoneNVerify">NEVERIFIKOVAN</string>
+    <string name="phoneRemove">UKLONI</string>
 
 
 </resources>
