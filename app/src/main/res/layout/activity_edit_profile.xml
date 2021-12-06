@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/editProfileLayout"
     android:layout_height="match_parent"
     tools:context=".ui.profil.EditProfile">
+
     <LinearLayout
         android:id="@+id/linLay"
         android:layout_width="match_parent"
@@ -128,11 +130,11 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_field_edit_profile"
                     android:ems="10"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="sans-serif-black"
                     android:hint="@string/pInfoNameAndSurname"
                     android:inputType="text"
                     android:padding="8dp"
-                    android:textColor="@color/stroke_gray"
+                    android:textColor="@color/gray"
                     android:textSize="14dp"
                     android:maxLength="24"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -156,7 +158,7 @@
                     tools:ignore="MissingConstraints"
                     tools:layout_editor_absoluteY="2dp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/editUsername"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -165,12 +167,12 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_field_edit_profile"
                     android:ems="10"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="sans-serif-black"
                     android:hint="@string/pInfoUsername"
                     android:inputType="text"
                     android:enabled="false"
                     android:padding="8dp"
-                    android:textColor="@color/stroke_gray"
+                    android:textColor="@color/gray"
                     android:textSize="14dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/profileUsernameIcon"
@@ -201,10 +203,10 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="5dp"
                     android:enabled="false"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="sans-serif-black"
                     android:padding="8dp"
-                    android:text="@string/pInfoEmail"
-                    android:textColor="@color/stroke_gray"
+                    android:hint="@string/pInfoEmail"
+                    android:textColor="@color/gray"
                     android:textSize="14dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/profileEmailIcon"
@@ -227,17 +229,19 @@
                     tools:ignore="MissingConstraints"
                     tools:layout_editor_absoluteY="2dp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/editPass"
+                    android:inputType="textPassword"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="5dp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="sans-serif-black"
                     android:padding="8dp"
-                    android:text="@string/editPasswordNew"
-                    android:textColor="@color/stroke_gray"
+                    android:hint="@string/editPasswordNew"
+                    android:textColor="@color/gray"
                     android:textSize="14dp"
+                    android:background="@drawable/text_field_edit_profile"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/passwordIcon"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -259,17 +263,19 @@
                     tools:ignore="MissingConstraints"
                     tools:layout_editor_absoluteY="2dp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/editPassRepeat"
+                    android:inputType="textPassword"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="sans-serif-black"
                     android:padding="8dp"
-                    android:text="@string/editPasswordNewRepeat"
-                    android:textColor="@color/stroke_gray"
+                    android:hint="@string/editPasswordNewRepeat"
+                    android:textColor="@color/gray"
                     android:textSize="14dp"
+                    android:background="@drawable/text_field_edit_profile"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/passwordIcon2"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -298,10 +304,10 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="5dp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="sans-serif-black"
                     android:padding="8dp"
-                    android:text="@string/phoneNVerify"
-                    android:textColor="@color/stroke_gray"
+                    android:hint="@string/phoneNVerify"
+                    android:textColor="@color/gray"
                     android:enabled="false"
                     android:textSize="14dp"
                     app:layout_constraintEnd_toStartOf="@+id/verifyPhone"
