@@ -1,4 +1,4 @@
-package com.gmijo.mytour;
+package com.gmijo.mytour.ui.profil;
 
 import java.util.ArrayList;
 
