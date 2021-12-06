@@ -1,9 +1,10 @@
 package com.gmijo.mytour.ui.profil;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.gmijo.mytour.interfaceProfilFragment;
+
 import com.gmijo.mytour.Login;
 import com.gmijo.mytour.R;
 import com.gmijo.mytour.database.SQLiteDataHelper;
@@ -72,6 +73,11 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
             public void run() {
                 //Kreiranje fragmenta
                 view = inflater.inflate(R.layout.fragment_profil, container, false);
+                try {
+                    getElements();
+                } catch (Exception e) {
+                    ErrDialog("setErr");
+                }
             }
         });
         t.start();
@@ -80,12 +86,7 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
         } catch (InterruptedException e) {
             ErrDialog("setErr");
         }
-        try {
-            //Dobavljanje elemenata (u novom threadu)
-            getElements();
-        } catch (InterruptedException e) {
-            ErrDialog("setErr");
-        }
+
         return view;
     }
 
@@ -167,7 +168,7 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getActivity(), Login.class));
                 getActivity().finish();
-                Toast.makeText(getActivity().getApplicationContext(), "Odjavljeni ste", Toast.LENGTH_LONG).show();
+                Snackbar.make(getView(), R.string.errLoader, Snackbar.LENGTH_SHORT).show();
             }
         });
 
@@ -178,9 +179,10 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
                 disableButtons();
                 Intent editProfileIntent = new Intent(getActivity(), EditProfile.class);
                 editProfileIntent.putStringArrayListExtra("data", data);
-                startActivity(editProfileIntent);
+                startActivityForResult(editProfileIntent, 0);
             }
         });
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -190,6 +192,21 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+
+                boolean dataChanged = data.getBooleanExtra("dataChanged", false);
+                if (dataChanged){
+                    syncCloudLocal(userUUID);
+                }
+
+            }
+        }
+    }
     //Metoda za prikaz podataka
     public void displayData(ArrayList<String> data){
                 if (data.size() != 0) {
@@ -286,10 +303,13 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
                     if (documentSnapshot.exists()) {
 
                         usernameData = documentSnapshot.get("personalData.Username").toString();
-                         fullNameData = documentSnapshot.get("personalData.FullName").toString();
-                        if (fullNameData == null) {
-                            fullNameData = "";
+                        if(documentSnapshot.get("personalData.FullName") == null){
+                           fullNameData = "";
+
+                        }else {
+                            fullNameData = documentSnapshot.get("personalData.FullName").toString();
                         }
+
                         cityExplored = documentSnapshot.get("achievementData.cityExplored").toString();
                         nationalParkExplored = documentSnapshot.get("achievementData.nationalParkExplored").toString();
                         naturePointExplored = documentSnapshot.get("achievementData.naturepointExplored").toString();
@@ -395,7 +415,7 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
         }
     }
     //Gasi buttone, radi prevencije bagovanja
-    public void disableButtons(){
+    public void disableButtons() {
         userProfile.setEnabled(false);
         userStats.setEnabled(false);
         userProfileBtn.setEnabled(false);
@@ -404,18 +424,19 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
         userLogOutBtn.setEnabled(false);
         userEditProfileBtn.setEnabled(false);
 
-   new Handler().postDelayed(new Runnable() {
-       @Override
-       public void run() {
-           userProfile.setEnabled(true);
-           userStats.setEnabled(true);
-           userProfileBtn.setEnabled(true);
-           userStatsBtn.setEnabled(true);
-           userSettingsBtn.setEnabled(true);
-           userLogOutBtn.setEnabled(true);
-           userEditProfileBtn.setEnabled(true);
-       }
-   }, 2000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                userProfile.setEnabled(true);
+                userStats.setEnabled(true);
+                userProfileBtn.setEnabled(true);
+                userStatsBtn.setEnabled(true);
+                userSettingsBtn.setEnabled(true);
+                userLogOutBtn.setEnabled(true);
+                userEditProfileBtn.setEnabled(true);
+            }
+        }, 500);
 
     }
+
 }
