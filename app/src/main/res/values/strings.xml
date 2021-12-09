@@ -94,6 +94,31 @@
     <string name="pNameChanged">Ime promjenjeno!</string>
     <string name="pGoogleDeny">Akcija neuspjela, nalog kreiran pomoću Google-a!</string>
     <string name="pLoggedOut">Odjavljeni ste!</string>
+    <string name="pCanceled">Radnja prekinuta!</string>
+
+    <string name="editProfileTitle">Uređivanje profila</string>
+    <string name="editProfileSubTitle">Uređivanje korisničkih podataka:</string>
+    <string name="editPasswordNew">NOVA LOZINKA</string>
+    <string name="editPasswordNewRepeat">PONOVO LOZINKA</string>
+
+    <string name="phoneVerify">VERIFIKUJ</string>
+    <string name="phoneNVerify">NEVERIFIKOVAN</string>
+    <string name="phoneRemove">UKLONI</string>
+    <string name="phoneVerifyTitle">Verifikacija broja telefona</string>
+    <string name="phoneVerifySubtitle">Molimo unesite broj telefona!</string>
+    <string name="phoneVerifyCode">Molimo unesite verifikaciski kod!</string>
+    <string name="phoneVerifyDescFooter">Verifikacijom vašeg broja telefona postajete 100% verifikovani korisnik!</string>
+    <string name="phoneHint">+387 6x xxx xxx</string>
+    <string name="codeHint">xxx xxx</string>
+    <string name="phoneVerifySend">Pošalji</string>
+    <string name="phoneNotValid">Broj nije validan!</string>
+    <string name="phoneVerified">Uspješna verifikacija!</string>
+    <string name="phoneVerifyFiled">Došlo je do pogreške!</string>
+    <string name="phoneCodeSent">Verifikaciski kod je poslat!</string>
+    <string name="phoneCodeInvalid">Uneseni kod nije validan!</string>
+    <string name="phoneUnlink">Da li želite ukloniti broj telefona?</string>
+    <string name="phoneUnlinked">Broj uklonjen!</string>
+
 
 
 
@@ -118,13 +143,6 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="editProfileTitle">Uređivanje profila</string>
-    <string name="editProfileSubTitle">Uređivanje korisničkih podataka:</string>
-    <string name="editPasswordNew">NOVA LOZINKA</string>
-    <string name="editPasswordNewRepeat">PONOVO LOZINKA</string>
-    <string name="phoneVerify">VERIFIKUJ</string>
-    <string name="phoneNVerify">NEVERIFIKOVAN</string>
-    <string name="phoneRemove">UKLONI</string>
 
 
 </resources>
