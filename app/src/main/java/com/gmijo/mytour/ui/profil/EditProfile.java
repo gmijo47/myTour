@@ -3,6 +3,7 @@ package com.gmijo.mytour.ui.profil;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -87,6 +88,7 @@ public class EditProfile extends AppCompatActivity {
         //Pozivanje metode za prikaz podataka
         displayData();
 
+
         //Lisener na strelicu za povratak
         editProfileBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +101,29 @@ public class EditProfile extends AppCompatActivity {
         editAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO
+            }
+        });
+        //Lisener za verifikaciju telefona
+        phoneAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                if (phoneData.getText().toString().trim().matches(getString(R.string.phoneNVerify))) {
+
+                    //Pokretanje novog dialog boxa, jer korisnik nema verifikovan broj telefona
+                    phoneVerifyDialog verifyDialog = new phoneVerifyDialog();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    verifyDialog.show(fragmentTransaction, "");
+
+                } else {
+
+                   //Pokretanje novog dialog boxa, za unlinkovanje telefona
+                    unlinkDialog unLink = new unlinkDialog();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    unLink.show(fragmentTransaction, "");
+
+                }
             }
         });
 
