@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <ImageView
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:src="@drawable/smartphone_icon"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/phoneImg"/>
+
+    <TextView
+        android:id="@+id/phoneVerifyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/phoneVerifyTitle"
+        android:textColor="@color/blue_grad2"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneImg" />
+
+    <TextView
+        android:id="@+id/phoneVerifySubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/phoneVerifySubtitle"
+        android:textAlignment="center"
+        android:layout_marginTop="5dp"
+        android:textSize="11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneVerifyTitle"
+        tools:ignore="MissingConstraints"
+        android:visibility="visible"/>
+    <TextView
+        android:id="@+id/phoneVerifyCodeSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/phoneVerifyCode"
+        android:textAlignment="center"
+        android:layout_marginTop="5dp"
+        android:textSize="11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneVerifyTitle"
+        tools:ignore="MissingConstraints"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/phoneVerifyFooter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lines="2"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:layout_marginTop="190dp"
+        android:text="@string/phoneVerifyDescFooter"
+        android:textAlignment="center"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="@+id/phoneVerifySubTitle"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/phoneNumber"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:background="@drawable/text_field"
+        android:hint="@string/phoneHint"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp"
+        android:inputType="phone"
+        android:textAlignment="center"
+        android:textColor="@color/stroke_gray"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneVerifySubTitle"
+        tools:ignore="MissingConstraints"
+        android:visibility="visible"/>
+
+    <EditText
+        android:id="@+id/codeNumber"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:background="@drawable/text_field"
+        android:hint="@string/codeHint"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginTop="20dp"
+        android:inputType="phone"
+        android:textAlignment="center"
+        android:textColor="@color/stroke_gray"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneVerifyCodeSubTitle"
+        tools:ignore="MissingConstraints"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/SendVefifyBtn"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/btn_login"
+        android:text="@string/phoneVerifySend"
+        android:textSize="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumber"
+        android:visibility="visible"/>
+
+    <Button
+        android:id="@+id/CheckVefiy"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/btn_login"
+        android:text="@string/phoneVerifySend"
+        android:textSize="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumber"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/progressVerify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/SendVefifyBtn" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
