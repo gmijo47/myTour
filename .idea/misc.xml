@@ -26,6 +26,7 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/personalinfo.xml" value="0.28888888888888886" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/personalinfo_btn.xml" value="0.2324074074074074" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/personalinfo_def_icon.xml" value="0.2898148148148148" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/phone_icon.xml" value="0.20572916666666666" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/pocetna.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/profil.xml" value="0.30462962962962964" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/profile_container.xml" value="0.25833333333333336" />
@@ -33,6 +34,7 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/save_icon.xml" value="0.2972222222222222" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/settings.xml" value="0.2526041666666667" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/settings_icon.xml" value="0.2898148148148148" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/smartphone_icon.xml" value="0.3388888888888889" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/stats_selected_icon.xml" value="0.21296296296296297" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/text_field.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/text_field_edit_profile.xml" value="0.22149837133550487" />
@@ -44,6 +46,8 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_splashscreen.xml" value="0.1859375" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_phone_verify.xml" value="0.22" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_phoneverify_sent.xml" value="0.19166666666666668" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_dashboard.xml" value="0.34270833333333334" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_explore.xml" value="0.34270833333333334" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_home.xml" value="0.34270833333333334" />
