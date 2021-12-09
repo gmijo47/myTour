@@ -322,7 +322,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="sans-serif"
-                    android:padding="8dp"
+                    android:padding="10dp"
                     android:text="@string/phoneVerify"
                     android:textColor="@color/blue_grad3"
                     android:textSize="14dp"
