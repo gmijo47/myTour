@@ -226,6 +226,7 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
                         userVerifyBadgeBtn.setVisibility(View.VISIBLE);
                     } else {
                         userPhone.setText(R.string.phoneNVerify);
+                        userVerifyBadgeBtn.setVisibility(View.GONE);
                     }
 //
                     //Group (Ukoliko korisnik ima grupu administrator_2 ili 1 shodno tome prikazuje mu badge)
