@@ -67,15 +67,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:lines="2"
+        android:layout_marginTop="220dp"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
-        android:layout_marginTop="190dp"
         android:text="@string/phoneVerifyDescFooter"
         android:textAlignment="center"
         android:textSize="12dp"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="@+id/phoneVerifySubTitle"
+        app:layout_constraintTop_toBottomOf="@+id/phoneVerifyTitle"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -102,21 +101,21 @@
         android:id="@+id/codeNumber"
         android:layout_width="0dp"
         android:layout_height="40dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="70dp"
         android:layout_weight="1"
         android:background="@drawable/text_field"
         android:hint="@string/codeHint"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="70dp"
-        android:layout_marginTop="20dp"
         android:inputType="phone"
         android:textAlignment="center"
         android:textColor="@color/stroke_gray"
         android:textSize="16dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneVerifyCodeSubTitle"
-        tools:ignore="MissingConstraints"
-        android:visibility="gone"/>
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/SendVefifyBtn"
@@ -137,26 +136,26 @@
         android:id="@+id/CheckVefiy"
         android:layout_width="0dp"
         android:layout_height="35dp"
+        android:layout_marginTop="14dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginTop="14dp"
         android:background="@drawable/btn_login"
         android:text="@string/phoneVerifySend"
         android:textSize="13dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneNumber"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toBottomOf="@+id/codeNumber" />
 
     <ProgressBar
         android:id="@+id/progressVerify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="150dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/SendVefifyBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/phoneVerifyCodeSubTitle" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

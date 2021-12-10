@@ -53,7 +53,7 @@ public class EditProfile extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
     ConstraintLayout view;
     ProfilFragment profilFragment;
-    Intent resIntent = new Intent();
+    Intent resIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,7 @@ public class EditProfile extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         //Dobavljanje intenta, i podataka u intentu;
         dataFromFragment = getIntent();
+        resIntent = getIntent();
         rawData = dataFromFragment.getStringArrayListExtra("data");
         //View
         view = (ConstraintLayout) findViewById(R.id.editProfileLayout);

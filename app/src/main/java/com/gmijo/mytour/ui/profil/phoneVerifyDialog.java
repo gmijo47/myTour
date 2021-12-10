@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -28,6 +30,7 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
@@ -37,14 +40,20 @@ import java.util.regex.Pattern;
 
 
 public class phoneVerifyDialog extends DialogFragment {
+
+    //Inicijaliziranje elemenata
     EditText phoneNumber, codeNumber;
     ProgressBar progressBar;
     Button verifyBtn, checkCodeBtn;
     String numberData;
     View newFileView;
-    FirebaseAuth firebaseAuth;
     TextView phoneTitle, codeTitle;
     String codeUser, codeSys;
+
+    //Firebase inicijalizacija
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -61,6 +70,7 @@ public class phoneVerifyDialog extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
+
         //Inicializiranje lemenata
         phoneNumber = (EditText) getDialog().findViewById(R.id.phoneNumber);
         codeNumber = (EditText) getDialog().findViewById(R.id.codeNumber);
@@ -69,7 +79,10 @@ public class phoneVerifyDialog extends DialogFragment {
         progressBar = (ProgressBar) getDialog().findViewById(R.id.progressVerify);
         phoneTitle = (TextView) getDialog().findViewById(R.id.phoneVerifySubTitle);
         codeTitle = (TextView) getDialog().findViewById(R.id.phoneVerifyCodeSubTitle);
+
+        //Firebase
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         //Lisener za verify button
         verifyBtn.setOnClickListener(new View.OnClickListener() {
@@ -128,12 +141,8 @@ public class phoneVerifyDialog extends DialogFragment {
             //Verifikacija nije uspijela, zatvara dijalog
             progressBar.setVisibility(View.GONE);
             Snackbar.make(newFileView, R.string.phoneVerifyFiled, Snackbar.LENGTH_LONG).show();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    phoneVerifyDialog.super.onCancel(getDialog());
-                }
-            }, 3500);
+            verifyBtn.setEnabled(true);
+            phoneNumber.setEnabled(true);
         }
 
         @Override
@@ -212,6 +221,18 @@ public class phoneVerifyDialog extends DialogFragment {
                    //Autentifikacija uspjela
                    progressBar.setVisibility(View.GONE);
                    Snackbar.make(newFileView, R.string.phoneVerified, Snackbar.LENGTH_LONG).show();
+
+                   //Vrši reload usera
+                   firebaseUser.reload();
+
+                   TextView displayPhone = (TextView) getDialog().getOwnerActivity().findViewById(R.id.displayPhone);
+                   TextView phoneAction = (TextView) getDialog().getOwnerActivity().findViewById(R.id.verifyPhone);
+                   displayPhone.setText(firebaseUser.getPhoneNumber());
+                   phoneAction.setTextColor(Color.RED);
+                   phoneAction.setText(R.string.phoneRemove);
+                   Intent resIntent = getDialog().getOwnerActivity().getIntent();
+                   resIntent.putExtra("dataChanged", true);
+
 
                    new Handler().postDelayed(new Runnable() {
                        @Override

@@ -3,6 +3,8 @@ package com.gmijo.mytour.ui.profil;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,13 +47,25 @@ public class unlinkDialog extends DialogFragment {
                 .setPositiveButton(R.string.phoneRemove, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                       //Korisnik uklanja broj telefona, gasi dialog, setuje value na NEVERIFIKOVAN
+                       //Korisnik uklanja broj telefona, reloaduje usera, pokazuje poruku, postavlja text, te gasi dialog
                         firebaseUser.unlink(PhoneAuthProvider.PROVIDER_ID);
+                        firebaseUser.reload();
+
+
                         Snackbar.make(getDialog().getOwnerActivity().getWindow().getDecorView(), R.string.phoneUnlinked, Snackbar.LENGTH_LONG).show();
+                        TextView displayPhone = (TextView) getDialog().getOwnerActivity().findViewById(R.id.displayPhone);
+                        TextView phoneAction = (TextView) getDialog().getOwnerActivity().findViewById(R.id.verifyPhone);
+                        displayPhone.setText(R.string.phoneNVerify);
+                        phoneAction.setTextColor(Color.BLUE);
+                        phoneAction.setText(R.string.phoneVerify);
+                        Intent resIntent = getDialog().getOwnerActivity().getIntent();
+                        resIntent.putExtra("dataChanged", true);
                         getDialog().cancel();
+
 
                     }
                 });
+
         //Vraća napravljen dialog
         return builder.create();
     }
