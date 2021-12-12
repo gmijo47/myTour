@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:lines="2"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="230dp"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
         android:text="@string/phoneVerifyDescFooter"
