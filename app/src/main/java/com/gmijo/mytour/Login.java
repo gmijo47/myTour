@@ -121,6 +121,7 @@ public class Login extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, ForgotPassword.class));
+                disableButtons();
             }
         });
 
@@ -137,6 +138,7 @@ public class Login extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 if (canSendVerifyEmail && firebaseUser != null){
+                disableButtons();
                 lErrorMsg.setVisibility(View.INVISIBLE);
                 lEmail.setBackgroundResource(R.drawable.text_field);
                 lProgressBar.setVisibility(View.INVISIBLE);
@@ -162,6 +164,7 @@ public class Login extends AppCompatActivity  {
     lBtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            disableButtons();
             lEmailData = lEmail.getText().toString().trim();
             lPasswordData = lPassword.getText().toString().trim();
 
@@ -243,13 +246,46 @@ public class Login extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 googleSignIn();
+                disableButtons();
             }
         });
     }
 
+    private void disableButtons() {
+
+        lBtnGoogle.setEnabled(false);
+        lBtn.setEnabled(false);
+        lRegisterRedirect.setClickable(false);
+        lForgotPassword.setClickable(false);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                enableButtons();
+
+            }
+        }, 2000);
+
+    }
+
+    private void enableButtons() {
+
+        lBtnGoogle.setEnabled(true);
+        lBtn.setEnabled(true);
+        lRegisterRedirect.setClickable(true);
+        lForgotPassword.setClickable(true);
+
+    }
 
     //Postavljanje errora, odnoso njihov UI prikaz
     public void setError(String errCode, int timeOut){
+        enableButtons();
         switch (errCode) {
             //Neisparavan email (formatting)
             case "errEmail":{

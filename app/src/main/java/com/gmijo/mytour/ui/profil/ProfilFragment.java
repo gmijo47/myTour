@@ -322,7 +322,12 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
                                 Integer.parseInt(nationalParkExplored), Integer.parseInt(naturePointExplored),
                                 Integer.parseInt(villageExplored), Integer.parseInt(tokenCount), groupData, true);
 
-
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                ErrDialog("rsState");
+                            }
+                        }, 1000);
 
                     } else {
                         setError("errFailedToGetData");
