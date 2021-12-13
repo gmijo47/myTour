@@ -119,30 +119,23 @@
     <string name="phoneUnlink">Da li želite ukloniti broj telefona?</string>
     <string name="phoneUnlinked">Broj uklonjen!</string>
 
-
-
-
     <string name="stPointsTitle">myTour TOKENI</string>
     <string name="stCityExplored">OTKRIVENO GRADOVA</string>
     <string name="stNaturePointExplored">OTKRIVENO PRIODNIH ATRAKCIJA</string>
     <string name="stVillageExplored">OTKRIVENO SELA</string>
     <string name="stNacionalParkExplored">OTKRIVENO NACIONALNIH PARKOVA</string>
-    <string name="title_activity_settings">SettingsActivity</string>
 
-    <!-- Preference Titles -->
+    <string name="settProfHeader">Profil</string>
     <string name="settingsTitle">Postavke</string>
-    <string name="sync_header">Sync</string>
+    <string name="settProfDelTitle">Brisanje naloga</string>
+    <string name="settProfDelDesc">Ovom akcijom nalog i svi podatci biti će obrisani!</string>
+    <string name="settDelProTxt">Da li želite trajno obristi nalog?</string>
+    <string name="delCofnirm">Obriši</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+
+
 
 
 </resources>
