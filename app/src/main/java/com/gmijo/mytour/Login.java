@@ -270,7 +270,7 @@ public class Login extends AppCompatActivity  {
                 enableButtons();
 
             }
-        }, 2000);
+        }, 3500);
 
     }
 
