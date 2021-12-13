@@ -62,6 +62,7 @@ public class SQLiteDataHelper {
                         if (data != null) {
                             if (interfaceProfilFragment != null) {
                                 interfaceProfilFragment.displayData(data);
+                                interfaceProfilFragment.ErrDialog("rsState");
                             }
                         }
                     }
@@ -75,6 +76,7 @@ public class SQLiteDataHelper {
                         if (data != null) {
                             if (interfaceProfilFragment != null) {
                                 interfaceProfilFragment.displayData(data);
+                                interfaceProfilFragment.ErrDialog("rsState");
                             }
                         }
                     }

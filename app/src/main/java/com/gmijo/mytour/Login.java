@@ -198,7 +198,6 @@ public class Login extends AppCompatActivity  {
                                     setError("errEmailNoVerify", 20000);
 
                                 } else {
-
                                     //Email je verifikovan, startuje LandingActivity
                                     startActivity(new Intent(Login.this, LandingActivity.class));
                                     finish();
@@ -246,7 +245,7 @@ public class Login extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 googleSignIn();
-                disableButtons();
+
             }
         });
     }
@@ -263,29 +262,28 @@ public class Login extends AppCompatActivity  {
     @Override
     protected void onResume() {
         super.onResume();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
 
-                enableButtons();
-
-            }
-        }, 3500);
+                enableButtons(4000);
 
     }
 
-    private void enableButtons() {
+    private void enableButtons(int ms_delay) {
 
-        lBtnGoogle.setEnabled(true);
-        lBtn.setEnabled(true);
-        lRegisterRedirect.setClickable(true);
-        lForgotPassword.setClickable(true);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                lBtnGoogle.setEnabled(true);
+                lBtn.setEnabled(true);
+                lRegisterRedirect.setClickable(true);
+                lForgotPassword.setClickable(true);
+            }
+        }, ms_delay);
 
     }
 
     //Postavljanje errora, odnoso njihov UI prikaz
     public void setError(String errCode, int timeOut){
-        enableButtons();
+        enableButtons(800);
         switch (errCode) {
             //Neisparavan email (formatting)
             case "errEmail":{
