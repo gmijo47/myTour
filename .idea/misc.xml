@@ -46,7 +46,7 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_splashscreen.xml" value="0.1859375" />
-        <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_phone_verify.xml" value="0.22" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_phone_verify.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_phoneverify_sent.xml" value="0.19166666666666668" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_dashboard.xml" value="0.34270833333333334" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_explore.xml" value="0.34270833333333334" />
@@ -59,10 +59,10 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/registertips_fragment.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/resendverifyemail_dialog.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/resendverifyemail_fragment.xml" value="0.19010416666666666" />
-        <entry key="..\:/Projects/myTour/app/src/main/res/layout/settings_activity.xml" value="0.22" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/settings_activity.xml" value="0.15" />
         <entry key="..\:/Projects/myTour/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20677083333333332" />
         <entry key="..\:/Projects/myTour/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19722222222222222" />
-        <entry key="..\:/Projects/myTour/app/src/main/res/xml/root_preferences.xml" value="0.3380208333333333" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/xml/root_preferences.xml" value="0.1" />
       </map>
     </option>
   </component>
