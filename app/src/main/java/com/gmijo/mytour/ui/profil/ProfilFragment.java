@@ -56,7 +56,7 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
     //Stringovi za polja
     String userUUID, userEmailData = null, usernameData, fullNameData, groupData, tokenCount, cityExplored, villageExplored, naturePointExplored, nationalParkExplored;
    //Array list za podatke
-    ArrayList<String> data;
+    ArrayList<String> dataR;
     //Helper SQLite
     SQLiteDataHelper liteDataHelper;
 
@@ -110,11 +110,11 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
         //Pozivanje metode za provjeru da li postoje podatci o korisniku u lokalnoj bazi
         boolean locUserExists = liteDataHelper.checkLocalData(userUUID);
         if (locUserExists) {
-           data = liteDataHelper.getData(userUUID);
-                if (data != null){
+           dataR = liteDataHelper.getData(userUUID);
+                if (dataR != null){
 
                     //Podatci postoje, prikaz istih
-                    displayData(data);
+                    displayData(dataR);
 
                 }
         } else {
@@ -178,7 +178,7 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
             public void onClick(View v) {
                 disableButtons();
                 Intent editProfileIntent = new Intent(getActivity(), EditProfile.class);
-                editProfileIntent.putStringArrayListExtra("data", data);
+                editProfileIntent.putStringArrayListExtra("data", dataR);
                 startActivityForResult(editProfileIntent, 0);
             }
         });
@@ -256,6 +256,7 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
                     ErrDialog("rsState");
                     swipeRefreshLayout.setRefreshing(false);
 
+                    dataR = data;
                 }
     }
 
@@ -321,9 +322,6 @@ public class ProfilFragment extends Fragment implements interfaceProfilFragment 
                         liteDataHelper.registerUser(userUUID, fullNameData, usernameData, Integer.parseInt(cityExplored),
                                 Integer.parseInt(nationalParkExplored), Integer.parseInt(naturePointExplored),
                                 Integer.parseInt(villageExplored), Integer.parseInt(tokenCount), groupData, true);
-
-
-
                     } else {
                         setError("errFailedToGetData");
                     }
