@@ -1,6 +1,7 @@
 package com.gmijo.mytour.database;
 
 import static com.gmijo.mytour.database.SQLiteController.COL_CITYEXP;
+import static com.gmijo.mytour.database.SQLiteController.COL_COUNT;
 import static com.gmijo.mytour.database.SQLiteController.COL_FNAME;
 import static com.gmijo.mytour.database.SQLiteController.COL_GPUUID;
 import static com.gmijo.mytour.database.SQLiteController.COL_GROUP;
@@ -9,18 +10,20 @@ import static com.gmijo.mytour.database.SQLiteController.COL_NAPEXP;
 import static com.gmijo.mytour.database.SQLiteController.COL_NATEXP;
 import static com.gmijo.mytour.database.SQLiteController.COL_USERNAME;
 import static com.gmijo.mytour.database.SQLiteController.COL_VILEXP;
-import static com.gmijo.mytour.database.SQLiteController.TAB_NAME;
+import static com.gmijo.mytour.database.SQLiteController.TAB_USER_DATA;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.util.Pair;
 
 
 import com.gmijo.mytour.ui.profil.interfaceProfilFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SQLiteDataHelper {
     private Context context;
@@ -56,7 +59,7 @@ public class SQLiteDataHelper {
 
             if (dataUpdate){
 
-                int res = (int) liteDatabase.update(TAB_NAME, values, COL_GPUUID + " = " + "'" + gUUID + "'", null);
+                int res = (int) liteDatabase.update(TAB_USER_DATA, values, COL_GPUUID + " = " + "'" + gUUID + "'", null);
                     if (res == 1){
                         ArrayList<String> data = getData(gUUID);
                         if (data != null) {
@@ -69,7 +72,7 @@ public class SQLiteDataHelper {
 
             } else {
 
-                result = (int) liteDatabase.insert(TAB_NAME, null, values);
+                result = (int) liteDatabase.insert(TAB_USER_DATA, null, values);
                 if (result == 1) {
                     if (refresh) {
                         ArrayList<String> data = getData(gUUID);
@@ -100,7 +103,7 @@ public class SQLiteDataHelper {
     public boolean checkLocalData(String  userUUID){
         boolean ret = false;
         try{
-        String check_query = "SELECT * FROM " + TAB_NAME + " WHERE " + COL_GPUUID + " = '" + userUUID +"'";
+        String check_query = "SELECT * FROM " + TAB_USER_DATA + " WHERE " + COL_GPUUID + " = '" + userUUID +"'";
         SQLiteDatabase liteDatabase = sqLiteController.getReadableDatabase();
         Cursor cursor = null;
         if (liteDatabase != null) {
@@ -125,7 +128,7 @@ public class SQLiteDataHelper {
     //Metoda koja dobavlja podatke iz lokalne baze, pakuje ih u array list i vraća podatke u arraylistu
     public ArrayList<String> getData(String  userUUID){
         try {
-            String check_query = "SELECT * FROM " + TAB_NAME + " WHERE " + COL_GPUUID + " = '" + userUUID + "'";
+            String check_query = "SELECT * FROM " + TAB_USER_DATA + " WHERE " + COL_GPUUID + " = '" + userUUID + "'";
             SQLiteDatabase liteDatabase = sqLiteController.getReadableDatabase();
             Cursor cursor = null;
             if (liteDatabase != null) {
@@ -155,4 +158,74 @@ public class SQLiteDataHelper {
         }
         return  data;
     }
+    public boolean checkTableDatExt(String table_name){
+
+        boolean ret = false;
+        try{
+            String check_query = "SELECT * FROM " + table_name;
+            SQLiteDatabase liteDatabase = sqLiteController.getReadableDatabase();
+            Cursor cursor = null;
+            if (liteDatabase != null) {
+                cursor = liteDatabase.rawQuery(check_query, null);
+                cursor.moveToFirst();
+            }
+            if(cursor.getCount() == 0){
+                ret = false;
+            }else {
+                ret = true;
+            }
+        }catch (Exception e){
+
+            Log.d("SQLite", "task failed!");
+
+        }
+        return ret;
+    }
+
+    //Metoda za insert podataka za leaderboard
+    public void insertData(String table, String userCol, String countCol, String username, String count){
+
+        SQLiteDatabase liteDatabase = sqLiteController.getWritableDatabase();
+
+        if (liteDatabase != null) {
+
+            //Query za insertovanje podataka
+            String insert_query = "INSERT INTO " + table + " (" + userCol + "," + countCol + ")" + " VALUES (" + "'" + username + "'" + ", " + "'" + count + "'" + ")";
+
+            //Execute querija
+            liteDatabase.execSQL(insert_query);
+
+        }
+
+    }
+    public void updateData(String table, ArrayList<String> usernames, ArrayList<String>  count){
+
+    }
+
+    public List<Pair<String, String>> obtainData(String table){
+
+        List<Pair<String, String>> test = new ArrayList<>();
+        SQLiteDatabase liteDatabase = sqLiteController.getReadableDatabase();
+
+        if (liteDatabase != null) {
+
+            //Query za citanje iz baze
+            String query_read = "SELECT " + COL_USERNAME + ", " + COL_COUNT + " FROM " + table;
+
+            //Executer querija
+            Cursor cursor = liteDatabase.rawQuery(query_read, null);
+            int i = 1;
+            cursor.moveToFirst();
+            if (cursor.getCount() != 0){
+                while (cursor.moveToNext()){
+                  // data.put(cursor.getString(cursor.getColumnIndex(COL_USERNAME)), cursor.getString(cursor.getColumnIndex(COL_COUNT)));
+                    test.add(new Pair(cursor.getString(cursor.getColumnIndex(COL_USERNAME)), cursor.getString(cursor.getColumnIndex(COL_COUNT))));
+                }
+            }
+
+        }
+        return test;
+    }
+
 }
+
