@@ -64,7 +64,7 @@ public class EditProfile extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         //Dobavljanje intenta, i podataka u intentu;
         dataFromFragment = getIntent();
-        resIntent = getIntent();
+        resIntent = new Intent();
         rawData = dataFromFragment.getStringArrayListExtra("data");
         //View
         view = (ConstraintLayout) findViewById(R.id.editProfileLayout);
