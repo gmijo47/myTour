@@ -60,7 +60,6 @@
     <string name="lSuccess">Prijava uspješna!</string>
 
 
-
     <string name="lResendedMail">Verifikaciski email poslat, provjerite sanduče!</string>
     <string name="lNotResendedMail">Verifikaciski email poslat, provjerite sanduče!</string>
 
@@ -125,17 +124,18 @@
     <string name="stVillageExplored">OTKRIVENO SELA</string>
     <string name="stNacionalParkExplored">OTKRIVENO NACIONALNIH PARKOVA</string>
 
+    <string name="stPoints">Tokeni</string>
+    <string name="stCity">Gradovi</string>
+    <string name="stNaturePoint">Atrakcije</string>
+    <string name="stVillage">Sela</string>
+    <string name="stNacionalPark">Nacionalni parkovi</string>
+
+
     <string name="settProfHeader">Profil</string>
     <string name="settingsTitle">Postavke</string>
     <string name="settProfDelTitle">Brisanje naloga</string>
     <string name="settProfDelDesc">Ovom akcijom nalog i svi podatci biti će obrisani!</string>
     <string name="settDelProTxt">Da li želite trajno obristi nalog?</string>
     <string name="delCofnirm">Obriši</string>
-
-
-
-
-
-
 
 </resources>
