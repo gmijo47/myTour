@@ -8,6 +8,7 @@ import static com.gmijo.mytour.database.SQLiteController.COL_GROUP;
 import static com.gmijo.mytour.database.SQLiteController.COL_MYTT;
 import static com.gmijo.mytour.database.SQLiteController.COL_NAPEXP;
 import static com.gmijo.mytour.database.SQLiteController.COL_NATEXP;
+import static com.gmijo.mytour.database.SQLiteController.COL_NO;
 import static com.gmijo.mytour.database.SQLiteController.COL_USERNAME;
 import static com.gmijo.mytour.database.SQLiteController.COL_VILEXP;
 import static com.gmijo.mytour.database.SQLiteController.TAB_USER_DATA;
@@ -16,10 +17,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
 import android.util.Log;
 import android.util.Pair;
 
 
+import com.gmijo.mytour.ui.leaderboard.nav_fragments.navInterface;
 import com.gmijo.mytour.ui.profil.interfaceProfilFragment;
 
 import java.util.ArrayList;
@@ -30,7 +33,9 @@ public class SQLiteDataHelper {
     SQLiteController sqLiteController;
     ArrayList<String> data = new ArrayList<String>();
     int result;
+
     private interfaceProfilFragment interfaceProfilFragment = null;
+    private navInterface navInterface = null;
 
     public SQLiteDataHelper(Context context){
         this.context = context;
@@ -39,6 +44,9 @@ public class SQLiteDataHelper {
     }
     public void setDisplayer(interfaceProfilFragment d) {
         interfaceProfilFragment = d;
+    }
+    public void setFragmentDisplayer(navInterface d) {
+        navInterface = d;
     }
     //Metoda za insetrovanje podataka u bazu (lokalnu) na registeru
     public void registerUser(String gUUID, String fName, String username, int cityExplored, int nacionalParkExplored, int naturePointExplored, int villageExplored, int mytourTokens, String group, Boolean refresh){
@@ -158,6 +166,8 @@ public class SQLiteDataHelper {
         }
         return  data;
     }
+
+    //Metoda za provjeru postojanja tabele za leaderboard
     public boolean checkTableDatExt(String table_name){
 
         boolean ret = false;
@@ -183,28 +193,85 @@ public class SQLiteDataHelper {
     }
 
     //Metoda za insert podataka za leaderboard
-    public void insertData(String table, String userCol, String countCol, String username, String count){
+    public void insertData(String table, String userCol, String countCol, String username, String count, boolean update) {
+        try {
+                    SQLiteDatabase liteDatabase = sqLiteController.getWritableDatabase();
+                    if (liteDatabase != null) {
 
-        SQLiteDatabase liteDatabase = sqLiteController.getWritableDatabase();
+                        //Query za insertovanje podataka, smiješta podatke u contentvalues, ubacuje u bazu
+                        ContentValues values = new ContentValues();
+                        values.put(userCol, username);
+                        values.put(countCol, count);
 
-        if (liteDatabase != null) {
+                        long result = liteDatabase.insert(table, null, values);
 
-            //Query za insertovanje podataka
-            String insert_query = "INSERT INTO " + table + " (" + userCol + "," + countCol + ")" + " VALUES (" + "'" + username + "'" + ", " + "'" + count + "'" + ")";
+                        if (result == 1){
+                            displayHelper();
+                        }
 
-            //Execute querija
-            liteDatabase.execSQL(insert_query);
+                    }
+
+        }catch (Exception e){
+
+                  if (navInterface != null){
+
+                      //Prikaz erora
+                      navInterface.setError();
+
+                  }
 
         }
 
     }
-    public void updateData(String table, ArrayList<String> usernames, ArrayList<String>  count){
 
+    private void displayHelper(){
+        if (navInterface != null) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    //Pikaz podataka nakon 1000ms
+                    navInterface.displayData();
+
+                }
+            }, 1000);
+        }else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    //Pikaz podataka nakon 1000ms
+                  displayHelper();
+
+                }
+            }, 5000);
+        }
+    }
+    public void updateData(String table, String username, String count, int _no){
+
+        SQLiteDatabase liteDatabase = sqLiteController.getWritableDatabase();
+
+        //Query za update podataka
+        String update_query = "UPDATE " + table + " SET " + COL_USERNAME + "=" + "'" + username + "'" + "," +
+                " " + COL_COUNT + "=" + "'" + count + "'" + " WHERE " + COL_NO + "=" + "'" + _no + "'";
+
+            try{
+
+                //Execute querija
+                liteDatabase.execSQL(update_query);
+
+            }catch (Exception e){
+
+                //Loguje exeception
+                Log.e("SQLite", String.valueOf(e));
+
+            }
     }
 
+    //Metoda za izvlacenje podataka iz baze na osnovu imena tabele
     public List<Pair<String, String>> obtainData(String table){
 
-        List<Pair<String, String>> test = new ArrayList<>();
+        List<Pair<String, String>> data = new ArrayList<>();
         SQLiteDatabase liteDatabase = sqLiteController.getReadableDatabase();
 
         if (liteDatabase != null) {
@@ -214,17 +281,21 @@ public class SQLiteDataHelper {
 
             //Executer querija
             Cursor cursor = liteDatabase.rawQuery(query_read, null);
-            int i = 1;
-            cursor.moveToFirst();
             if (cursor.getCount() != 0){
+                //Loop kroz cursor
                 while (cursor.moveToNext()){
-                  // data.put(cursor.getString(cursor.getColumnIndex(COL_USERNAME)), cursor.getString(cursor.getColumnIndex(COL_COUNT)));
-                    test.add(new Pair(cursor.getString(cursor.getColumnIndex(COL_USERNAME)), cursor.getString(cursor.getColumnIndex(COL_COUNT))));
+
+                   //Dodavanje u listu u vidu parova
+                    data.add(new Pair(cursor.getString(cursor.getColumnIndex(COL_USERNAME)), cursor.getString(cursor.getColumnIndex(COL_COUNT))));
+
                 }
             }
 
         }
-        return test;
+
+        //Vraca listu
+        return data;
+
     }
 
 }
