@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:tag="leaderboard"
     tools:context=".ui.leaderboard.LeaderboardFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -26,7 +27,8 @@
         tools:ignore="MissingConstraints" />
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/leaderboardRefresh">
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"

@@ -8,12 +8,15 @@
    >
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/light_white">
 
             <TextView
                 android:id="@+id/lbNOUser"
@@ -21,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
                 android:text=""
-                android:textSize="30dp"
+                android:textSize="26dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -30,22 +33,32 @@
                 android:id="@+id/lbUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
                 android:fontFamily="sans-serif-black"
                 android:text=""
-                android:textSize="20dp"
+                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/lbNOUser"
+                android:layout_marginStart="30dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/user_leadboard_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/lbNOUser"
+                app:layout_constraintTop_toTopOf="parent" />
             <TextView
                 android:id="@+id/lbCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
                 android:text=""
-                android:textSize="20dp"
+                android:textAlignment="center"
+                android:textSize="18dp"
                 android:layout_marginEnd="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
