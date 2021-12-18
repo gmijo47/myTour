@@ -46,7 +46,7 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_splashscreen.xml" value="0.1859375" />
-        <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapter_leaderboard_layout.xml" value="0.27812113720642767" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapter_leaderboard_layout.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapterlist_leaderboard_layout.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_phone_verify.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_phoneverify_sent.xml" value="0.19166666666666668" />
@@ -54,8 +54,10 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_explore.xml" value="0.34270833333333334" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_home.xml" value="0.34270833333333334" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_lb_city.xml" value="0.25" />
-        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_lb_npark.xml" value="0.22" />
-        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_lb_tokens.xml" value="0.15477293790546803" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_lb_n_point.xml" value="0.19010416666666666" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_lb_npark.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_lb_tokens.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_lb_village.xml" value="0.19010416666666666" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_lbtokens.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_leadboard.xml" value="0.32395833333333335" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_leaderborad.xml" value="0.25" />
