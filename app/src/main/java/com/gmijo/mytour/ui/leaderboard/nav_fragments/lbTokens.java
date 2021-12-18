@@ -7,20 +7,23 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.gmijo.mytour.R;
 import com.gmijo.mytour.database.SQLiteDataHelper;
 import com.gmijo.mytour.ui.leaderboard.CustomAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -29,27 +32,35 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class lbTokens extends Fragment {
+public class lbTokens extends Fragment implements navInterface {
 
     //Definisanje elemenata
     RecyclerView recyclerView;
     SQLiteDataHelper dataHelper;
+    View view;
     ArrayList<String> username_list, count_value_list;
     FirebaseFirestore firebaseFirestore;
     CustomAdapter customAdapter;
+    ConstraintLayout loader;
+    TextView titleToken;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //Inicijaliziranje elemenata
         dataHelper = new SQLiteDataHelper(getActivity());
         username_list = new ArrayList<String>();
         count_value_list = new ArrayList<String>();
         firebaseFirestore = FirebaseFirestore.getInstance();
+        view = inflater.inflate(R.layout.fragment_lb_tokens, container, false);
+        recyclerView =  (RecyclerView)  view.findViewById(R.id.tokenRecView);
+        loader = (ConstraintLayout) view.findViewById(R.id.loaderToken);
+        titleToken = (TextView) view.findViewById(R.id.titleToken);
 
-        return inflater.inflate(R.layout.fragment_lb_tokens, container, false);
+        return view;
+
     }
 
     @Override
@@ -69,15 +80,27 @@ public class lbTokens extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful()) {
+
+                        //Loopuje kroz rezultate dobivene iz querija
                         for (QueryDocumentSnapshot document : task.getResult()) {
 
-                            //Ubacuje podatke u SQL lite tabelu
-                            dataHelper.insertData(TAB_TOKEN_STATS, COL_USERNAME, COL_COUNT, document.get("personalData.Username").toString(), document.get("achievementData.myTourTokens").toString());
+                            try {
+
+                                //Ubacuje podatke u SQL lite tabelu
+                                dataHelper.insertData(TAB_TOKEN_STATS, COL_USERNAME, COL_COUNT, document.get("personalData.Username").toString(), document.get("achievementData.myTourTokens").toString(), true);
+
+                            } catch (Exception e) {
+
+                                //Došlo je do pogreške, pirkaz errora
+                                setError();
+
+                            }
 
                         }
                     } else {
 
-                        //todo error
+                        //Došlo je do pogreške, pirkaz errora
+                        setError();
 
                     }
                 }
@@ -86,25 +109,58 @@ public class lbTokens extends Fragment {
 
         }else {
 
+            //Podatci postoje lokalno, poziva metodu za prikaz istih
             displayData();
 
         }
 
-
         super.onViewCreated(view, savedInstanceState);
+
     }
 
-    private void displayData() {
+    //Metoda za prikaz podatataka kada su oni dostupni lokalno
+    public void displayData() {
 
-        ArrayList<String> user_list = new ArrayList<>();
-        ArrayList<String> count_list = new ArrayList<>();
-
+        //Fetch iz lokalne baze u listu koja sarži parove (username-count)
         List<Pair<String, String>> data = dataHelper.obtainData(TAB_TOKEN_STATS);
-        for (int i = 0; i< data.size(); i++){
-            user_list.add(i, data.get(i).first);
-            count_list.add(i, data.get(i).second);
-        }
-        customAdapter = new CustomAdapter(getActivity(), user_list, count_list);
 
+        //Loop kroz listu, ubacivanje padataka u 2 razlicita array liste;
+        for (int i = 0; i< data.size(); i++){
+            username_list.add(i, data.get(i).first);
+            count_value_list.add(i, data.get(i).second);
+        }
+
+        //Pozivanje custom adaptera i prikaz podataka
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        customAdapter = new CustomAdapter(username_list, count_value_list);
+        recyclerView.setAdapter(customAdapter);
+
+        loader.setVisibility(View.GONE);
+        titleToken.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
+
+    }
+
+    //Prosljeđivanje konteksta u data helper
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Prosljeđuje kontekst u datahelper preko interface-a
+        dataHelper.setFragmentDisplayer(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //Prosljeđuje null u datahelper preko interface-a
+        dataHelper.setFragmentDisplayer(null);
+    }
+
+    //Metoda za prikaz errora
+    public void setError(){
+        Snackbar.make(getView(), R.string.errLoader, Snackbar.LENGTH_LONG)
+                .setAnchorView(R.id.nav_view)
+                .show();
     }
 }
