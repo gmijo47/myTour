@@ -21,7 +21,8 @@
     <string name="errAlreadySignedInPass">Već ste registrovani koristeći email, ukoliko niste vi, zatražite reset lozinke!</string>
     <string name="errLoader">Upss... došlo je do pogreške!</string>
     <string name="errDataLoading">Neuspješno dohvaćanje podataka!</string>
-    <string name="errActionUnfinished">Molimo pričekajte</string>
+    <string name="errActionUnfinished">Molimo pričekajte!</string>
+    <string name="errGettingData">Još samo trenutak, dohvaćamo podatke...</string>
 
     <string name="alright">Razumijem</string>
     <string name="rDataTipsTitle">Opss.. izgleda da vam ne ide od ruke, evo pomoći!</string>
@@ -59,14 +60,12 @@
     <string name="lRedirectCreateAcc">Nemate MyTour nalog? Kliknite ovdje!</string>
     <string name="lSuccess">Prijava uspješna!</string>
 
-
     <string name="lResendedMail">Verifikaciski email poslat, provjerite sanduče!</string>
     <string name="lNotResendedMail">Verifikaciski email poslat, provjerite sanduče!</string>
 
     <string name="rsPasswordEmail">Email za reset lozinke poslat, provjerite sanduče!</string>
     <string name="rsUnknownErr">Došlo je do pogreške, pokušajte ponovo kasnije!</string>
     <string name="rsAlreadySent">Email je već poslat!</string>
-
 
     <string name="webcl_id">787058489748-2vm90c5kd8ljelpr0tg1hf9vejuv2jed.apps.googleusercontent.com</string>
 
@@ -119,16 +118,22 @@
     <string name="phoneUnlinked">Broj uklonjen!</string>
 
     <string name="stPointsTitle">myTour TOKENI</string>
-    <string name="stCityExplored">OTKRIVENO GRADOVA</string>
-    <string name="stNaturePointExplored">OTKRIVENO PRIODNIH ATRAKCIJA</string>
-    <string name="stVillageExplored">OTKRIVENO SELA</string>
-    <string name="stNacionalParkExplored">OTKRIVENO NACIONALNIH PARKOVA</string>
+    <string name="stCityExplored">POSJEĆENO GRADOVA</string>
+    <string name="stNaturePointExplored">POSJEĆENO PRIODNIH ATRAKCIJA</string>
+    <string name="stVillageExplored">POSJEĆENO SELA</string>
+    <string name="stNacionalParkExplored">POSJEĆENO NACIONALNIH PARKOVA</string>
 
     <string name="stPoints">Tokeni</string>
     <string name="stCity">Gradovi</string>
     <string name="stNaturePoint">Atrakcije</string>
     <string name="stVillage">Sela</string>
     <string name="stNacionalPark">Nacionalni parkovi</string>
+
+    <string name="stTOPPoints">Top 15 - myTour Tokeni</string>
+    <string name="stTOPCity">Top 15 - Posjećeni gradovi</string>
+    <string name="stTOPNaturePoint">Top 15 - Posjećene prirodne atrakcije</string>
+    <string name="stTOPVillage">Top 15 - Posjećena sela</string>
+    <string name="stTOPNacionalPark">Top15 - Posjećeni nacionalni parkovi</string>
 
 
     <string name="settProfHeader">Profil</string>
@@ -137,5 +142,6 @@
     <string name="settProfDelDesc">Ovom akcijom nalog i svi podatci biti će obrisani!</string>
     <string name="settDelProTxt">Da li želite trajno obristi nalog?</string>
     <string name="delCofnirm">Obriši</string>
+    <string name="hello_blank_fragment">3213</string>
 
 </resources>
