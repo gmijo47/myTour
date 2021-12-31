@@ -144,4 +144,10 @@
     <string name="delCofnirm">Obriši</string>
     <string name="hello_blank_fragment">3213</string>
 
+    <string name="hTitle">Dobrodošli nazad!</string>
+    <string name="hSubTitle">Istražite dosad neistraženo!</string>
+    <string name="hCityTitle">Izdvojeni gradovi</string>
+    <string name="hNatureTitle">Izdvojene atrakcije</string>
+    <string name="hPopulation">Broj stanovnika:</string>
+
 </resources>
