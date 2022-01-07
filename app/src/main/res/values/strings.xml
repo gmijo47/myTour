@@ -150,4 +150,7 @@
     <string name="hNatureTitle">Izdvojene atrakcije</string>
     <string name="hPopulation">Broj stanovnika:</string>
 
+    <string name="titleNearBy">Atrakcije u blizini:</string>
+    <string name="piMoreAbout">O mjestu:</string>
+
 </resources>

@@ -19,7 +19,7 @@
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/desert_background"/>
+        android:src="@drawable/img_city_holder"/>
 
     <TextView
         android:id="@+id/placeName"
