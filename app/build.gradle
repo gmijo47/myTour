@@ -45,6 +45,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.5'
     implementation 'com.google.firebase:firebase-firestore:24.0.0'
     implementation 'androidx.preference:preference:1.1.1'
+    implementation 'org.jsoup:jsoup:1.14.3'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
