@@ -25,27 +25,9 @@ public class SQLiteCityController extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    //onCreate meteoda vrši kreiranje tabela i odgovarajučih kolona
     @Override
     public void onCreate(SQLiteDatabase liteDatabase){
 
-       //String create_query = "CREATE TABLE " + TAB_C_NAME +"(" +
-       //        COL_CITY + " VARCHAR(17) NOT NULL," +
-       //        COL_POP + 	" NUMERIC(9, 3)," +
-       //        COL_SDESC +	" VARCHAR(49)," +
-       //        COL_LDESC +	" VARCHAR(1128)," +
-       //        COL_LINK + 	" VARCHAR(2)," +
-       //        COL_ID +	 "INTEGER PRIMARY KEY AUTOINCREMENT); ";
-       //try {
-
-       //    //Kreiranje tabele
-       //    liteDatabase.execSQL(create_query);
-
-       //} catch (Exception e){
-
-       //    //Error
-       //    Log.e("Error", String.valueOf(e));
-       //}
     }
 
     //Upgrade metoda, kada se mijenja verzija baze, obriše tabelu

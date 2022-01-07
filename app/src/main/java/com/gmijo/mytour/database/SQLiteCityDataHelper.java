@@ -15,7 +15,7 @@ import java.util.Random;
 public class SQLiteCityDataHelper {
     Context context;
     SQLiteCityController liteCityController;
-    List<Pair<Pair<String, String>, Pair<String, String>>> data = new ArrayList<>();
+    List<Pair<Pair<String, String>, Pair<String, Pair<String, String>>>> data = new ArrayList<>();
     List<Integer> brojevi =  new ArrayList<>();
     SQLiteDatabase liteDatabase;
 
@@ -27,12 +27,12 @@ public class SQLiteCityDataHelper {
 
     }
     public void setBrojevi() {
-        for(int i = 0; i < 20; i++){
+        for(int i = 0; i < 10; i++){
             Random random = new Random();
             brojevi.add(i, random.nextInt(105));
         }
     }
-    public List<Pair<Pair<String, String>, Pair<String, String>>> getData(){
+    public List<Pair<Pair<String, String>, Pair<String, Pair<String, String>>>> getData(){
         setBrojevi();
         liteDatabase = liteCityController.getWritableDatabase();
         try {
@@ -43,7 +43,7 @@ public class SQLiteCityDataHelper {
                     cursor = liteDatabase.rawQuery(check_query, null);
                     if (cursor.getCount() != 0) {
                         while (cursor.moveToNext()) {
-                            data.add(i, new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_CITY)), cursor.getString(cursor.getColumnIndex(COL_POP))), new Pair(cursor.getString(cursor.getColumnIndex(COL_SDESC)), cursor.getString(cursor.getColumnIndex(COL_LDESC)))));
+                            data.add(i, new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_CITY)), cursor.getString(cursor.getColumnIndex(COL_POP))), new Pair(cursor.getString(cursor.getColumnIndex(COL_SDESC)), new Pair(cursor.getString(cursor.getColumnIndex(COL_LDESC)), cursor.getString(cursor.getColumnIndex(COL_LINK))))));
                             i++;
                         }
                     } else {

@@ -33,7 +33,7 @@ public class PocetnaFragment extends Fragment {
     View view;
     RecyclerView cityFeatured, natureFeatured;
     FeaturedAdapter featuredAdapter;
-    List<Pair<Pair<String, String>, Pair<String, String>>> dataCity = new ArrayList<>();
+    List<Pair<Pair<String, String>, Pair<String, Pair<String, String>>>> dataCity = new ArrayList<>();
     SQLiteCityDataHelper liteCityDataHelper;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
