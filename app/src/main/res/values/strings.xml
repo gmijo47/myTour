@@ -119,7 +119,7 @@
 
     <string name="stPointsTitle">myTour TOKENI</string>
     <string name="stCityExplored">POSJEĆENO GRADOVA</string>
-    <string name="stNaturePointExplored">POSJEĆENO PRIODNIH ATRAKCIJA</string>
+    <string name="stNaturePointExplored">POSJEĆENO ATRAKCIJA</string>
     <string name="stVillageExplored">POSJEĆENO SELA</string>
     <string name="stNacionalParkExplored">POSJEĆENO NACIONALNIH PARKOVA</string>
 
@@ -131,7 +131,7 @@
 
     <string name="stTOPPoints">Top 15 - myTour Tokeni</string>
     <string name="stTOPCity">Top 15 - Posjećeni gradovi</string>
-    <string name="stTOPNaturePoint">Top 15 - Posjećene prirodne atrakcije</string>
+    <string name="stTOPNaturePoint">Top 15 - Posjećene atrakcije</string>
     <string name="stTOPVillage">Top 15 - Posjećena sela</string>
     <string name="stTOPNacionalPark">Top15 - Posjećeni nacionalni parkovi</string>
 
