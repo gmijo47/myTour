@@ -21,6 +21,7 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ljestvica.xml" value="0.30462962962962964" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/login_container.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/logout_icon.xml" value="0.2898148148148148" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/moreimages_shape.xml" value="0.1935185185185185" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/name.xml" value="0.2526041666666667" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/name_icon.xml" value="0.23703703703703705" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/password_icon.xml" value="0.23703703703703705" />
@@ -45,10 +46,13 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_landing.xml" value="0.2" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_place_info.xml" value="0.17314814814814813" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_splashscreen.xml" value="0.1859375" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapter_featured_layout.xml" value="0.25" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapter_leaderboard_layout.xml" value="0.22" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapter_more_photos.xml" value="0.22962962962962963" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapter_nearby_attractions.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapterlist_leaderboard_layout.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_phone_verify.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_phoneverify_sent.xml" value="0.19166666666666668" />
@@ -64,7 +68,7 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_leadboard.xml" value="0.32395833333333335" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_leaderborad.xml" value="0.25" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_mapa.xml" value="0.34270833333333334" />
-        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_pocetna.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_pocetna.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_profil.xml" value="0.18" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/registertips_dialog.xml" value="0.2682291666666667" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/registertips_fragment.xml" value="0.22" />
