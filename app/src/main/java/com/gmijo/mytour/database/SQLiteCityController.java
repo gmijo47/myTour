@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteCityController extends SQLiteOpenHelper {
 
     //Podatci o bazi, kolonama, tabeli
-    public static final String DATABASE_NAME = "gradoviba";
+    public static final String CITY_DATABASE_NAME = "gradoviba";
     public static final String TAB_C_NAME = "gradovi";
     public static final int DATABASE_VERSION = 1;
     public static final String COL_CITY = "city";
@@ -22,7 +22,7 @@ public class SQLiteCityController extends SQLiteOpenHelper {
 
     //Kreiranje baze
     public SQLiteCityController(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, CITY_DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
