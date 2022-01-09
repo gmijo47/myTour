@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +24,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.FeaturedHolder> {
+public class FeaturedCityAdapter extends RecyclerView.Adapter<FeaturedCityAdapter.FeaturedHolder> {
 
     //Inicijalizacija za podatke
     Context context;
@@ -35,7 +34,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
 
 
 
-    public FeaturedAdapter(Context context, List<Pair<Pair<String, String>, Pair<String, Pair<String, String>>>> data) {
+    public FeaturedCityAdapter(Context context, List<Pair<Pair<String, String>, Pair<String, Pair<String, String>>>> data) {
         this.data = data;
         this.context = context;
 
@@ -99,13 +98,12 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
 
                //Smiještanje podataka u bundle
                Bundle dataBundle = new Bundle();
-               dataBundle.putString("cityname", data.get(position).first.first);
+               dataBundle.putString("placename", data.get(position).first.first);
                dataBundle.putString("citypop", data.get(position).first.second);
                dataBundle.putString("citysdesc", data.get(position).second.first);
-               dataBundle.putString("cityldesc", data.get(position).second.second.first);
+               dataBundle.putString("placetext", data.get(position).second.second.first);
                dataBundle.putString("img_url", data.get(position).second.second.second);
                intent.putExtras(dataBundle);
-
                //Startovanje acitivijta
                ((Activity)context).startActivity(intent);
            }
