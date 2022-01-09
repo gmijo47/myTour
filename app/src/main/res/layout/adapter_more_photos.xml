@@ -3,23 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="160dp"
-    android:layout_height="160dp"
+    android:layout_height="140dp"
     android:layout_marginStart="16dp"
-    android:layout_marginBottom="16dp"
-    android:background="@drawable/moreimages_shape">
+    android:layout_marginBottom="16dp">
 
-
-    <ImageView
-        android:id="@+id/placeImg"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/image_card"
         android:layout_width="160dp"
         android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
+        android:visibility="visible"
+        app:cardCornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/desert_background"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-
+        <ImageView
+            android:id="@+id/placesImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_city_holder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

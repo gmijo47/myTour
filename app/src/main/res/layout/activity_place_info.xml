@@ -10,10 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="320dp"
         android:scaleType="fitXY"
-        android:src="@drawable/th"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
         android:layout_marginTop="-40dp"
+        android:adjustViewBounds="true"
         android:id="@+id/placeInfoFeaturedImg"/>
 
     <ImageButton
@@ -29,18 +29,21 @@
 
     <TextView
         android:id="@+id/placeInfoTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-medium"
+        android:paddingEnd="10dp"
         android:text="Sarajevo"
+        android:paddingRight="20dp"
+        android:textAlignment="viewStart"
         android:textColor="@color/white"
         android:textFontWeight="600"
         android:textSize="19dp"
-        android:paddingEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/placeInfoBack"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -51,16 +54,16 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="160dp"
                     app:layout_constraintTop_toTopOf="parent"
                     android:id="@+id/morePhotosRecycler"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:paddingEnd="8dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="15dp"
-                    android:paddingTop="10dp"
                     android:text="@string/piMoreAbout"
                     android:textSize="16dp"
                     android:fontFamily="sans-serif-black"
@@ -72,12 +75,20 @@
                     android:id="@+id/placeInfoText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="sans-serif"
                     android:padding="12dp"
                     android:textColor="@color/gray"
                     app:layout_constraintTop_toBottomOf="@id/morePhotosRecycler"
                     tools:ignore="MissingConstraints" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    app:layout_constraintTop_toBottomOf="@id/placeInfoText"
+                    android:id="@+id/attractionsInCity"
+                    android:layout_marginTop="10dp"
+                    android:paddingEnd="8dp"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -89,7 +100,7 @@
         android:id="@+id/loaderPlace"
         android:background="@color/white"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
 
         <ProgressBar
