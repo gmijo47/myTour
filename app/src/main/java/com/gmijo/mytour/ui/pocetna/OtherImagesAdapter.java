@@ -73,14 +73,6 @@ import com.squareup.picasso.Picasso;
                 }
             }, 20);
 
-            //Setovanje slike kao featured kada klikne na nju
-            holder.placesImg.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ImageView img = ((Activity)context).findViewById(R.id.placeInfoFeaturedImg);
-                    img.setImageDrawable(holder.placesImg.getDrawable());
-                }
-            });
 
         }
 
