@@ -100,7 +100,7 @@ public class FeaturedCityAdapter extends RecyclerView.Adapter<FeaturedCityAdapte
                Bundle dataBundle = new Bundle();
                dataBundle.putString("placename", data.get(position).first.first);
                dataBundle.putString("citypop", data.get(position).first.second);
-               dataBundle.putString("citysdesc", data.get(position).second.first);
+               dataBundle.putString("placedesc", data.get(position).second.first);
                dataBundle.putString("placetext", data.get(position).second.second.first);
                dataBundle.putString("img_url", data.get(position).second.second.second);
                intent.putExtras(dataBundle);

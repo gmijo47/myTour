@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.gmijo.mytour.R;
 import com.gmijo.mytour.dataparser.FeaturedImgParser;
 import com.squareup.picasso.Picasso;
@@ -25,17 +23,17 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeaturedAttractionAdapter extends RecyclerView.Adapter<FeaturedAttractionAdapter.FeaturedHolder> {
 
-    //Inicijalizacija za podatke
+public class AdapterNearByAttr extends RecyclerView.Adapter<AdapterNearByAttr.NearByHolder> {
+//Inicijalizacija za podatke
     Context context;
-    List<Pair<Pair<String, String>, Pair<Pair<String, String>, Pair<String, String>>>> data;
+    List<Pair<Pair<String, String>, Pair<String, Pair<String, String>>>> data;
     List<String> urlDataArr = new ArrayList<>();
     String urlData;
 
 
 
-    public FeaturedAttractionAdapter(Context context, List<Pair<Pair<String, String>, Pair<Pair<String, String>, Pair<String, String>>>> data) {
+    public AdapterNearByAttr(Context context, List<Pair<Pair<String, String>, Pair<String, Pair<String, String>>>> data) {
         this.data = data;
         this.context = context;
 
@@ -51,19 +49,19 @@ public class FeaturedAttractionAdapter extends RecyclerView.Adapter<FeaturedAttr
 
     @NonNull
     @Override
-    public FeaturedHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterNearByAttr.NearByHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         //Kreiranje viewholdera
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_nearby_attractions, parent, false);
 
-        return new FeaturedHolder(view);
+        return new AdapterNearByAttr.NearByHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FeaturedHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull AdapterNearByAttr.NearByHolder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.placeName.setText(String.valueOf(data.get(position).first.first));
-        holder.placeDesc.setText(String.valueOf(data.get(position).second.first.first));
+        holder.placeDesc.setText(String.valueOf(data.get(position).second.first));
 
         //Optimalni delay, da ne bi došlo do blokiranja od strane SE za slike
         new Handler().postDelayed(new Runnable() {
@@ -96,17 +94,16 @@ public class FeaturedAttractionAdapter extends RecyclerView.Adapter<FeaturedAttr
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlaceInfoActivity.class);
 
-              //Smiještanje podataka u bundle
-              Bundle dataBundle = new Bundle();
-              dataBundle.putString("placename", data.get(position).first.first);
-              dataBundle.putString("type", data.get(position).first.second);
-              dataBundle.putString("placedesc", data.get(position).second.first.first);
-              dataBundle.putString("placetext", data.get(position).second.first.second);
-              dataBundle.putString("ncity", data.get(position).second.second.first);
-              dataBundle.putString("img_url", data.get(position).second.second.second);
-              intent.putExtras(dataBundle);
-              //Startovanje acitivijta
-              ((Activity)context).startActivity(intent);
+                //Smiještanje podataka u bundle
+                Bundle dataBundle = new Bundle();
+                dataBundle.putString("placename", data.get(position).first.first);
+                dataBundle.putString("type", data.get(position).first.second);
+                dataBundle.putString("placedesc", data.get(position).second.first);
+                dataBundle.putString("placetext", data.get(position).second.second.first);
+                dataBundle.putString("img_url", data.get(position).second.second.second);
+                intent.putExtras(dataBundle);
+                //Startovanje acitivijta
+                ((Activity)context).startActivity(intent);
             }
         });
     }
@@ -117,14 +114,14 @@ public class FeaturedAttractionAdapter extends RecyclerView.Adapter<FeaturedAttr
         return data.size();
     }
 
-    public static final class FeaturedHolder extends RecyclerView.ViewHolder{
+    public static final class NearByHolder extends RecyclerView.ViewHolder{
 
         //Inicijalizacija elemenata
 
         ImageView attractionImg;
         TextView placeName, placeDesc;
 
-        public FeaturedHolder(@NonNull View itemView) {
+        public NearByHolder(@NonNull View itemView) {
             super(itemView);
 
             //Dobavljanje elemenata
@@ -134,4 +131,6 @@ public class FeaturedAttractionAdapter extends RecyclerView.Adapter<FeaturedAttr
 
 
         }
-    }}
+    }
+}
+
