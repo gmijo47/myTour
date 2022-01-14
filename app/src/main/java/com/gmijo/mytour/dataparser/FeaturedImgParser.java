@@ -26,6 +26,7 @@ public class FeaturedImgParser extends AsyncTask<String, Void, Void> {
 
             //Otvara url
             Document doc = Jsoup.connect(rawUrl[0]).get();
+            Log.e("LINKall", String.valueOf(rawUrl[0]));
 
             //Parsovanje html elemenata
             Element htmlElement = doc.select("img").first();
