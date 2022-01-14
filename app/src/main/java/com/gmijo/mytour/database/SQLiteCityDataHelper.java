@@ -29,7 +29,7 @@ public class SQLiteCityDataHelper {
     public void setBrojevi() {
         for(int i = 0; i < 10; i++){
             Random random = new Random();
-            brojevi.add(i, random.nextInt(105));
+            brojevi.add(i, random.nextInt(101));
         }
     }
     public List<Pair<Pair<String, String>, Pair<String, Pair<String, String>>>> getData(){

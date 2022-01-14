@@ -16,7 +16,7 @@ import java.util.Random;
 public class SQLiteAttractionDataHelper {
     Context context;
     SQLiteAttractionController liteAttractionController;
-    List<Pair<Pair<String, String>, Pair<String, Pair<String, String>>>> data = new ArrayList<>();
+    List<Pair<Pair<String, String>, Pair<Pair<String, String>, Pair<String, String>>>> data = new ArrayList<>();
     SQLiteDatabase liteDatabase;
     List<Integer> brojevi = new ArrayList<>();
 
@@ -33,7 +33,7 @@ public class SQLiteAttractionDataHelper {
             brojevi.add(i, random.nextInt(268));
         }
     }
-    public List<Pair<Pair<String, String>, Pair<String, Pair<String, String>>>> getDataByCity(String cityName){
+    public  List<Pair<Pair<String, String>, Pair<Pair<String, String>, Pair<String, String>>>> getDataByCity(String cityName){
         liteDatabase = liteAttractionController.getWritableDatabase();
         try {
                 int i = 0;
@@ -43,7 +43,7 @@ public class SQLiteAttractionDataHelper {
                     cursor = liteDatabase.rawQuery(check_query, null);
                     if (cursor.getCount() != 0) {
                         while (cursor.moveToNext()) {
-                            data.add(i, new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_ATTRACTION)), cursor.getString(cursor.getColumnIndex(COL_TYPE))), new Pair(cursor.getString(cursor.getColumnIndex(COL_SDESC)), new Pair(cursor.getString(cursor.getColumnIndex(COL_LDESC)), cursor.getString(cursor.getColumnIndex(COL_LINK))))));
+                            data.add(i, new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_ATTRACTION)), cursor.getString(cursor.getColumnIndex(COL_TYPE))), new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_SDESC)), cursor.getString(cursor.getColumnIndex(COL_LDESC))), new Pair( cursor.getString(cursor.getColumnIndex(COL_N_CITY)), cursor.getString(cursor.getColumnIndex(COL_LINK))))));
                             i++;
                         }
                     } else {
@@ -57,7 +57,7 @@ public class SQLiteAttractionDataHelper {
         }
         return  data;
     }
- public List<Pair<Pair<String, String>, Pair<String, Pair<String, String>>>> getData(){
+ public  List<Pair<Pair<String, String>, Pair<Pair<String, String>, Pair<String, String>>>> getData(){
      setBrojevi();
      liteDatabase = liteAttractionController.getWritableDatabase();
      try {
@@ -68,7 +68,7 @@ public class SQLiteAttractionDataHelper {
                  cursor = liteDatabase.rawQuery(check_query, null);
                  if (cursor.getCount() != 0) {
                      while (cursor.moveToNext()) {
-                         data.add(i, new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_ATTRACTION)), cursor.getString(cursor.getColumnIndex(COL_TYPE))), new Pair(cursor.getString(cursor.getColumnIndex(COL_SDESC)), new Pair(cursor.getString(cursor.getColumnIndex(COL_LDESC)), cursor.getString(cursor.getColumnIndex(COL_LINK))))));
+                         data.add(i, new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_ATTRACTION)), cursor.getString(cursor.getColumnIndex(COL_TYPE))), new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_SDESC)), cursor.getString(cursor.getColumnIndex(COL_LDESC))), new Pair( cursor.getString(cursor.getColumnIndex(COL_N_CITY)), cursor.getString(cursor.getColumnIndex(COL_LINK))))));
                          i++;
                      }
                  } else {
