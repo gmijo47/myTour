@@ -7,20 +7,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
+import android.util.Pair;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.gmijo.mytour.R;
+import com.gmijo.mytour.database.SQLiteAttractionDataHelper;
 import com.gmijo.mytour.dataparser.FeaturedImgParser;
-import com.gmijo.mytour.dataparser.OtherImagesParser;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,15 +31,17 @@ public class PlaceInfoActivity extends AppCompatActivity {
 
     //Inicijalizacija elemenata
     ImageView featuredImg;
-    ImageButton backBtn;
-    TextView placeTitle, placeText, loaderErr;
+    ImageButton backBtn, dirBtn;
+    TextView placeTitle, placeText, loaderErr, placeHeader, placeSubHeader, errNoNearBy, nearByTitle;
     ConstraintLayout loader;
-    RecyclerView cityImages;
+    RecyclerView cityImages, nearByAttr;
     OtherImagesAdapter otherImagesAdapter;
     Bundle dataBundle;
+    Button showOnMap;
     Intent intent;
     String imgUrl;
     Context ctx;
+    List<Pair<Pair<String, String>, Pair<Pair<String, String>, Pair<String, String>>>> data = new ArrayList<>();
 
 
     @Override
@@ -53,7 +58,7 @@ public class PlaceInfoActivity extends AppCompatActivity {
         if (dataBundle.get("img_url") != null){
             imgUrl = dataBundle.get("img_url").toString();
         }else {
-            imgUrl = "https://www.qwant.com/?t=images&q="+dataBundle.get("placename").toString()+"&size=medium";
+            imgUrl = "https://www.qwant.com/?t=images&q="+dataBundle.get("placename").toString();
         }
 
         //Dodjelivanje vrijednosti inicijaliziranim elementima
@@ -64,6 +69,13 @@ public class PlaceInfoActivity extends AppCompatActivity {
         loaderErr = (TextView) findViewById(R.id.placeLoaderError);
         loader = (ConstraintLayout) findViewById(R.id.loaderPlace);
         cityImages = (RecyclerView) findViewById(R.id.morePhotosRecycler);
+        placeHeader = (TextView) findViewById(R.id.placeHeader);
+        placeSubHeader = (TextView) findViewById(R.id.placeSubHeader);
+        showOnMap = (Button) findViewById(R.id.showOnMapBtn);
+        dirBtn = (ImageButton) findViewById(R.id.directionsBtn);
+        nearByAttr = (RecyclerView) findViewById(R.id.attractionsInCity);
+        errNoNearBy = (TextView) findViewById(R.id.errNoAttr);
+        nearByTitle = (TextView) findViewById(R.id.nearByTitle);
 
         //Lisener na back btn
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +85,36 @@ public class PlaceInfoActivity extends AppCompatActivity {
                 //Završava activity
                 finish();
 
+            }
+        });
+
+        //Prikazuje mijesto na mapi
+        showOnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Kreiranje intenta, za startovanje gmm
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q= "+ dataBundle.get("placename").toString());
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                //Startuje map activity
+                startActivity(mapIntent);
+            }
+        });
+
+        //Prikazuje upute do tog mijesta
+        dirBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Kreiranje intenta, za startovanje gmn
+                Uri gmmIntentUri = Uri.parse("google.navigation:q="+dataBundle.get("placename").toString()+"&avoid=f");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                //Startuje map activity
+                startActivity(mapIntent);
             }
         });
 
@@ -98,13 +140,6 @@ public class PlaceInfoActivity extends AppCompatActivity {
                                 otherImagesAdapter = new OtherImagesAdapter(PlaceInfoActivity.this, imgUrl);
                                 cityImages.setAdapter(otherImagesAdapter);
 
-                                //Uklanjanje loadinga
-                                        new Handler().postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                removeLoading();
-                                            }
-                                        }, 500);
                             }
                         });
                     }
@@ -113,9 +148,47 @@ public class PlaceInfoActivity extends AppCompatActivity {
             }
         }, 20);
 
+        //Postavljanje texta u texview-e
         placeTitle.setText(dataBundle.get("placename").toString());
         placeText.setText((dataBundle.get("placetext")).toString());
+        placeHeader.setText(dataBundle.get("placename").toString());
+        placeSubHeader.setText(dataBundle.get("placedesc").toString());
 
+        //Type je null, znači radi se o gradu
+        if (dataBundle.get("type") == null){
+            SQLiteAttractionDataHelper liteAttractionDataHelper = new SQLiteAttractionDataHelper(this);
+            if(liteAttractionDataHelper != null){
+                data = liteAttractionDataHelper.getDataByCity(dataBundle.get("placename").toString());
+            }
+           new Handler().postDelayed(new Runnable() {
+               @Override
+               public void run() {
+                   if (data != null){
+
+                       nearByAttr.setHasFixedSize(true);
+                       nearByAttr.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
+                       FeaturedAttractionAdapter featuredAttractionAdapter = new FeaturedAttractionAdapter(ctx, data);
+                       nearByAttr.setAdapter(featuredAttractionAdapter);
+
+                   }else {
+
+                       nearByAttr.setVisibility(View.GONE);
+                       errNoNearBy.setVisibility(View.VISIBLE);
+
+                   }
+               }
+           }, 200);
+        }else {
+            nearByAttr.setVisibility(View.GONE);
+            nearByTitle.setVisibility(View.GONE);
+        }
+        //Uklanjanje loadinga
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                removeLoading();
+            }
+        }, 1000);
 
     }
 
