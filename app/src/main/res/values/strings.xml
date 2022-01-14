@@ -35,7 +35,7 @@
     <string name="rAccCreated">Korisnički nalog uspješno kreiran</string>
 
     <string name="title_activity_landing">LandingActivity</string>
-    <string name="fHome">Pocetna</string>
+    <string name="fHome">Početna</string>
     <string name="fLeaderboard">Ljestvica</string>
     <string name="fExplore">Istraži</string>
     <string name="fMap">Mapa</string>
@@ -148,7 +148,12 @@
     <string name="hSubTitle">Istražite dosad neistraženo!</string>
     <string name="hCityTitle">Izdvojeni gradovi</string>
     <string name="hNatureTitle">Izdvojene atrakcije</string>
+    <string name="hVillageTitle">Izdvojena sela</string>
+    <string name="hParkTitle">Izdvojeni nacionalni parkovi</string>
     <string name="hPopulation">Broj stanovnika:</string>
+    <string name="hShowOnMap">Prikaži na mapi</string>
+    <string name="hNearBy">Atrakcije u blizini</string>
+    <string name="hNearByNoAttr">Nema atrakcija u blizini ovog mjesta.</string>
 
     <string name="titleNearBy">Atrakcije u blizini:</string>
     <string name="piMoreAbout">O mjestu:</string>
