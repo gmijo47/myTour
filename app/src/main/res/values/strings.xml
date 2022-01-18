@@ -158,4 +158,13 @@
     <string name="titleNearBy">Atrakcije u blizini:</string>
     <string name="piMoreAbout">O mjestu:</string>
 
+    <string name="ePhrase">Maštaj, istraži i otkriji,\n izbor je na vama!</string>
+    <string name="eTitle">Zdravo, </string>
+    <string name="eHint">Mjesto, atrakcija, selo... </string>
+    <string name="eCity">Gradovi</string>
+    <string name="eVill">Sela</string>
+    <string name="eAttr">Atrakcije</string>
+    <string name="eNPark">Nacionalni parkovi </string>
+    <string name="eNothingFound">Pretraga nije dala rezultate, pokušajte sa pretragom druge kategorije.</string>
+
 </resources>
