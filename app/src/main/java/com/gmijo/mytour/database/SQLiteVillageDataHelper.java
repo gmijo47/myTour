@@ -49,7 +49,30 @@ public class SQLiteVillageDataHelper {
         }
         return  data;
     }
+    public  List<Pair<Pair<String, String>, Pair<Pair<String, String>, Pair<String, String>>>> exploreQuery(String query){
+        liteDatabase = liteVillageController.getWritableDatabase();
+        try {
+            int i = 0;
+            String check_query = "SELECT * FROM " + TAB_V_NAME +" lower(" + COL_VILLAGE + ")" + " LIKE '%" + query.toLowerCase() + "%'" + " OR lower(" + COL_N_CITY + ")" + " LIKE '%" + query.toLowerCase() + "%'";
+            Cursor cursor = null;
+            if (liteDatabase != null) {
+                cursor = liteDatabase.rawQuery(check_query, null);
+                if (cursor.getCount() != 0) {
+                    while (cursor.moveToNext()) {
+                        data.add(i, new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_VILLAGE)), cursor.getString(cursor.getColumnIndex(COL_TYPE))), new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_SDESC)), cursor.getString(cursor.getColumnIndex(COL_LDESC))), new Pair( cursor.getString(cursor.getColumnIndex(COL_N_CITY)), cursor.getString(cursor.getColumnIndex(COL_LINK))))));
+                        i++;
+                    }
+                } else {
 
+                }
+            }
+        } catch(Exception e){
+            Log.e("SQLite", e.toString());
+            e.printStackTrace();
+
+        }
+        return  data;
+    }
 
 
 

@@ -16,7 +16,7 @@ public class SQLiteAttractionController extends SQLiteOpenHelper{
         public static final String COL_LDESC =  "long_desc";
         public static final String COL_LINK =  "link";
         public static final String COL_TYPE = "type";
-        public static final String COL_N_CITY = "nctiy";
+        public static final String COL_N_CITY = "ncity";
         public static final String COL_ID = "_id";
 
         //Kreiranje baze
