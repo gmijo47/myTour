@@ -53,7 +53,7 @@ public class SQLiteVillageDataHelper {
         liteDatabase = liteVillageController.getWritableDatabase();
         try {
             int i = 0;
-            String check_query = "SELECT * FROM " + TAB_V_NAME +" lower(" + COL_VILLAGE + ")" + " LIKE '%" + query.toLowerCase() + "%'" + " OR lower(" + COL_N_CITY + ")" + " LIKE '%" + query.toLowerCase() + "%'";
+            String check_query = "SELECT * FROM " + TAB_V_NAME +  " WHERE lower(" + COL_VILLAGE + ")" + " LIKE '%" + query.toLowerCase() + "%'" + " OR lower(" + COL_N_CITY + ")" + " LIKE '%" + query.toLowerCase() + "%'";
             Cursor cursor = null;
             if (liteDatabase != null) {
                 cursor = liteDatabase.rawQuery(check_query, null);
