@@ -13,6 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTour">
+
+        <activity
+            android:name=".ui.explore.ReviewActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.pocetna.PlaceInfoActivity"
             android:exported="false" />
