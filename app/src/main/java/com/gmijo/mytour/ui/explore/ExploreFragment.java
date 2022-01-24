@@ -2,6 +2,7 @@ package com.gmijo.mytour.ui.explore;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -22,9 +23,13 @@ import com.gmijo.mytour.database.SQLiteCityDataHelper;
 import com.gmijo.mytour.database.SQLiteNParkDataHelper;
 import com.gmijo.mytour.database.SQLiteVillageDataHelper;
 import com.gmijo.mytour.databinding.AdapterExploreBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +53,7 @@ public class ExploreFragment extends Fragment {
     SQLiteNParkDataHelper liteNParkDataHelper;
     RecyclerView exploreRes;
     ExploreAdapter exploreAdapter;
+    FirebaseFirestore firebaseFirestore;
     List<Pair<Pair<String, String>, Pair<Pair<String, String>, Pair<String, String>>>> data = new ArrayList<>();
 
 
@@ -72,6 +78,7 @@ public class ExploreFragment extends Fragment {
         liteAttractionDataHelper = new SQLiteAttractionDataHelper(getActivity());
         liteNParkDataHelper = new SQLiteNParkDataHelper(getActivity());
         liteVillageDataHelper = new SQLiteVillageDataHelper(getActivity());
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         return  view;
     }
@@ -80,9 +87,18 @@ public class ExploreFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        firebaseFirestore.collection("users").document(firebaseUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    wlcmTitle.setText(getContext().getString(R.string.eTitle) + " " + documentSnapshot.get("personalData.Username").toString());
+                }else {
+                    wlcmTitle.setText(getContext().getString(R.string.eTitle));
+                }
+            }
+        });
 
-        //Postavljanje dobrodošlice sa imenom korisnika
-        wlcmTitle.setText(getContext().getString(R.string.eTitle) + " " + firebaseUser.getDisplayName());
 
         //Liseneri na promjene chipova
         cityC.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +112,7 @@ public class ExploreFragment extends Fragment {
 
             }
         });
+
         attrC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +123,7 @@ public class ExploreFragment extends Fragment {
                 querySubmit(searchBox.getQuery().toString());
             }
         });
+
         villC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +134,7 @@ public class ExploreFragment extends Fragment {
                 querySubmit(searchBox.getQuery().toString());
             }
         });
+
         nparkC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,8 +145,11 @@ public class ExploreFragment extends Fragment {
                 querySubmit(searchBox.getQuery().toString());
             }
         });
+
+        //Postavljanje default value za query
         searchBox.setQuery("Sarajevo", false);
         querySubmit("Sarajevo");
+
         searchBox.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -143,11 +165,18 @@ public class ExploreFragment extends Fragment {
             }
         });
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
-        getActivity().findViewById(R.id.loaderBox).setVisibility(View.GONE);
-        getActivity().findViewById(R.id.fragmentProgBar).setVisibility(View.VISIBLE);
-        getActivity().findViewById(R.id.errImg).setVisibility(View.GONE);
-        getActivity().findViewById(R.id.loaderError).setVisibility(View.GONE);
+                getActivity().findViewById(R.id.loaderBox).setVisibility(View.GONE);
+                getActivity().findViewById(R.id.fragmentProgBar).setVisibility(View.VISIBLE);
+                getActivity().findViewById(R.id.errImg).setVisibility(View.GONE);
+                getActivity().findViewById(R.id.loaderError).setVisibility(View.GONE);
+
+            }
+        }, 1000);
+
     }
     private void resetChips(){
         cityC.setChipIconTint(getContext().getColorStateList(R.color.gray));

@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -103,6 +102,7 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ExploreH
                 dataBundle.putString("placedesc", data.get(position).second.first.first);
                 dataBundle.putString("placetext", data.get(position).second.first.second);
                 dataBundle.putString("img_url", data.get(position).second.second.second);
+                dataBundle.putBoolean("enable_reviews", true);
                 intent.putExtras(dataBundle);
                 //Startovanje acitivijta
                 ((Activity)context).startActivity(intent);

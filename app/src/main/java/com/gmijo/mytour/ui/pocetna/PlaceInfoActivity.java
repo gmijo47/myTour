@@ -1,26 +1,37 @@
 package com.gmijo.mytour.ui.pocetna;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 
 import com.gmijo.mytour.R;
 import com.gmijo.mytour.database.SQLiteAttractionDataHelper;
 import com.gmijo.mytour.dataparser.FeaturedImgParser;
+import com.gmijo.mytour.ui.explore.ReviewActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -30,10 +41,11 @@ import java.util.List;
 public class PlaceInfoActivity extends AppCompatActivity {
 
     //Inicijalizacija elemenata
-    ImageView featuredImg;
-    ImageButton backBtn, dirBtn;
-    TextView placeTitle, placeText, loaderErr, placeHeader, placeSubHeader, errNoNearBy, nearByTitle;
-    ConstraintLayout loader;
+    ImageView featuredImg, badgeImg;
+    ImageButton backBtn, dirBtn, viewMoreReviews;
+    TextView placeTitle, placeText, loaderErr, placeHeader, placeSubHeader, errNoNearBy, nearByTitle,
+                badgeText, ratingText;
+    ConstraintLayout loader, reviewBox;
     RecyclerView cityImages, nearByAttr;
     OtherImagesAdapter otherImagesAdapter;
     Bundle dataBundle;
@@ -41,6 +53,9 @@ public class PlaceInfoActivity extends AppCompatActivity {
     Intent intent;
     String imgUrl;
     Context ctx;
+    FirebaseDatabase firebaseDatabase;
+    RatingBar ratingBar;
+
     List<Pair<Pair<String, String>, Pair<Pair<String, String>, Pair<String, String>>>> data = new ArrayList<>();
 
 
@@ -76,6 +91,14 @@ public class PlaceInfoActivity extends AppCompatActivity {
         nearByAttr = (RecyclerView) findViewById(R.id.attractionsInCity);
         errNoNearBy = (TextView) findViewById(R.id.errNoAttr);
         nearByTitle = (TextView) findViewById(R.id.nearByTitle);
+        reviewBox = (ConstraintLayout) findViewById(R.id.reviewBox);
+        viewMoreReviews = (ImageButton) findViewById(R.id.viewReviews);
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        ratingText = (TextView) findViewById(R.id.numRating);
+        badgeImg = (ImageView) findViewById(R.id.badgemyTourCertify);
+        badgeText = (TextView) findViewById(R.id.certifyText);
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
         //Lisener na back btn
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +125,19 @@ public class PlaceInfoActivity extends AppCompatActivity {
                 startActivity(mapIntent);
             }
         });
+        //Prikaz više review-a
+        viewMoreReviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                //Kreira intent sa podatcima o mijestu na koje je kliknuo
+                Intent reviewsIntent = new Intent(PlaceInfoActivity.this, ReviewActivity.class);
+                reviewsIntent.putExtra("place", dataBundle.get("placename").toString());
+
+                //Startuje activity
+                startActivity(reviewsIntent);
+            }
+        });
         //Prikazuje upute do tog mijesta
         dirBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,42 +189,122 @@ public class PlaceInfoActivity extends AppCompatActivity {
         placeHeader.setText(dataBundle.get("placename").toString());
         placeSubHeader.setText(dataBundle.get("placedesc").toString());
 
-        //Type je null, znači radi se o gradu
-        if (dataBundle.get("type") == null){
-            SQLiteAttractionDataHelper liteAttractionDataHelper = new SQLiteAttractionDataHelper(this);
-            if(liteAttractionDataHelper != null){
-                data = liteAttractionDataHelper.getDataByCity(dataBundle.get("placename").toString());
+
+            //Type je null, znači radi se o gradu
+            if (dataBundle.get("type") == null) {
+                SQLiteAttractionDataHelper liteAttractionDataHelper = new SQLiteAttractionDataHelper(this);
+                if (liteAttractionDataHelper != null) {
+                    data = liteAttractionDataHelper.getDataByCity(dataBundle.get("placename").toString());
+                }
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (data != null) {
+
+                            nearByAttr.setHasFixedSize(true);
+                            nearByAttr.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
+                            if(dataBundle.getBoolean("enable_reviews")) {
+                                FeaturedAttractionAdapter featuredAttractionAdapter = new FeaturedAttractionAdapter(ctx, data, true);
+                                nearByAttr.setAdapter(featuredAttractionAdapter);
+                                reviewBox.setVisibility(View.VISIBLE);
+                                getRating(dataBundle.get("placename").toString());
+                            }else {
+                                FeaturedAttractionAdapter featuredAttractionAdapter = new FeaturedAttractionAdapter(ctx, data, false);
+                                nearByAttr.setAdapter(featuredAttractionAdapter);
+                                //Uklanjanje loadinga
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        removeLoading();
+                                    }
+                                }, 1000);
+                            }
+
+
+                            } else {
+
+                            nearByAttr.setVisibility(View.GONE);
+                            errNoNearBy.setVisibility(View.VISIBLE);
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    removeLoading();
+                                }
+                            }, 1000);
+                        }
+                    }
+                }, 200);
+            } else {
+
+                nearByAttr.setVisibility(View.GONE);
+                nearByTitle.setVisibility(View.GONE);
+
+                if(dataBundle.getBoolean("enable_reviews") == true) {
+
+                    reviewBox.setVisibility(View.VISIBLE);
+                    ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) reviewBox.getLayoutParams();
+                    layoutParams.setMargins(0, 60, 0, 0);
+                    reviewBox.setLayoutParams(layoutParams);
+
+                    getRating(dataBundle.get("placename").toString());
+
+                }else {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            removeLoading();
+                        }
+                    }, 1000);
+                }
+
             }
-           new Handler().postDelayed(new Runnable() {
-               @Override
-               public void run() {
-                   if (data != null){
 
-                       nearByAttr.setHasFixedSize(true);
-                       nearByAttr.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
-                       FeaturedAttractionAdapter featuredAttractionAdapter = new FeaturedAttractionAdapter(ctx, data);
-                       nearByAttr.setAdapter(featuredAttractionAdapter);
+    }
 
-                   }else {
+    public void getRating(String placename) {
+        DatabaseReference documentReference = firebaseDatabase.getReferenceFromUrl("https://mytour-df457-default-rtdb.europe-west1.firebasedatabase.app").child("attr_reviews").child(placename);
+       documentReference.addListenerForSingleValueEvent(new ValueEventListener() {
+           float sum;
+           float count;
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+               if (snapshot.exists()){
+                   for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                       count = (int) snapshot.getChildrenCount();
+                        String rawvalue = dataSnapshot.child("rating").toString();
+                       Log.e("raw", String.valueOf(rawvalue));
 
-                       nearByAttr.setVisibility(View.GONE);
-                       errNoNearBy.setVisibility(View.VISIBLE);
+                       for (char c : rawvalue.replaceAll("\\D", "").toCharArray()) {
+                           int digit = c - '0';
+                           sum += digit;
+                           Log.e("sumupdate", String.valueOf(sum));
+                       }
 
                    }
-               }
-           }, 200);
-        }else {
-            nearByAttr.setVisibility(View.GONE);
-            nearByTitle.setVisibility(View.GONE);
-        }
-        //Uklanjanje loadinga
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                removeLoading();
-            }
-        }, 1000);
 
+                   float rating = sum / count;
+                   if(rating >= 4.5){
+                       badgeImg.setVisibility(View.VISIBLE);
+                       badgeText.setVisibility(View.VISIBLE);
+                   }
+                   ratingBar.setRating(rating);
+                   ratingText.setText(String.valueOf(ratingBar.getRating()));
+                   //Uklanjanje loadinga
+                   new Handler().postDelayed(new Runnable() {
+                       @Override
+                       public void run() {
+                           removeLoading();
+                       }
+                   }, 1000);
+
+               }
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+
+           }
+       });
     }
 
     //Metoda za uklanjanje loadinga

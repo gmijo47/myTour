@@ -29,15 +29,17 @@ public class FeaturedAttractionAdapter extends RecyclerView.Adapter<FeaturedAttr
 
     //Inicijalizacija za podatke
     Context context;
+    Boolean enableReview;
     List<Pair<Pair<String, String>, Pair<Pair<String, String>, Pair<String, String>>>> data;
     List<String> urlDataArr = new ArrayList<>();
     String urlData;
 
 
 
-    public FeaturedAttractionAdapter(Context context, List<Pair<Pair<String, String>, Pair<Pair<String, String>, Pair<String, String>>>> data) {
+    public FeaturedAttractionAdapter(Context context, List<Pair<Pair<String, String>, Pair<Pair<String, String>, Pair<String, String>>>> data, Boolean review) {
         this.data = data;
         this.context = context;
+        this.enableReview = review;
 
         //Ubacivanje linkova u array
         for(int i = 0; i<data.size(); i++){
@@ -104,6 +106,14 @@ public class FeaturedAttractionAdapter extends RecyclerView.Adapter<FeaturedAttr
               dataBundle.putString("placetext", data.get(position).second.first.second);
               dataBundle.putString("ncity", data.get(position).second.second.first);
               dataBundle.putString("img_url", data.get(position).second.second.second);
+              if (enableReview){
+
+                  dataBundle.putBoolean("enable_reviews", true);
+
+              }else {
+                  dataBundle.putBoolean("enable_reviews", false);
+              }
+
               intent.putExtras(dataBundle);
               //Startovanje acitivijta
               ((Activity)context).startActivity(intent);

@@ -276,7 +276,7 @@ public class PocetnaFragment extends Fragment {
 
         attractionFeatured.setHasFixedSize(true);
         attractionFeatured.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        attractionAdapter = new FeaturedAttractionAdapter(getContext(), dataAttraction);
+        attractionAdapter = new FeaturedAttractionAdapter(getContext(), dataAttraction, false);
         attractionFeatured.setAdapter(attractionAdapter);
 
         villageFeatured.setHasFixedSize(true);

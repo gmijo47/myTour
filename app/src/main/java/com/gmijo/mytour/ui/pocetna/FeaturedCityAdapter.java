@@ -103,6 +103,7 @@ public class FeaturedCityAdapter extends RecyclerView.Adapter<FeaturedCityAdapte
                dataBundle.putString("placedesc", data.get(position).second.first);
                dataBundle.putString("placetext", data.get(position).second.second.first);
                dataBundle.putString("img_url", data.get(position).second.second.second);
+               dataBundle.putBoolean("enable_reviews", false);
                intent.putExtras(dataBundle);
                //Startovanje acitivijta
                ((Activity)context).startActivity(intent);
