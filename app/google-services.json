@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "787058489748",
+    "firebase_url": "https://mytour-df457-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "mytour-df457",
     "storage_bucket": "mytour-df457.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "787058489748-93g30ke8q3hppelcjaf6215bljfkomqv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gmijo.mytour",
+            "certificate_hash": "ab1e4d9d55a50e2c7bb8805dcff14c607dbf5da3"
+          }
+        },
         {
           "client_id": "787058489748-2vm90c5kd8ljelpr0tg1hf9vejuv2jed.apps.googleusercontent.com",
           "client_type": 3
