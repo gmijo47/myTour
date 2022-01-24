@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F8F8"
     tools:context=".ui.pocetna.PlaceInfoActivity">
 
     <ImageView
@@ -178,13 +176,13 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/attractionsInCity"
                     android:layout_width="match_parent"
                     android:layout_height="320dp"
-                    app:layout_constraintTop_toBottomOf="@id/nearByTitle"
-                    android:id="@+id/attractionsInCity"
                     android:layout_marginTop="10dp"
+                    android:paddingEnd="8dp"
                     android:visibility="visible"
-                    android:paddingEnd="8dp"/>
+                    app:layout_constraintTop_toBottomOf="@id/nearByTitle" />
 
                 <TextView
                     android:id="@+id/nearByTitle"
@@ -205,14 +203,105 @@
                     android:layout_marginTop="35dp"
                     android:fontFamily="sans-serif-black"
                     android:paddingStart="15dp"
+                    android:paddingBottom="100dp"
                     android:text="@string/hNearByNoAttr"
                     android:textSize="18dp"
                     android:visibility="gone"
-                    android:paddingBottom="100dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/nearByTitle"
                     tools:ignore="MissingConstraints" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/reviewBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="400dp"
+                    app:layout_constraintTop_toBottomOf="@+id/containerAbout">
+
+                    <TextView
+                        android:id="@+id/rewiews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="19dp"
+                        android:fontFamily="sans-serif-black"
+                        android:paddingStart="15dp"
+                        android:text="@string/heReviews"
+                        android:textSize="18dp"
+                        android:visibility="visible"
+                        app:layout_constraintTop_toBottomOf="@+id/attractionsInCity"
+                        tools:ignore="MissingConstraints,NotSibling" />
+
+                    <ImageButton
+                        android:id="@+id/viewReviews"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginEnd="40dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/icon_arrow_right"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/rewiews" />
+
+                    <TextView
+                        android:id="@+id/numRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginTop="30dp"
+                        android:text="3.5"
+                        android:textSize="56dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rewiews" />
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        style="@style/Widget.AppCompat.RatingBar.Indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="34dp"
+                        android:layout_marginTop="5dp"
+                        android:numStars="5"
+                        android:paddingBottom="80dp"
+                        android:isIndicator="true"
+                        android:rating="3.22"
+                        android:scaleX=".7"
+                        android:scaleY=".7"
+                        android:stepSize="0.1"
+                        android:transformPivotX="0dp"
+                        android:transformPivotY="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/numRating" />
+
+                    <ImageView
+                        android:id="@+id/badgemyTourCertify"
+                        android:layout_width="120dp"
+                        android:visibility="gone"
+                        android:layout_height="120dp"
+                        android:layout_marginLeft="50dp"
+                        android:src="@drawable/icon_certified_place"
+                        app:layout_constraintStart_toEndOf="@+id/numRating"
+                        app:layout_constraintTop_toTopOf="@+id/numRating" />
+
+                    <TextView
+                        android:id="@+id/certifyText"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="sans-serif"
+                        android:visibility="gone"
+                        android:text="@string/eReviewBadge"
+                        android:textAlignment="center"
+                        android:textColor="@color/blue_grad2"
+                        android:textFontWeight="700"
+                        android:textSize="12dp"
+                        app:layout_constraintStart_toStartOf="@+id/badgemyTourCertify"
+                        app:layout_constraintTop_toBottomOf="@+id/badgemyTourCertify" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 
 

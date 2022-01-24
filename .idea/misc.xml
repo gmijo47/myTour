@@ -14,6 +14,7 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/featured_shape.xml" value="0.19907407407407407" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/field_element.xml" value="0.2526041666666667" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/gradient_splashscreen.xml" value="0.1" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/drawable/header_element.xml" value="0.24947916666666667" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_error_svg.xml" value="0.21296296296296297" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.30462962962962964" />
         <entry key="..\:/Projects/myTour/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
@@ -52,6 +53,7 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_place_info.xml" value="0.25" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_register.xml" value="0.22" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_review.xml" value="0.25" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/activity_splashscreen.xml" value="0.1859375" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapter_explore.xml" value="0.25" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapter_featured_layout.xml" value="0.25" />
@@ -59,9 +61,11 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapter_more_photos.xml" value="0.22962962962962963" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapter_nearby_attractions.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapter_npark_layout.xml" value="0.33" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapter_reviews.xml" value="0.25" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapter_village_layout.xml" value="0.25" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapterlist_leaderboard_layout.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapters_attractions_solo.xml" value="0.34270833333333334" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_add_review.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_phone_verify.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_phoneverify_sent.xml" value="0.19166666666666668" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_dashboard.xml" value="0.34270833333333334" />

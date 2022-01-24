@@ -9,7 +9,7 @@
     <string name="errUserAlreadyExist">Već ste registrovani!</string>
     <string name="errConn">Nema internetske veze!</string>
     <string name="errEmailNoVerify">Vaš email nije verifikovan. Za ponovo slanje verifikacije kliknite ovdje!</string>
-    <string name="errInvalidPass">Unesena lozika nije tačna!</string>
+    <string name="errInvalidPass">Unesena lozinka nije tačna!</string>
     <string name="errInvalidUser">Korisnički nalog ne postoji!</string>
     <string name="errBruteForce">Upss... iskoristili ste sve pokušaje, pokušajte ponovo nakon 5 minuta!</string>
     <string name="errTooManyReq">Zahtjev ocijenjen kao spam, pokušajte ponovo kasnije!</string>
@@ -154,6 +154,7 @@
     <string name="hShowOnMap">Prikaži na mapi</string>
     <string name="hNearBy">Atrakcije u blizini</string>
     <string name="hNearByNoAttr">Nema atrakcija u blizini ovog mjesta.</string>
+    <string name="heReviews">Ocjene i recenzije</string>
 
     <string name="titleNearBy">Atrakcije u blizini:</string>
     <string name="piMoreAbout">O mjestu:</string>
@@ -166,5 +167,21 @@
     <string name="eAttr">Atrakcije</string>
     <string name="eNPark">Nacionalni parkovi </string>
     <string name="eNothingFound">Pretraga nije dala rezultate, pokušajte sa pretragom druge kategorije.</string>
+    <string name="eReviewBadge">myTour medalja za ocjenu preko 4.5</string>
+    <string name="eReviewedAlready">Već ste dali recenziju ovog mijesta!</string>
+    <string name="eReviewTitle">Dodavanje nove recenzije</string>
+    <string name="eReviewAdd">Dodaj recenziju</string>
+    <string name="eReviewCancel">Odustani</string>
+    <string name="eReviewErrTxt">Recenzija odbaćena, text mora imati najmanje 15 karaktera!</string>
+    <string name="eReviewDesc">Molimo opišite vaše iskustvo...</string>
+    <string name="eReviewErrUnkw">Došlo je do pogreške molimo pokušajte kasnije!</string>
+
+    <string name="eReviewOneStar">Izuzetno užasno</string>
+    <string name="eReviewTwoStar">Užasno</string>
+    <string name="eReviewThreeStar">Dobro</string>
+    <string name="eReviewFourStar">Odlično</string>
+    <string name="eReviewFiveStar">Izuzetno odlično</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
 
 </resources>

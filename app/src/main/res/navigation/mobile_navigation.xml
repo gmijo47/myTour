@@ -30,15 +30,6 @@
             app:destination="@id/navigation_home" />
     </fragment>
     <fragment
-        android:id="@+id/navigation_map"
-        android:name="com.gmijo.mytour.ui.mapa.MapaFragment"
-        android:label="@string/fLeaderboard"
-        tools:layout="@layout/fragment_mapa" >
-        <action
-            android:id="@+id/action_navigation_map_to_navigation_home"
-            app:destination="@id/navigation_home" />
-    </fragment>
-    <fragment
         android:id="@+id/navigation_profile"
         android:name="com.gmijo.mytour.ui.profil.ProfilFragment"
         android:label="@string/fLeaderboard"

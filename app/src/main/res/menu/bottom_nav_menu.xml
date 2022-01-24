@@ -5,10 +5,6 @@
         android:icon="@drawable/pocetna"
         android:title="@string/fHome" />
     <item
-        android:id="@+id/navigation_map"
-        android:icon="@drawable/map"
-        android:title="@string/fMap" />
-    <item
         android:id="@+id/navigation_explore"
         android:icon="@drawable/lupa"
         android:title="@string/fExplore" />
