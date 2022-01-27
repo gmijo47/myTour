@@ -31,7 +31,6 @@ public class OtherImagesParser extends AsyncTask<String, Void, Void> {
         try {
 
             Document doc = Jsoup.connect(String.valueOf(data[0])).get();
-            Log.e("LINKall", String.valueOf(data[0]));
 
 
             //Parsovanje html elemenata

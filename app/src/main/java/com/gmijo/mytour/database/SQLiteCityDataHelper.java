@@ -76,7 +76,7 @@ public class SQLiteCityDataHelper {
                 cursor = liteDatabase.rawQuery(exploreQuery, null);
                 if(cursor.getCount() != 0){
                     while (cursor.moveToNext()){
-                        dataDouble.add(i, new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_CITY)), null), new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_SDESC)), cursor.getString(cursor.getColumnIndex(COL_LDESC))), new Pair(null, cursor.getString(cursor.getColumnIndex(COL_LINK))))));
+                        dataDouble.add(i, new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_CITY)), "city"), new Pair(new Pair(cursor.getString(cursor.getColumnIndex(COL_SDESC)), cursor.getString(cursor.getColumnIndex(COL_LDESC))), new Pair(null, cursor.getString(cursor.getColumnIndex(COL_LINK))))));
                         i++;
                     }
                 }

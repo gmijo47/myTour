@@ -67,6 +67,7 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapterlist_leaderboard_layout.xml" value="0.22" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/adapters_attractions_solo.xml" value="0.34270833333333334" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_add_review.xml" value="0.22" />
+        <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_congrats.xml" value="0.25" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_phone_verify.xml" value="0.1" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/dialog_phoneverify_sent.xml" value="0.19166666666666668" />
         <entry key="..\:/Projects/myTour/app/src/main/res/layout/fragment_dashboard.xml" value="0.34270833333333334" />
@@ -94,6 +95,9 @@
         <entry key="..\:/Projects/myTour/app/src/main/res/xml/root_preferences.xml" value="0.1" />
       </map>
     </option>
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/icon_success.xml" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

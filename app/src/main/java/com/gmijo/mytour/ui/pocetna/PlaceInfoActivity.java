@@ -132,10 +132,40 @@ public class PlaceInfoActivity extends AppCompatActivity {
 
                 //Kreira intent sa podatcima o mijestu na koje je kliknuo
                 Intent reviewsIntent = new Intent(PlaceInfoActivity.this, ReviewActivity.class);
-                reviewsIntent.putExtra("place", dataBundle.get("placename").toString());
+                Bundle bundle = new Bundle();
+                bundle.putString("place", dataBundle.get("placename").toString());
 
-                //Startuje activity
-                startActivity(reviewsIntent);
+                    String str = String.valueOf(dataBundle.get("type"));
+
+                   if (str.matches("Nacionalni park")) {
+
+                        bundle.putString("type", "npark");
+                        reviewsIntent.putExtras(bundle);
+                        startActivity(reviewsIntent);
+
+
+                    } else if (str.matches("Etno selo") ) {
+
+                        bundle.putString("type", "vill");
+                        reviewsIntent.putExtras(bundle);
+                        startActivity(reviewsIntent);
+
+
+                    } else if (str.matches("city")) {
+
+                        bundle.putString("type", "city");
+                        reviewsIntent.putExtras(bundle);
+                        startActivity(reviewsIntent);
+                    }else {
+                       bundle.putString("type", "attr");
+                       reviewsIntent.putExtras(bundle);
+                       startActivity(reviewsIntent);
+                   }
+
+
+
+
+
             }
         });
         //Prikazuje upute do tog mijesta
@@ -271,14 +301,10 @@ public class PlaceInfoActivity extends AppCompatActivity {
                if (snapshot.exists()){
                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                        count = (int) snapshot.getChildrenCount();
-                        String rawvalue = dataSnapshot.child("rating").toString();
-                       Log.e("raw", String.valueOf(rawvalue));
+                       String str = snapshot.child(dataSnapshot.getKey()).child("rating").getValue().toString();
 
-                       for (char c : rawvalue.replaceAll("\\D", "").toCharArray()) {
-                           int digit = c - '0';
+                           int digit = Integer.parseInt(str);
                            sum += digit;
-                           Log.e("sumupdate", String.valueOf(sum));
-                       }
 
                    }
 

@@ -60,7 +60,7 @@ public class ReviewActivity extends AppCompatActivity {
         placeName = (TextView) findViewById(R.id.reviewPlaceTitle);
         intent = getIntent();
         reviewRecycler = (RecyclerView) findViewById(R.id.recyclerReviews);
-        placeName.setText(intent.getStringExtra("place"));
+        placeName.setText(intent.getExtras().getString("place"));
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         //Lisener na back btn
@@ -90,7 +90,7 @@ public class ReviewActivity extends AppCompatActivity {
                         } else {
 
                             //Prikaz dialoga za davanje review-a
-                            DialogAddReview dialogAddReview = new DialogAddReview(intent.getStringExtra("place"));
+                            DialogAddReview dialogAddReview = new DialogAddReview(intent.getExtras().getString("place"), intent.getExtras().getString("type"));
                             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                             dialogAddReview.show(fragmentTransaction, "");
                         }
@@ -145,4 +145,5 @@ public class ReviewActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
 }

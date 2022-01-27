@@ -46,7 +46,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHold
     public void onBindViewHolder(@NonNull ReviewAdapter.ReviewHolder holder, @SuppressLint("RecyclerView") int position) {
 
        //Prikaz podataka prosljeđenih u viewholder
-       holder.rating.setRating(data.get(position).second.first);
+       holder.rating.setRating(Long.parseLong(String.valueOf(data.get(position).second.first)));
        holder.userName.setText("myTour korisnik");
        holder.reviewText.setText(data.get(position).second.second);
 

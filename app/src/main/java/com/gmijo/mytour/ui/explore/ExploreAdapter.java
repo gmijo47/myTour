@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,6 +100,7 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ExploreH
                 Bundle dataBundle = new Bundle();
                 dataBundle.putString("placename", data.get(position).first.first);
                 dataBundle.putString("type", data.get(position).first.second);
+                Log.e("Explore", data.get(position).first.second);
                 dataBundle.putString("placedesc", data.get(position).second.first.first);
                 dataBundle.putString("placetext", data.get(position).second.first.second);
                 dataBundle.putString("img_url", data.get(position).second.second.second);
