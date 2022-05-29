@@ -3,6 +3,8 @@
 
 ## Naziv aplikacije: myTour
 
+<img src="https://i.imgur.com/Tzat33u.gif"/>
+
 ## Kratak opis aplikacije (47): Vaš turistički vodičkroz Bosnu i Hercegovinu.
 
 ## Puni opis aplikacije (1108): Ovaj turistički vodičće vam pružiti jedinstvenu
@@ -250,8 +252,4 @@ korisnik želi da prikaže svježe podatke iz clouda bazi podataka. Može to ura
 lokalnoj bazi. Također ovdje imamo i statistiku o korisniku koji je također još jedan
 query iz lokalne baze podataka.Pored toga, korisnik može uređivati svoje podatke o
 profilu .Na taj način što će direktno u cloud bazu podataka biti upisani podaci uz
-prethodne provjere. Ovaj opis koda napisan je uz pomoć voice to text funkcije, pa su
-sitne greške moguće. Ukoliko bude potrebe VCS odnosno Version Control Sistem
-čitave aplikacije može biti dat na uvid.
-
-
+prethodne provjere. 
