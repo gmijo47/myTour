@@ -22,9 +22,10 @@ najboljih iz svake kategorije uključujući i myTour tokene. Ipak, ako odlučite
 posjetiti neko od ovih mjesta,a ne znate kako doći do njega, ne brinite se, tu je
 pomoćnik koji će vas odvesti do tog mjesta, u svega nekoliko klikova.
 
-## Opis funkcionalnosti aplikacije: Konkretno što setiče same
+## Opis funkcionalnosti aplikacije:
 
-funkcionalnosti aplikacije za početak imamoSplashScreenzajedno sa
+
+Konkretno što setiče same funkcionalnosti aplikacije za početak imamoSplashScreenzajedno sa
 uvodnom animacijom planete, nakon čega imamoLoginScreensa sljedećim
 funkcionalnostima:Prijava (username:password), kaoiPrijava putem
 Google-a (Google OAuth).U slučaju pokušaja provaljivanjau korisnički nalog
