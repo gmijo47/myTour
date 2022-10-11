@@ -7,6 +7,15 @@
 
 <img src="https://i.imgur.com/Tzat33u.gif"/>
 
+##Rezultati takmičenja:
+Aplikacija je izabrana među 5 najboljih aplikacija u Bosni i Hecegovini, te uzela je učešće na regionalnom takmičenju
+https://www.nezavisne.com/novosti/drustvo/Izabrani-pobjednici-petog-mtel-App-takmicenja/704932
+https://aloonline.ba/vijesti/mtel-app-takmicanje-pobjednici/
+https://insajder.in/izabrani-pobjednici-petog-mtel-app-takmicenja/
+https://www.capital.ba/izabrani-pobjednici-petog-mtel-app-takmicenja/
+https://www.vesti.rs/Android/Izabrani-pobjednici-petog-M-tel-App-takmicenja-2.html
+https://mondo.ba/MobIT/Mtel-vijesti/a1113071/Pobjednici-petog-m-tel-App-takmicenja.html
+
 ## Kratak opis aplikacije (47): Vaš turistički vodičkroz Bosnu i Hercegovinu.
 
 ## Puni opis aplikacije (1108): Ovaj turistički vodičće vam pružiti jedinstvenu
