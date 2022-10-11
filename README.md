@@ -1,6 +1,8 @@
 # m:tel app takmičenje 2021/2022
 ## Galić Mijo
 
+<img src="https://repository-images.githubusercontent.com/422688065/b3746250-4be1-4e07-b53e-3490139c03ce" />
+
 ## Naziv aplikacije: myTour
 
 <img src="https://i.imgur.com/Tzat33u.gif"/>
